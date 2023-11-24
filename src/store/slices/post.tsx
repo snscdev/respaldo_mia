@@ -6,6 +6,7 @@ import { IPost, ISocialNetworksNames } from 'src/types/post';
 
 export interface PostState {
   openModal: boolean;
+  openModalPreviewMobile: boolean;
   previewData: IPost;
   previewSelected: ISocialNetworksNames | string;
   postList: IPost[];
@@ -13,6 +14,7 @@ export interface PostState {
 
 const initialState: PostState = {
   openModal: false,
+  openModalPreviewMobile: false,
   previewData: {
     id: '6471648e-d6c5-4fdc-a156-56ba19583019',
     createdAt: new Date(),
@@ -52,10 +54,19 @@ export const PostSlice = createSlice({
     setPreviewSelected: (state, action: PayloadAction<ISocialNetworksNames>) => {
       state.previewSelected = action.payload;
     },
+    setOpenModalPreviewMobile: (state, action: PayloadAction<boolean>) => {
+      state.openModalPreviewMobile = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setOpenModal, setPreviewData, setPostList, setPreviewSelected } = PostSlice.actions;
+export const {
+  setOpenModal,
+  setPreviewData,
+  setPostList,
+  setPreviewSelected,
+  setOpenModalPreviewMobile,
+} = PostSlice.actions;
 
 export default PostSlice.reducer;

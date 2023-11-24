@@ -96,11 +96,6 @@
           "endDate": "End date",
           "search": "Search..."
         }
-      },
-      "Modal": {
-        "connect_SocialNetworks": "Connect to another Social Network",
-        "Publish_in": "Publish in:",
-        "btn_Back": "Back"
       }
     }
   }

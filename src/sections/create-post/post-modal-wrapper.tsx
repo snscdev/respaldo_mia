@@ -16,7 +16,6 @@ import Iconify from 'src/components/iconify';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { RootState } from 'src/store';
 import { setOpenModal } from 'src/store/slices/post';
-import { useLocales } from 'src/locales';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -39,7 +38,6 @@ export default function PostModalWrepper({ children }: PostModalProps) {
   const handleBack = () => {
     dispatch(setOpenModal(false));
   };
-  const { t } = useLocales();
 
   return (
     <Dialog
@@ -61,7 +59,7 @@ export default function PostModalWrepper({ children }: PostModalProps) {
               </IconButton>
 
               <Typography variant="h6" sx={{ flex: 1 }}>
-                {t('Dashboard.Create_Post.Modal.btn_Back')}
+                volver
               </Typography>
             </Toolbar>
           </AppBar>
