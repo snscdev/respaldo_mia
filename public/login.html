@@ -1,0 +1,1148 @@
+/* eslint-disable */
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Welcome to Growth Book - Sign in or register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+
+      body,
+      html {
+        -webkit-font-smoothing: antialiased;
+        height: 100%;
+        background-color: #f9f9f9;
+        font-size: 12px;
+      }
+
+      input::-ms-reveal,
+      input::-ms-clear {
+        display: none;
+      }
+
+      label {
+        font-size: 12px;
+      }
+
+      a {
+        color: gray;
+      }
+
+      .login-container {
+        position: relative;
+        height: 100%;
+      }
+      .btn-block {
+        display: block;
+        width: 100%;
+      }
+      .btn-google {
+        color: #545454;
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 2px 1px #ddd;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .login-box {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 15px;
+        background-color: #fff;
+        box-shadow: 0px 5px 5px #ccc;
+        border-radius: 5px;
+        border-top: 1px solid #e9e9e9;
+      }
+      .form-select,
+      .form-control {
+        -webkit-box-shadow: none !important;
+        outline: -webkit-focus-ring-color auto 0px !important;
+        border-color: #d3d3d3;
+        font-size: 14px !important;
+        border-radius: 8px !important;
+        height: 38px !important;
+      }
+
+      .form-control:focus {
+        border-color: rgb(55, 55, 55);
+      }
+
+      .btn {
+        -webkit-box-shadow: none !important;
+        outline: -webkit-focus-ring-color auto 0px !important;
+        border-color: gray;
+        cursor: pointer;
+      }
+
+      .login-header {
+        text-align: center;
+      }
+
+      .login-header img {
+        width: 75px;
+      }
+
+      .error-message {
+        display: none;
+        width: 100%;
+        height: auto;
+        background-color: #f8d7da;
+        border-radius: 5px;
+        text-align: center;
+        padding: 1rem;
+        color: #721c24;
+        font-size: 15px;
+      }
+
+      .welcome {
+        z-index: 1000;
+        position: relative;
+        min-height: 100vh;
+        font-family: Poppins, "Helvetica Neue", Arial, sans-serif;
+      }
+      .welcome .intro-side {
+        position: relative;
+        background: linear-gradient(
+          90deg,
+          rgba(241, 241, 245, 1) 0%,
+          rgb(248 251 251) 100%
+        );
+        color: black;
+        padding-bottom: 30px;
+        vertical-align: middle;
+        min-height: 100%;
+      }
+      .welcome .logo {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+      .welcome .form-side {
+        background-color: #fff;
+      }
+      .welcome .formwrap {
+        width: 100%;
+        max-width: 500px;
+      }
+      .welcome h1,
+      .welcome h2,
+      .welcome h3 {
+        font-weight: 600;
+      }
+
+      .error {
+        color: red;
+        font-size: 12px;
+      }
+
+      .errorInput {
+        border: 1px solid red !important;
+      }
+
+      .eye {
+        position: absolute;
+        right: 4px;
+        top: 24px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.5;
+        display: none;
+      }
+
+      .eye svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .eye:hover {
+        opacity: 1;
+      }
+
+      .close-eye {
+        position: absolute;
+        right: 4px;
+        top: 24px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        opacity: 0.5;
+      }
+      .close-eye:hover {
+        opacity: 1;
+      }
+
+      .close-eye svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      @media (min-width: 575px) {
+        .welcome .full-height {
+          min-height: 100vh;
+        }
+        .welcome .intro-side {
+          padding-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="welcome container-fluid">
+      <div
+        class="row full-height align-items-stretch d-flex flex-fill d-flex justify-content-start"
+      >
+        <div class="col-sm-7 intro-side">
+          <div class="ghosted-logo"></div>
+          <div
+            class="p-sm-1 p-md-3 pt-3 pt-sm-3 pt-md-5 d-flex align-items-center justify-content-center h-100"
+          >
+            <div class="text-center">
+              <img
+                src="https://minimals.cc/assets/illustrations/illustration_dashboard.png"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+          <div class="logo">
+            <a href="" target="_blank" rel="noreferrer">
+              <svg
+                width="100"
+                height="30"
+                viewBox="0 0 2025 811"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M259.887 626C239.059 626 220.598 620.32 204.504 608.959C188.41 597.598 175.866 582.214 166.872 562.807C157.878 542.926 153.381 520.204 153.381 494.643V106.962C153.381 96.5484 156.695 88.0279 163.322 81.4009C169.949 74.7739 178.469 71.4604 188.883 71.4604C199.297 71.4604 207.818 74.7739 214.445 81.4009C221.072 88.0279 224.385 96.5484 224.385 106.962V494.643C224.385 512.157 227.699 526.595 234.326 537.955C240.953 549.316 249.473 554.996 259.887 554.996H277.638C287.105 554.996 294.679 558.31 300.359 564.937C306.513 571.564 309.59 580.084 309.59 590.498C309.59 600.912 305.093 609.432 296.099 616.059C287.105 622.686 275.508 626 261.307 626H259.887ZM543.763 629.55C511.102 629.55 481.753 622.686 455.719 608.959C430.157 594.758 409.803 574.167 394.656 547.186C379.981 520.204 372.644 487.069 372.644 447.78V273.111C372.644 262.697 375.958 254.177 382.585 247.55C389.685 240.449 398.442 236.899 408.856 236.899C419.27 236.899 427.791 240.449 434.418 247.55C441.518 254.177 445.068 262.697 445.068 273.111V447.78C445.068 474.289 450.038 496.3 459.979 513.814C469.92 530.855 483.41 543.636 500.451 552.156C517.492 560.203 536.663 564.227 557.964 564.227C578.319 564.227 596.306 560.203 611.927 552.156C628.021 544.109 640.802 533.222 650.269 519.494C659.736 505.767 664.47 490.383 664.47 473.342H709.202C709.202 502.69 701.865 529.198 687.191 552.866C672.99 576.534 653.346 595.232 628.258 608.959C603.643 622.686 575.479 629.55 543.763 629.55ZM700.682 626C690.268 626 681.511 622.686 674.41 616.059C667.783 608.959 664.47 600.202 664.47 589.788V273.111C664.47 262.224 667.783 253.467 674.41 246.84C681.511 240.213 690.268 236.899 700.682 236.899C711.569 236.899 720.326 240.213 726.953 246.84C733.58 253.467 736.894 262.224 736.894 273.111V589.788C736.894 600.202 733.58 608.959 726.953 616.059C720.326 622.686 711.569 626 700.682 626ZM1040.53 628.84C1002.67 628.84 968.821 620.32 938.999 603.279C909.651 585.765 886.457 562.333 869.416 532.985C852.848 503.163 844.564 469.555 844.564 432.16C844.564 393.818 852.848 359.736 869.416 329.914C885.983 300.093 908.704 276.898 937.579 260.33C966.454 243.29 999.589 234.769 1036.98 234.769C1064.91 234.769 1090.47 240.213 1113.67 251.1C1136.86 261.514 1157.69 277.371 1176.15 298.673C1182.78 306.246 1185.15 314.057 1183.25 322.104C1181.36 330.151 1176.15 337.251 1167.63 343.405C1161 348.138 1153.67 349.795 1145.62 348.375C1137.57 346.482 1130.24 342.222 1123.61 335.594C1100.41 310.98 1071.54 298.673 1036.98 298.673C1012.84 298.673 991.542 304.353 973.081 315.713C954.62 326.601 940.183 341.985 929.769 361.866C919.355 381.747 914.148 405.178 914.148 432.16C914.148 457.721 919.355 480.442 929.769 500.323C940.656 520.204 955.567 536.062 974.501 547.896C993.436 559.256 1015.45 564.937 1040.53 564.937C1057.1 564.937 1071.54 563.043 1083.85 559.256C1096.63 554.996 1108.23 548.606 1118.64 540.085C1126.21 533.932 1134.02 530.618 1142.07 530.145C1150.12 529.198 1157.22 531.328 1163.37 536.535C1171.42 543.162 1175.92 550.736 1176.86 559.256C1177.81 567.304 1174.97 574.641 1168.34 581.268C1134.26 612.983 1091.66 628.84 1040.53 628.84ZM1334.2 626C1323.78 626 1315.03 622.686 1307.93 616.059C1301.3 608.959 1297.98 600.202 1297.98 589.788V273.821C1297.98 262.934 1301.3 254.177 1307.93 247.55C1315.03 240.923 1323.78 237.609 1334.2 237.609C1345.08 237.609 1353.84 240.923 1360.47 247.55C1367.09 254.177 1370.41 262.934 1370.41 273.821V589.788C1370.41 600.202 1367.09 608.959 1360.47 616.059C1353.84 622.686 1345.08 626 1334.2 626ZM1334.2 174.416C1321.42 174.416 1310.29 169.919 1300.82 160.925C1291.83 151.458 1287.33 140.334 1287.33 127.553C1287.33 114.773 1291.83 103.885 1300.82 94.8916C1310.29 85.4245 1321.42 80.6909 1334.2 80.6909C1346.98 80.6909 1357.86 85.4245 1366.86 94.8916C1376.33 103.885 1381.06 114.773 1381.06 127.553C1381.06 140.334 1376.33 151.458 1366.86 160.925C1357.86 169.919 1346.98 174.416 1334.2 174.416ZM1334.2 785.048C1321.42 785.048 1310.29 780.315 1300.82 770.848C1291.83 761.854 1287.33 750.967 1287.33 738.186C1287.33 725.405 1291.83 714.281 1300.82 704.814C1310.29 695.82 1321.42 691.323 1334.2 691.323C1346.98 691.323 1357.86 695.82 1366.86 704.814C1376.33 714.281 1381.06 725.405 1381.06 738.186C1381.06 750.967 1376.33 761.854 1366.86 770.848C1357.86 780.315 1346.98 785.048 1334.2 785.048ZM1667.03 628.84C1632.48 628.84 1601.47 620.32 1574.02 603.279C1546.56 585.765 1524.79 562.333 1508.69 532.985C1493.07 503.163 1485.26 469.555 1485.26 432.16C1485.26 394.764 1493.78 361.156 1510.82 331.334C1528.34 301.513 1551.77 278.081 1581.12 261.041C1610.94 243.526 1644.31 234.769 1681.23 234.769C1718.16 234.769 1751.29 243.526 1780.64 261.041C1809.99 278.081 1833.18 301.513 1850.22 331.334C1867.74 361.156 1876.49 394.764 1876.49 432.16H1848.8C1848.8 469.555 1840.75 503.163 1824.66 532.985C1809.04 562.333 1787.5 585.765 1760.05 603.279C1732.59 620.32 1701.59 628.84 1667.03 628.84ZM1681.23 564.937C1705.37 564.937 1726.91 559.256 1745.85 547.896C1764.78 536.062 1779.69 520.204 1790.58 500.323C1801.47 479.969 1806.91 457.248 1806.91 432.16C1806.91 406.598 1801.47 383.877 1790.58 363.996C1779.69 343.642 1764.78 327.784 1745.85 316.423C1726.91 304.589 1705.37 298.673 1681.23 298.673C1657.57 298.673 1636.03 304.589 1616.62 316.423C1597.69 327.784 1582.54 343.642 1571.18 363.996C1560.29 383.877 1554.85 406.598 1554.85 432.16C1554.85 457.248 1560.29 479.969 1571.18 500.323C1582.54 520.204 1597.69 536.062 1616.62 547.896C1636.03 559.256 1657.57 564.937 1681.23 564.937ZM1840.28 626.71C1829.87 626.71 1821.11 623.397 1814.01 616.77C1807.38 609.669 1804.07 600.912 1804.07 590.498V481.862L1817.56 406.598L1876.49 432.16V590.498C1876.49 600.912 1872.94 609.669 1865.84 616.77C1859.22 623.397 1850.7 626.71 1840.28 626.71Z"
+                  fill="#637381"
+                />
+                <path
+                  d="M1297.45 93.4486C1317.03 73.8713 1348.77 73.8713 1368.34 93.4486C1387.92 113.026 1387.92 144.767 1368.34 164.344C1332.9 199.792 1332.9 199.792 1297.45 164.344C1277.87 144.767 1277.87 113.026 1297.45 93.4486Z"
+                  fill="#637381"
+                />
+                <path
+                  d="M1299.52 774.55C1319.13 794.165 1350.93 794.165 1370.55 774.55C1390.16 754.934 1390.16 723.132 1370.55 703.517C1335.03 668 1335.03 668 1299.52 703.517C1279.9 723.132 1279.9 754.934 1299.52 774.55Z"
+                  fill="#637381"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-5 form-side p-0">
+          <div
+            class="welcomemodal p-4 h-100"
+            style="display: flex; justify-content: center"
+          >
+            <div
+              class="h-100 align-items-center justify-content-center d-flex pr-2 w-100"
+            >
+              <div class="formwrap">
+                <!-- register -->
+                <div class="d-none" id="registerform">
+                  <form onsubmit="return false;" method="post" novalidate>
+                    <div>
+                      <h3 class="h2">Registrate</h3>
+                      <p style="font-size: 12px">
+                        ¿Ya tienes una cuenta?
+                        <a href="#" id="registerSwitcher"> Iniciar sesión </a>
+                      </p>
+                    </div>
+                    <div style="display: flex; gap: 20px; width: 100%">
+                      <div class="form-group" style="width: 50%">
+                        <label>Nombre</label>
+                        <input
+                          required
+                          type="name"
+                          name="name"
+                          autofocus="true"
+                          autocomplete="username"
+                          id="registername"
+                          class="form-control"
+                        />
+                        <div class="error registererrorName"></div>
+                      </div>
+                      <div class="form-group" style="width: 50%">
+                        <label>Apellido</label>
+                        <input
+                          required
+                          type="apellido"
+                          name="apellido"
+                          autofocus="true"
+                          autocomplete="apellido"
+                          id="registerapellido"
+                          class="form-control"
+                        />
+                        <div class="error registererrorApellido"></div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Correo electrónico</label>
+                      <input
+                        required
+                        type="email"
+                        name="email"
+                        autofocus="true"
+                        autocomplete="username"
+                        id="registeremail"
+                        class="form-control shadow-none"
+                      />
+                      <div class="error registererrorEmail"></div>
+                    </div>
+
+                    <div style="display: flex; gap: 20px; width: 100%">
+                      <div class="form-group" style="width: 50%">
+                        <label>País</label>
+                        <select
+                          class="form-select"
+                          id="registerpais"
+                          required
+                          name="pais"
+                        >
+                          <option value="0" selected>seleccione un país</option>
+                          <option value="1">Mexico</option>
+                        </select>
+                        <div class="error registererrorPais"></div>
+                      </div>
+                      <div class="form-group" style="width: 50%">
+                        <label>Ciudad</label>
+                        <input
+                          required
+                          type="ciudad"
+                          name="ciudad"
+                          autofocus="true"
+                          autocomplete="ciudad"
+                          id="registerciudad"
+                          class="form-control"
+                        />
+                        <div class="error registererrorCiudad"></div>
+                      </div>
+                    </div>
+                    <div style="display: flex; gap: 20px; width: 100%">
+                      <div class="form-group" style="width: 50%">
+                        <label>Telefono</label>
+                        <input
+                          required
+                          type="telefono"
+                          name="telefono"
+                          autofocus="true"
+                          autocomplete="telefono"
+                          placeholder="(55) 5555-5555"
+                          id="registertelefono"
+                          class="form-control"
+                        />
+                        <div class="error registererrorTelefono"></div>
+                      </div>
+                      <div class="form-group" style="width: 50%">
+                        <label>Fecha de nacimiento</label>
+                        <input
+                          required
+                          type="date"
+                          name="date"
+                          autofocus="true"
+                          autocomplete="date"
+                          id="registerdate"
+                          class="form-control"
+                        />
+                        <div class="error registererrorDate"></div>
+                      </div>
+                    </div>
+                    <div class="form-group" style="position: relative">
+                      <label>Contraseña</label>
+                      <input
+                        required
+                        type="password"
+                        name="password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        class="form-control"
+                        id="registerpassword"
+                      />
+
+                      <!-- eye -->
+                      <div class="eye" id="regEye">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          class="component-iconify MuiBox-root css-9uy14h iconify iconify--solar"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                        >
+                          <g fill="currentColor">
+                            <path
+                              d="M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0Z"
+                            ></path>
+                            <path
+                              fill-rule="evenodd"
+                              d="M2 12c0 1.64.425 2.191 1.275 3.296C4.972 17.5 7.818 20 12 20c4.182 0 7.028-2.5 8.725-4.704C21.575 14.192 22 13.639 22 12c0-1.64-.425-2.191-1.275-3.296C19.028 6.5 16.182 4 12 4C7.818 4 4.972 6.5 3.275 8.704C2.425 9.81 2 10.361 2 12Zm10-3.75a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5Z"
+                              clip-rule="evenodd"
+                            ></path>
+                          </g>
+                        </svg>
+                      </div>
+                      <!-- end eye -->
+                      <div class="close-eye" id="regCloseEye">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          class="component-iconify MuiBox-root css-9uy14h iconify iconify--solar"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                            d="M1.606 6.08a1 1 0 0 1 1.313.526L2 7l.92-.394v-.001c0-.001 0 0 0 0l.003.009l.021.045c.02.042.051.108.094.194c.086.172.219.424.4.729a13.37 13.37 0 0 0 1.67 2.237a11.966 11.966 0 0 0 .59.592C7.18 11.8 9.251 13 12 13a8.706 8.706 0 0 0 3.22-.602c1.227-.483 2.254-1.21 3.096-1.998a13.053 13.053 0 0 0 2.733-3.725l.027-.058l.005-.011a1 1 0 0 1 1.838.788L22 7l.92.394l-.003.005l-.004.008l-.011.026l-.04.087a14.045 14.045 0 0 1-.741 1.348a15.368 15.368 0 0 1-1.711 2.256l.797.797a1 1 0 0 1-1.414 1.415l-.84-.84a11.81 11.81 0 0 1-1.897 1.256l.782 1.202a1 1 0 1 1-1.676 1.091l-.986-1.514c-.679.208-1.404.355-2.176.424V16.5a1 1 0 0 1-2 0v-1.544c-.775-.07-1.5-.217-2.177-.425l-.985 1.514a1 1 0 0 1-1.676-1.09l.782-1.203c-.7-.37-1.332-.8-1.897-1.257l-.84.84a1 1 0 0 1-1.414-1.414l.797-.797a15.406 15.406 0 0 1-1.87-2.519a13.457 13.457 0 0 1-.591-1.107a5.418 5.418 0 0 1-.033-.072l-.01-.021l-.002-.007l-.001-.002v-.001C1.08 7.395 1.08 7.394 2 7l-.919.395a1 1 0 0 1 .525-1.314Z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </div>
+                      <div class="error registererrorPassword"></div>
+
+                      <small
+                        id="passwordHelpInline"
+                        class="text-muted"
+                        style="font-size: 10px"
+                      >
+                        Debe tener al menos 8 caracteres, 1 mayúscula, 1 número
+                        y 1 caracter especial ( ! @ # $ % ^ & * )
+                      </small>
+                    </div>
+
+                    <div class="form-group" style="position: relative">
+                      <label>Confirmar contraseña</label>
+                      <input
+                        required
+                        type="password"
+                        name="confirmpassword"
+                        autocomplete="new-password"
+                        minlength="8"
+                        class="form-control"
+                        id="confirmpassword"
+                      />
+
+                      <!-- eye -->
+                      <div class="eye" id="confirmEye">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          class="component-iconify MuiBox-root css-9uy14h iconify iconify--solar"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                        >
+                          <g fill="currentColor">
+                            <path
+                              d="M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0Z"
+                            ></path>
+                            <path
+                              fill-rule="evenodd"
+                              d="M2 12c0 1.64.425 2.191 1.275 3.296C4.972 17.5 7.818 20 12 20c4.182 0 7.028-2.5 8.725-4.704C21.575 14.192 22 13.639 22 12c0-1.64-.425-2.191-1.275-3.296C19.028 6.5 16.182 4 12 4C7.818 4 4.972 6.5 3.275 8.704C2.425 9.81 2 10.361 2 12Zm10-3.75a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5Z"
+                              clip-rule="evenodd"
+                            ></path>
+                          </g>
+                        </svg>
+                      </div>
+                      <!-- end eye -->
+                      <div class="close-eye" id="confirmCloseEye">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          class="component-iconify MuiBox-root css-9uy14h iconify iconify--solar"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                            d="M1.606 6.08a1 1 0 0 1 1.313.526L2 7l.92-.394v-.001c0-.001 0 0 0 0l.003.009l.021.045c.02.042.051.108.094.194c.086.172.219.424.4.729a13.37 13.37 0 0 0 1.67 2.237a11.966 11.966 0 0 0 .59.592C7.18 11.8 9.251 13 12 13a8.706 8.706 0 0 0 3.22-.602c1.227-.483 2.254-1.21 3.096-1.998a13.053 13.053 0 0 0 2.733-3.725l.027-.058l.005-.011a1 1 0 0 1 1.838.788L22 7l.92.394l-.003.005l-.004.008l-.011.026l-.04.087a14.045 14.045 0 0 1-.741 1.348a15.368 15.368 0 0 1-1.711 2.256l.797.797a1 1 0 0 1-1.414 1.415l-.84-.84a11.81 11.81 0 0 1-1.897 1.256l.782 1.202a1 1 0 1 1-1.676 1.091l-.986-1.514c-.679.208-1.404.355-2.176.424V16.5a1 1 0 0 1-2 0v-1.544c-.775-.07-1.5-.217-2.177-.425l-.985 1.514a1 1 0 0 1-1.676-1.09l.782-1.203c-.7-.37-1.332-.8-1.897-1.257l-.84.84a1 1 0 0 1-1.414-1.414l.797-.797a15.406 15.406 0 0 1-1.87-2.519a13.457 13.457 0 0 1-.591-1.107a5.418 5.418 0 0 1-.033-.072l-.01-.021l-.002-.007l-.001-.002v-.001C1.08 7.395 1.08 7.394 2 7l-.919.395a1 1 0 0 1 .525-1.314Z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </div>
+                      <div class="error registererrorConfirmpassword"></div>
+                    </div>
+                    <small>
+                      Al registrarme, acepto los
+                      <a href="https://google.com">Términos de servicio</a> y la
+                      <a href="https://google.com">Política de privacidad.</a>
+                    </small>
+                    <div class="captcha-container form-group"></div>
+                    <div class="error-message"></div>
+                    <button
+                      class="btn btn-block btn-lg mt-4"
+                      type="submit"
+                      id="btn-signup"
+                      style="
+                        height: 48px;
+                        font-size: 15px;
+                        background: #212b36;
+                        border-radius: 8px;
+                        color: white;
+                      "
+                    >
+                      Registrate
+                    </button>
+                    <hr />
+                    <button
+                      type="button"
+                      id="btn-google"
+                      class="btn btn-lg btn-google btn-block btn-outline"
+                    >
+                      <img
+                        src="https://img.icons8.com/color/16/000000/google-logo.png"
+                        class="mr-2"
+                      />
+                      Registrate con Google
+                    </button>
+                  </form>
+                </div>
+                <!-- end register -->
+                <!-- sign in -->
+                <div class="loginform" id="loginform">
+                  <form onsubmit="return false;" method="post" novalidate>
+                    <div>
+                      <h3 class="h2">Iniciar sesión</h3>
+                      <p style="font-size: 12px">
+                        ¿Aún no tienes una cuenta?
+                        <a href="#" id="loginSwitcher"> Registrate </a>
+                      </p>
+                    </div>
+                    <div class="form-group">
+                      <label>Correo electrónico</label>
+
+                      <input
+                        required
+                        type="email"
+                        name="email"
+                        autocomplete="username"
+                        id="loginemail"
+                        class="form-control"
+                      />
+                      <div class="error loginerrorEmail"></div>
+                    </div>
+                    <div class="form-group" style="position: relative">
+                      <label>Contraseña</label>
+                      <input
+                        required
+                        type="password"
+                        name="password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        class="form-control"
+                        id="loginpassword"
+                      />
+                      <!-- eye -->
+                      <div class="eye" id="loginEye">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          class="component-iconify MuiBox-root css-9uy14h iconify iconify--solar"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                        >
+                          <g fill="currentColor">
+                            <path
+                              d="M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0Z"
+                            ></path>
+                            <path
+                              fill-rule="evenodd"
+                              d="M2 12c0 1.64.425 2.191 1.275 3.296C4.972 17.5 7.818 20 12 20c4.182 0 7.028-2.5 8.725-4.704C21.575 14.192 22 13.639 22 12c0-1.64-.425-2.191-1.275-3.296C19.028 6.5 16.182 4 12 4C7.818 4 4.972 6.5 3.275 8.704C2.425 9.81 2 10.361 2 12Zm10-3.75a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5Z"
+                              clip-rule="evenodd"
+                            ></path>
+                          </g>
+                        </svg>
+                      </div>
+                      <!-- end eye -->
+                      <div class="close-eye" id="loginCloseEye">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          class="component-iconify MuiBox-root css-9uy14h iconify iconify--solar"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                            d="M1.606 6.08a1 1 0 0 1 1.313.526L2 7l.92-.394v-.001c0-.001 0 0 0 0l.003.009l.021.045c.02.042.051.108.094.194c.086.172.219.424.4.729a13.37 13.37 0 0 0 1.67 2.237a11.966 11.966 0 0 0 .59.592C7.18 11.8 9.251 13 12 13a8.706 8.706 0 0 0 3.22-.602c1.227-.483 2.254-1.21 3.096-1.998a13.053 13.053 0 0 0 2.733-3.725l.027-.058l.005-.011a1 1 0 0 1 1.838.788L22 7l.92.394l-.003.005l-.004.008l-.011.026l-.04.087a14.045 14.045 0 0 1-.741 1.348a15.368 15.368 0 0 1-1.711 2.256l.797.797a1 1 0 0 1-1.414 1.415l-.84-.84a11.81 11.81 0 0 1-1.897 1.256l.782 1.202a1 1 0 1 1-1.676 1.091l-.986-1.514c-.679.208-1.404.355-2.176.424V16.5a1 1 0 0 1-2 0v-1.544c-.775-.07-1.5-.217-2.177-.425l-.985 1.514a1 1 0 0 1-1.676-1.09l.782-1.203c-.7-.37-1.332-.8-1.897-1.257l-.84.84a1 1 0 0 1-1.414-1.414l.797-.797a15.406 15.406 0 0 1-1.87-2.519a13.457 13.457 0 0 1-.591-1.107a5.418 5.418 0 0 1-.033-.072l-.01-.021l-.002-.007l-.001-.002v-.001C1.08 7.395 1.08 7.394 2 7l-.919.395a1 1 0 0 1 .525-1.314Z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </div>
+
+                      <div class="error loginerrorPassword"></div>
+                      <small class="form-text text-muted">
+                        <a href="#" id="forgotswitcher">
+                          ¿Has olvidado tu contraseña?
+                        </a>
+                      </small>
+                    </div>
+                    <div class="captcha-container form-group"></div>
+                    <div class="error-message"></div>
+                    <button
+                      class="btn btn-block btn-lg mt-4"
+                      style="
+                        height: 48px;
+                        font-size: 15px;
+                        background: #212b36;
+                        border-radius: 8px;
+                        color: white;
+                      "
+                      type="submit"
+                      id="btn-login"
+                    >
+                      Iniciar sesión
+                    </button>
+                    <hr />
+                    <button
+                      type="button"
+                      id="btn-google2"
+                      style="height: 48px; font-size: 15px"
+                      class="btn btn-lg btn-google btn-block btn-outline"
+                    >
+                      <img
+                        src="https://img.icons8.com/color/16/000000/google-logo.png"
+                        class="mr-2"
+                      />
+                      Iniciar con Google
+                    </button>
+                  </form>
+                </div>
+                <!-- end sign in -->
+                <!-- forgot -->
+                <div class="d-none" id="forgotpassword">
+                  <form onsubmit="return false;" method="post" novalidate>
+                    <div>
+                      <h3 class="h2">Forgot password</h3>
+                      <p>
+                        Volver
+                        <a href="#" id="registerSwitcher2"> Log In </a>
+                      </p>
+                    </div>
+                    <div class="form-group" id="forgot-contents">
+                      <label>Email</label>
+                      <input
+                        required
+                        type="email"
+                        name="email"
+                        autofocus="true"
+                        autocomplete="username"
+                        id="forgotemail"
+                        class="form-control"
+                      />
+                      <div class="error forgoterrorEmail"></div>
+                    </div>
+                    <div class="error-message"></div>
+                    <div class="captcha-container form-group"></div>
+                    <button
+                      class="btn btn-primary btn-block btn-lg mt-4"
+                      type="submit"
+                      id="btn-forgot"
+                      style="
+                        height: 48px;
+                        font-size: 15px;
+                        background: #212b36;
+                        border-radius: 8px;
+                        color: white;
+                      "
+                    >
+                      Buscar
+                    </button>
+                  </form>
+                </div>
+                <!-- end forgot -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--[if IE 8]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/ie8/0.2.5/ie8.js"></script>
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+      <script src="https://cdn.auth0.com/js/polyfills/1.0/base64.min.js"></script>
+      <script src="https://cdn.auth0.com/js/polyfills/1.0/es5-shim.min.js"></script>
+    <![endif]-->
+
+    <script src="https://cdn.auth0.com/js/auth0/9.16/auth0.min.js"></script>
+    <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+      window.addEventListener("load", function () {
+        let config = JSON.parse(
+          decodeURIComponent(escape(window.atob("@@config@@")))
+        );
+
+        $(document).ready(function () {
+          $("#registertelefono").mask("(00) 0000-0000", { placeholder: " " });
+        });
+
+        document
+          .getElementById("loginCloseEye")
+          .addEventListener("click", () => {
+            const password = document.getElementById("loginpassword");
+            const eye = document.getElementById("loginEye");
+            const closeEye = document.getElementById("loginCloseEye");
+
+            if (password.type === "password") {
+              password.type = "text";
+              eye.style.display = "flex";
+              closeEye.style.display = "none";
+            } else {
+              password.type = "password";
+              eye.style.display = "none";
+              closeEye.style.display = "flex";
+            }
+          });
+
+        document.getElementById("loginEye").addEventListener("click", () => {
+          const password = document.getElementById("loginpassword");
+          const eye = document.getElementById("loginEye");
+          const closeEye = document.getElementById("loginCloseEye");
+
+          if (password.type === "password") {
+            password.type = "text";
+            eye.style.display = "flex";
+            closeEye.style.display = "none";
+          } else {
+            password.type = "password";
+            eye.style.display = "none";
+            closeEye.style.display = "flex";
+          }
+        });
+
+        document.getElementById("regCloseEye").addEventListener("click", () => {
+          const password = document.getElementById("registerpassword");
+          const eye = document.getElementById("regEye");
+          const closeEye = document.getElementById("regCloseEye");
+
+          if (password.type === "password") {
+            password.type = "text";
+            eye.style.display = "flex";
+            closeEye.style.display = "none";
+          } else {
+            password.type = "password";
+            eye.style.display = "none";
+            closeEye.style.display = "flex";
+          }
+        });
+
+        document.getElementById("regEye").addEventListener("click", () => {
+          const password = document.getElementById("registerpassword");
+          const eye = document.getElementById("regEye");
+          const closeEye = document.getElementById("regCloseEye");
+
+          if (password.type === "password") {
+            password.type = "text";
+            eye.style.display = "flex";
+            closeEye.style.display = "none";
+          } else {
+            password.type = "password";
+            eye.style.display = "none";
+            closeEye.style.display = "flex";
+          }
+        });
+
+        document
+          .getElementById("confirmCloseEye")
+          .addEventListener("click", () => {
+            const password = document.getElementById("confirmpassword");
+            const eye = document.getElementById("confirmEye");
+            const closeEye = document.getElementById("confirmCloseEye");
+
+            if (password.type === "password") {
+              password.type = "text";
+              eye.style.display = "flex";
+              closeEye.style.display = "none";
+            } else {
+              password.type = "password";
+              eye.style.display = "none";
+              closeEye.style.display = "flex";
+            }
+          });
+
+        document.getElementById("confirmEye").addEventListener("click", () => {
+          const password = document.getElementById("confirmpassword");
+          const eye = document.getElementById("confirmEye");
+          const closeEye = document.getElementById("confirmCloseEye");
+
+          if (password.type === "password") {
+            password.type = "text";
+            eye.style.display = "flex";
+            closeEye.style.display = "none";
+          } else {
+            password.type = "password";
+            eye.style.display = "none";
+            closeEye.style.display = "flex";
+          }
+        });
+
+        document
+          .getElementById("registerSwitcher")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            clearErrors();
+            document.getElementById("registerform").className = "d-none";
+            document.getElementById("loginform").className = "";
+            document.getElementById("forgotpassword").className = "d-none";
+            document.getElementById("extrainfo").className = "d-none";
+          });
+        document
+          .getElementById("registerSwitcher2")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            clearErrors();
+            document.getElementById("registerform").className = "d-none";
+            document.getElementById("loginform").className = "";
+            document.getElementById("forgotpassword").className = "d-none";
+          });
+        document
+          .getElementById("loginSwitcher")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            clearErrors();
+            document.getElementById("registerform").className = "";
+            document.getElementById("loginform").className = "d-none";
+            document.getElementById("forgotpassword").className = "d-none";
+          });
+        document
+          .getElementById("forgotswitcher")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            clearErrors();
+            document.getElementById("registerform").className = "d-none";
+            document.getElementById("loginform").className = "d-none";
+            document.getElementById("forgotpassword").className = "";
+          });
+
+        if (config && "internalOptions" in config) {
+          let leeway = config.internalOptions.leeway;
+          if (leeway) {
+            let convertedLeeway = parseInt(leeway);
+
+            if (!isNaN(convertedLeeway)) {
+              config.internalOptions.leeway = convertedLeeway;
+            }
+          }
+        }
+
+        let params = Object.assign(
+          {
+            overrides: {
+              __tenant: config.auth0Tenant,
+              __token_issuer: config.authorizationServer.issuer,
+            },
+            domain: config.auth0Domain,
+            clientID: config.clientID,
+            redirectUri: config.callbackURL,
+            responseType: "code",
+          },
+          config.internalOptions
+        );
+
+        let webAuth = new auth0.WebAuth(params);
+        let databaseConnection = "Username-Password-Authentication";
+        let captcha = webAuth.renderCaptcha(
+          document.querySelector(".captcha-container")
+        );
+
+        function login(e) {
+          e.preventDefault();
+          clearErrors();
+          let button = this;
+          let email = document.getElementById("loginemail").value;
+          let password = document.getElementById("loginpassword").value;
+
+          validateData({
+            email,
+            password,
+            from: "login",
+          }).then(isValid => {
+            if (!isValid) return;
+            button.disabled = true;
+            webAuth.login(
+              {
+                realm: databaseConnection,
+                username: email,
+                password: password,
+                captcha: captcha.getValue(),
+              },
+              function (err) {
+                if (err) displayError(err);
+                button.disabled = false;
+              }
+            );
+          });
+        }
+
+        function forgotpassword(e) {
+          e.preventDefault();
+          clearErrors();
+          let button = this;
+          let email = document.getElementById("forgotemail").value;
+
+          validateData({
+            email,
+            from: "forgot",
+          }).then(isValid => {
+            if (!isValid) return;
+            button.disabled = true;
+            webAuth.changePassword(
+              {
+                connection: databaseConnection,
+                email: email,
+                captcha: captcha.getValue(),
+              },
+              function (err, resp) {
+                if (err) {
+                  if (err) displayError(err);
+                } else {
+                  document.getElementById("forgot-contents").innerHTML = resp;
+                  document.getElementById("btn-forgot").classList.add("d-none");
+                  button.disabled = false;
+                }
+              }
+            );
+          });
+        }
+
+        function signup(e) {
+          e.preventDefault();
+          clearErrors();
+          let button = this;
+          let email = document.getElementById("registeremail").value;
+          let password = document.getElementById("registerpassword").value;
+          let name = document.getElementById("registername").value;
+          let apellido = document.getElementById("registerapellido").value;
+          let date = document.getElementById("registerdate").value;
+          let telefono = document.getElementById("registertelefono").value;
+          let pais = document.getElementById("registerpais").value;
+          let ciudad = document.getElementById("registerciudad").value;
+          let confirmpassword =
+            document.getElementById("confirmpassword").value;
+
+          validateData({
+            email,
+            password,
+            name,
+            apellido,
+            date,
+            telefono,
+            pais,
+            ciudad,
+            confirmpassword,
+            from: "register",
+          }).then(isValid => {
+            if (!isValid) return;
+
+            button.disabled = true;
+            webAuth.redirect.signupAndLogin(
+              {
+                connection: databaseConnection,
+                email: email,
+                password: password,
+                captcha: captcha.getValue(),
+              },
+              function (err) {
+                if (err) {
+                  displayError(err);
+                } else {
+                  console.error("unknown error", err);
+                }
+                button.disabled = false;
+              }
+            );
+          });
+        }
+
+        function loginWithGoogle() {
+          webAuth.authorize(
+            {
+              connection: "google-oauth2",
+            },
+            function (err) {
+              if (err) displayError(err);
+            }
+          );
+        }
+
+        function displayError(err) {
+          captcha.reload();
+          let errorMessage = document.getElementsByClassName("error-message");
+          for (let i = 0; i < errorMessage.length; i++) {
+            errorMessage[i].innerHTML = err.policy || err.description;
+            errorMessage[i].style.display = "block";
+          }
+        }
+
+        const validateData = async ({
+          name,
+          apellido,
+          email,
+          date,
+          telefono,
+          pais,
+          ciudad,
+          password,
+          confirmpassword,
+          from,
+        }) => {
+          const fields = {
+            login: { email, password },
+            register: {
+              name,
+              apellido,
+              email,
+              date,
+              telefono,
+              pais,
+              ciudad,
+              password,
+              confirmpassword,
+            },
+            forgot: { email },
+          }[from];
+
+          clearErrors();
+
+          for (const [field, value] of Object.entries(fields)) {
+            let input = document.getElementById(`${from}${field}`);
+            if (field === "confirmpassword" && from === "register") {
+              input = document.getElementById("confirmpassword");
+            }
+
+            const error = document.querySelector(
+              `.${from}error${field[0].toUpperCase() + field.slice(1)}`
+            );
+
+            if (value === "") {
+              error.innerHTML = `Es requerido`;
+              input.classList.add("errorInput");
+              if (password === "") {
+                let passwordHelpInline =
+                  document.getElementById("passwordHelpInline");
+                passwordHelpInline.style.display = "block";
+              }
+            } else {
+              error.innerHTML = "";
+              input.classList.remove("errorInput");
+
+              if (field === "email") {
+                const emailRegex =
+                  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                if (!emailRegex.test(value.trim())) {
+                  error.innerHTML = `El ${field} no es válido`;
+                  input.classList.add("errorInput");
+                }
+              }
+
+              if (field === "password") {
+                const passwordRegex =
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,}$/;
+                if (!passwordRegex.test(value.trim())) {
+                  error.innerHTML = `El ${field} no es válido (8 caracteres, 1 mayuscula, 1 minuscula, 1 numero, 1 caracter especial)`;
+                  input.classList.add("errorInput");
+                  let passwordHelpInline =
+                    document.getElementById("passwordHelpInline");
+                  passwordHelpInline.style.display = "none";
+                }
+              }
+
+              if (field === "confirmpassword") {
+                const password =
+                  document.getElementById("confirmpassword").value;
+                if (password !== value) {
+                  error.innerHTML = `Las contraseñas no coinciden`;
+                  input.classList.add("errorInput");
+                }
+              }
+              if (field === "pais") {
+                // valida si el pais esta seleccionado
+                if (value === "0") {
+                  error.innerHTML = `Es requerido`;
+                  input.classList.add("errorInput");
+                }
+              }
+            }
+          }
+
+          const errorInputs = document.querySelectorAll(".errorInput");
+          if (errorInputs.length > 0) {
+            return false;
+          }
+          return true;
+        };
+
+        function clearErrors() {
+          const errorInputs = document.querySelectorAll(".errorInput");
+          errorInputs.forEach(input => input.classList.remove("errorInput"));
+
+          const errorMessages = document.querySelectorAll(".error");
+          errorMessages.forEach(error => (error.innerHTML = ""));
+
+          const errorMessage = document.querySelectorAll(".error-message");
+          errorMessage.forEach(error => {
+            error.innerHTML = "";
+            error.style.display = "none";
+          });
+        }
+
+        document.getElementById("btn-login").addEventListener("click", login);
+
+        document
+          .getElementById("btn-google")
+          .addEventListener("click", loginWithGoogle);
+
+        document
+          .getElementById("btn-google2")
+          .addEventListener("click", loginWithGoogle);
+
+        document.getElementById("btn-signup").addEventListener("click", signup);
+
+        document
+          .getElementById("btn-forgot")
+          .addEventListener("click", forgotpassword);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "You must follow eslint guidelines to be able to upload the commit."
+npm run lint

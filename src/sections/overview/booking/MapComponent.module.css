@@ -1,0 +1,19 @@
+.popup-content {
+    font-family: 'Overpass', sans-serif;  /* Asegúrate de que la tipografía sea la que quieres */
+    border-radius: 8px;  /* Esquinas redondeadas para el popup */
+    padding: 10px;
+    text-align: center;  /* Esto centrará todo el contenido, incluido el título */
+}
+
+.popup-content h4 {
+    margin-bottom: 10px;  /* Separación entre el título y la lista */
+}
+
+.popup-content ul {
+    list-style-type: none;  /* Esto quitará los puntos de la lista */
+    padding: 0;
+}
+
+.popup-content li {
+    margin-bottom: 5px;
+}
