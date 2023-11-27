@@ -19,6 +19,9 @@ export default function PublishRadioButtons({ name }: IPublishRadioButtons) {
       color="info"
       value={!field.value ? 'Programar' : 'Publicar ahora'}
       onChange={handleChange}
+      sx={{
+        padding: '0 10px',
+      }}
     >
       <FormControlLabel value="Programar" control={<Radio color="info" />} label="Programar" />
       <FormControlLabel

@@ -3,7 +3,7 @@
 import { Box, IconButton, Menu, Theme, styled, useTheme } from '@mui/material';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { ErrorMessage, useField } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Iconify from 'src/components/iconify/iconify';
 import { useLocales } from 'src/locales';
 import ErrorForm from '../error-form';
@@ -33,6 +33,7 @@ type TexAreaContainerProps = {
 const TexAreaContainer = styled(Box)(({ error, theme }: TexAreaContainerProps) => ({
   width: '100%',
   display: 'flex',
+  height: '168px',
   flexDirection: 'column',
   gap: 16,
   borderRadius: 8,
@@ -55,9 +56,14 @@ export default function PostTextArea({ name }: IPostTextArea) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const [showPicker, setShowPicker] = useState(false);
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    helpers.setValue(text);
+  }, [text]);
 
   const onEmojiClick = ({ emoji }: EmojiClickData, emojiObject: any) => {
-    helpers.setValue(field.value + emoji);
+    setText((prevValue: string) => prevValue + emoji);
     setShowPicker(false);
   };
 
@@ -67,12 +73,19 @@ export default function PostTextArea({ name }: IPostTextArea) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    helpers.setValue(e.target.value);
+    setText(e.target.value);
   };
   return (
     <Box>
       <TexAreaContainer error={meta.error && meta.touched} theme={theme}>
-        <TextArea lang={currentLang.label} value={field.value} onChange={handleChange} />
+        <TextArea
+          lang={currentLang.label}
+          value={text}
+          onChange={handleChange}
+          style={{
+            height: '150px',
+          }}
+        />
         <Box
           sx={{
             display: 'flex',

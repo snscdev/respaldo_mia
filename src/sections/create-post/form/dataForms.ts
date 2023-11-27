@@ -16,6 +16,7 @@ export const initialValues = {
     shareReelsFeed: false,
     stories: false,
   },
+  instagramComments: '',
 
   /// Facebook
   facebookOptions: {

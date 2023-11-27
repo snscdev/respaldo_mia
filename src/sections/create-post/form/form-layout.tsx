@@ -18,11 +18,17 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
   return (
     <Stack
       sx={{
-        padding: '24px 24px 0 0',
+        padding: '0 4px 0 0',
         gap: '24px',
       }}
     >
-      <Typography variant="h5" sx={{ fontWeight: 700 }}>
+      <Typography
+        variant="h5"
+        sx={{
+          fontWeight: 700,
+          p: '24px 24px 0 0',
+        }}
+      >
         Crea un post
       </Typography>
 
@@ -32,6 +38,7 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
           justifyContent: 'space-between',
           alignItems: 'center',
           gap: '24px',
+          p: '0 24px 0 0',
         }}
       >
         <Typography sx={{ fontWeight: 400, fontSize: 14 }}>Publicar en</Typography>
