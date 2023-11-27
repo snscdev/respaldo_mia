@@ -1,10 +1,12 @@
 'use client';
 
-import { Box, IconButton, Menu, styled, useTheme } from '@mui/material';
+import { Box, IconButton, Menu, Theme, styled, useTheme } from '@mui/material';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import { ErrorMessage, useField } from 'formik';
 import { useState } from 'react';
 import Iconify from 'src/components/iconify/iconify';
 import { useLocales } from 'src/locales';
+import ErrorForm from '../error-form';
 
 const TextArea = styled('textarea')(({ theme }) => ({
   width: '100%',
@@ -23,30 +25,39 @@ const TextArea = styled('textarea')(({ theme }) => ({
   },
 }));
 
-const TexAreaContainer = styled(Box)(({ theme }) => ({
+type TexAreaContainerProps = {
+  error: boolean | undefined | string;
+  theme: Theme;
+};
+
+const TexAreaContainer = styled(Box)(({ error, theme }: TexAreaContainerProps) => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: 16,
   borderRadius: 8,
-  border: `1px solid ${theme.palette.info.main}`,
+  border: `1px solid ${error ? theme.palette.error.main : theme.palette.info.main}`,
   '&:focus': {
     border: `1px solid ${theme.palette.info.main} !important`,
   },
 }));
-export default function PostTextArea() {
+
+interface IPostTextArea {
+  name: string;
+}
+
+export default function PostTextArea({ name }: IPostTextArea) {
   const { currentLang } = useLocales();
+
+  const [field, meta, helpers] = useField(name);
+  const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const [text, setText] = useState('');
-
   const [showPicker, setShowPicker] = useState(false);
 
-  const Theme = useTheme();
-
   const onEmojiClick = ({ emoji }: EmojiClickData, emojiObject: any) => {
-    setText((previus) => previus + emoji);
+    helpers.setValue(field.value + emoji);
     setShowPicker(false);
   };
 
@@ -56,51 +67,54 @@ export default function PostTextArea() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
+    helpers.setValue(e.target.value);
   };
   return (
-    <TexAreaContainer>
-      <TextArea lang={currentLang.label} value={text} onChange={handleChange} />
-      <Box
-        sx={(theme) => ({
-          display: 'flex',
-          alignItems: 'center',
-          gap: '5px',
-          padding: '0 16px',
-          height: 48,
-          backgroundColor: theme.palette.background.neutral,
-          borderRadius: '0 0 8px 8px',
-          position: 'relative',
-        })}
-      >
-        <IconButton onClick={openEmojiPicker}>
-          <span
-            style={{
-              width: 24,
-              height: 24,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            😀
-          </span>
-        </IconButton>
-        <Menu
-          anchorEl={anchorEl}
-          open
-          onClose={() => setShowPicker(false)}
-          sx={{ display: showPicker ? 'block' : 'none' }}
+    <Box>
+      <TexAreaContainer error={meta.error && meta.touched} theme={theme}>
+        <TextArea lang={currentLang.label} value={field.value} onChange={handleChange} />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px',
+            padding: '0 16px',
+            height: 48,
+            backgroundColor: theme.palette.background.neutral,
+            borderRadius: '0 0 8px 8px',
+            position: 'relative',
+          }}
         >
-          <EmojiPicker onEmojiClick={onEmojiClick} />
-        </Menu>
-        <IconButton onClick={openEmojiPicker}>
-          <Iconify icon="fontisto:hashtag" />
-        </IconButton>
-        <IconButton onClick={openEmojiPicker}>
-          <Iconify icon="streamline:sign-at-solid" />
-        </IconButton>
-      </Box>
-    </TexAreaContainer>
+          <IconButton onClick={openEmojiPicker}>
+            <span
+              style={{
+                width: 24,
+                height: 24,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              😀
+            </span>
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open
+            onClose={() => setShowPicker(false)}
+            sx={{ display: showPicker ? 'block' : 'none' }}
+          >
+            <EmojiPicker onEmojiClick={onEmojiClick} />
+          </Menu>
+          <IconButton onClick={openEmojiPicker}>
+            <Iconify icon="fontisto:hashtag" />
+          </IconButton>
+          <IconButton onClick={openEmojiPicker}>
+            <Iconify icon="streamline:sign-at-solid" />
+          </IconButton>
+        </Box>
+      </TexAreaContainer>
+      <ErrorForm name={name} />
+    </Box>
   );
 }

@@ -4,6 +4,7 @@ import { Box, Button, Link, Stack, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { setOpenModalPreviewMobile } from 'src/store/slices/post';
+import PostModalSocialButtons from './inputs/post-modal-social-buttons';
 
 interface IPosModalFormLayout {
   children?: React.ReactNode | React.ReactNode[];
@@ -45,6 +46,7 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
           Conectar a otra Red Social
         </Link>
       </Box>
+      <PostModalSocialButtons />
 
       {children}
 

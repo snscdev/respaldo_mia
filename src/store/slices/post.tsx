@@ -10,6 +10,13 @@ export interface PostState {
   previewData: IPost;
   previewSelected: ISocialNetworksNames | string;
   postList: IPost[];
+  formData: {
+    errors: any;
+    values: any;
+  };
+  tabSelected: ISocialNetworksNames;
+  socialNetworksConnected: ISocialNetworksNames[];
+  socialNetworksToPublish: ISocialNetworksNames[];
 }
 
 const initialState: PostState = {
@@ -36,6 +43,13 @@ const initialState: PostState = {
   },
   previewSelected: '',
   postList: [],
+  formData: {
+    errors: {},
+    values: {},
+  },
+  socialNetworksConnected: ['facebook'],
+  tabSelected: 'facebook',
+  socialNetworksToPublish: [],
 };
 
 export const PostSlice = createSlice({
@@ -57,6 +71,18 @@ export const PostSlice = createSlice({
     setOpenModalPreviewMobile: (state, action: PayloadAction<boolean>) => {
       state.openModalPreviewMobile = action.payload;
     },
+    setFormData: (state, action: PayloadAction<any>) => {
+      state.formData = action.payload;
+    },
+    setTabSelected: (state, action: PayloadAction<ISocialNetworksNames>) => {
+      state.tabSelected = action.payload;
+    },
+    setSocialNetworksConnected: (state, action: PayloadAction<ISocialNetworksNames[]>) => {
+      state.socialNetworksConnected = action.payload;
+    },
+    setSocialNetworksToPublish: (state, action: PayloadAction<ISocialNetworksNames[]>) => {
+      state.socialNetworksToPublish = action.payload;
+    },
   },
 });
 
@@ -67,6 +93,10 @@ export const {
   setPostList,
   setPreviewSelected,
   setOpenModalPreviewMobile,
+  setFormData,
+  setTabSelected,
+  setSocialNetworksConnected,
+  setSocialNetworksToPublish,
 } = PostSlice.actions;
 
 export default PostSlice.reducer;
