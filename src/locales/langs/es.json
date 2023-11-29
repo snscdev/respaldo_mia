@@ -95,6 +95,18 @@
                     "startDate": "Fecha inicio",
                     "endDate": "Fecha fin",
                     "search": "Buscar..."
+                },
+                "Modal": {
+                    "Connect_SocialNetwork": "Conectar a otra Red Social",
+                    "Publish_In": "Publicar en",
+                    "Program": "Programar",
+                    "Publish_now": "Publicar ahora",
+                    "btn_Post": "Publicar",
+                    "Instagram_Post_Type": "Tipo de publicación en instagram",
+                    "Publication": "Publicación",
+                    "Stories": "Historias",
+                    "Instagram_Options": "Opciones de instagram",
+                    "Options_Placeholder_Insta": "Añade hashtags para que tu publicación sea más visible"
                 }
             }
         }

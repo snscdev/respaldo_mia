@@ -95,6 +95,18 @@
           "startDate": "Start date",
           "endDate": "End date",
           "search": "Search..."
+        },
+        "Modal": {
+          "Connect_SocialNetwork": "Connect to another Social Network",
+          "Publish_In": "Publish in",
+          "Program": "Program",
+          "Publish_now": "Publish now",
+          "btn_Post": "Post",
+          "Instagram_Post_Type": "Instagram post type",
+          "Publication": "Publication",
+          "Stories": "Stories",
+          "Instagram_Options": "Instagram Options",
+          "Options_Placeholder_Insta": "Add hashtags to make your post more visible"
         }
       }
     }

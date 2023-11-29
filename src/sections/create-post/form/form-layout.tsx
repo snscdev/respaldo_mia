@@ -4,6 +4,7 @@ import { Box, Button, Link, Stack, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { setOpenModalPreviewMobile } from 'src/store/slices/post';
+import { useLocales } from 'src/locales';
 import PostModalSocialButtons from './inputs/post-modal-social-buttons';
 
 interface IPosModalFormLayout {
@@ -14,6 +15,7 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
   const mdDown = useResponsive('down', 'md');
 
   const dispatch = useDispatch();
+  const { t } = useLocales();
 
   return (
     <Stack
@@ -29,7 +31,7 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
           p: '24px 24px 0 0',
         }}
       >
-        Crea un post
+        {t('Dashboard.Create_Post.Title')}
       </Typography>
 
       <Box
@@ -41,7 +43,9 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
           p: '0 24px 0 0',
         }}
       >
-        <Typography sx={{ fontWeight: 400, fontSize: 14 }}>Publicar en</Typography>
+        <Typography sx={{ fontWeight: 400, fontSize: 14 }}>
+          {t('Dashboard.Create_Post.Create.Modal.Publish_In')}
+        </Typography>
 
         <Link
           href="#"
@@ -50,7 +54,7 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
             color: theme.palette.info.main,
           })}
         >
-          Conectar a otra Red Social
+          {t('Dashboard.Create_Post.Create.Modal.Connect_SocialNetwork')}
         </Link>
       </Box>
       <PostModalSocialButtons />

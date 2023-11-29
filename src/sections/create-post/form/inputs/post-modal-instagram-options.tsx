@@ -43,6 +43,7 @@ export default function InstagramOptions({ name }: IPostTextArea) {
   const theme = useTheme();
   const { currentLang } = useLocales();
   const [field, , helpers] = useField(name);
+  const { t } = useLocales();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     helpers.setValue(e.target.value);
@@ -64,14 +65,16 @@ export default function InstagramOptions({ name }: IPostTextArea) {
         backgroundColor: theme.palette.background.neutral,
       }}
     >
-      <Typography sx={{ fontWeight: 700, fontSize: '14px' }}>Opciones de instagram</Typography>
+      <Typography sx={{ fontWeight: 700, fontSize: '14px' }}>
+        {t('Dashboard.Create_Post.Create.Modal.Instagram_Options')}
+      </Typography>
       <TexAreaContainer error={false} theme={theme}>
         <TextArea
           lang={currentLang.label}
           value={field.value}
           onChange={handleChange}
           style={{ height: 103 }}
-          placeholder="Añade hashtags para que tu publicación sea más visible"
+          placeholder={t('Dashboard.Create_Post.Create.Modal.Options_Placeholder_Insta')}
         />
       </TexAreaContainer>
     </Box>

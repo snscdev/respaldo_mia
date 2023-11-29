@@ -2,6 +2,7 @@
 /* eslint-disable no-nested-ternary */
 import { Box, FormControlLabel, Radio, RadioGroup, Typography, useTheme } from '@mui/material';
 import { useField } from 'formik';
+import { useLocales } from 'src/locales';
 
 interface IPostTypeInstagram {
   name: string;
@@ -10,6 +11,7 @@ export default function PostTypeInstagram({ name }: IPostTypeInstagram) {
   const theme = useTheme();
 
   const [field, , helpers] = useField(name);
+  const { t } = useLocales();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     helpers.setValue({
@@ -36,7 +38,7 @@ export default function PostTypeInstagram({ name }: IPostTypeInstagram) {
       }}
     >
       <Typography sx={{ fontWeight: 700, fontSize: '14px' }}>
-        Tipo de publicación en instagram
+        {t('Dashboard.Create_Post.Create.Modal.Instagram_Post_Type')}
       </Typography>
       <RadioGroup
         row
@@ -55,10 +57,14 @@ export default function PostTypeInstagram({ name }: IPostTypeInstagram) {
         <FormControlLabel
           value="shareReelsFeed"
           control={<Radio color="info" />}
-          label="Publicación"
+          label={t('Dashboard.Create_Post.Create.Modal.Publication')}
         />
         <FormControlLabel value="reels" control={<Radio color="info" />} label="Reels" />
-        <FormControlLabel value="stories" control={<Radio color="info" />} label="Historias" />
+        <FormControlLabel
+          value="stories"
+          control={<Radio color="info" />}
+          label={t('Dashboard.Create_Post.Create.Modal.Stories')}
+        />
       </RadioGroup>
     </Box>
   );

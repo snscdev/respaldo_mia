@@ -9,6 +9,7 @@ import { RootState } from 'src/store';
 
 import { Button, Stack, alpha, useTheme } from '@mui/material';
 import { SOCIALNETWORKSNAMES } from 'src/const/post/redes';
+import { useLocales } from 'src/locales';
 import PostTextArea from './inputs/post-modal-text-area';
 import PosModalFormLayout from './form-layout';
 import { initialValues, validationSchema } from './dataForms';
@@ -41,6 +42,7 @@ const DataForm = ({ errors, values }: IDataForm) => {
 export default function PostModalForm() {
   const tabSelected = useSelector((state: RootState) => state.post.tabSelected);
   const theme = useTheme();
+  const { t } = useLocales();
   return (
     <PosModalFormLayout>
       <Formik
@@ -95,7 +97,7 @@ export default function PostModalForm() {
                     width: '20%',
                   }}
                 >
-                  Publicar
+                  {t('Dashboard.Create_Post.Create.Modal.btn_Post')}
                 </Button>
               </Stack>
             </Form>
