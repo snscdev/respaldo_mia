@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from 'src/store/slices/post';
 import { RootState } from 'src/store';
 
-import { Button, Stack, alpha, useTheme } from '@mui/material';
+import { Box, Button, Stack, alpha, useTheme } from '@mui/material';
+import ThumbnailsView from 'src/components/Thumbnails';
 import { SOCIALNETWORKSNAMES } from 'src/const/post/redes';
 import { useLocales } from 'src/locales';
 import PostTextArea from './inputs/post-modal-text-area';
@@ -19,6 +20,7 @@ import PublishDatePicker from './inputs/post-modal-publish-date-picker';
 import PostTypeInstagram from './inputs/post-modal-post-type-instagram';
 import InstagramOptions from './inputs/post-modal-instagram-options';
 import TiktokOptions from './inputs/post-modal-tiktok-options';
+import ImageBox from './inputs/post-modal-image-box';
 
 interface IDataForm {
   errors: any;
@@ -62,6 +64,7 @@ export default function PostModalForm() {
                   p: '0 20px 0 0',
                   maxHeight: 'calc(100vh - 300px)',
                   overflowY: 'scroll',
+                  overflowX: 'hidden',
                   '&::-webkit-scrollbar': {
                     position: 'absolute',
                     padding: '10px',
@@ -82,6 +85,58 @@ export default function PostModalForm() {
                 )}
 
                 <PostTextArea name="content" />
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '8px',
+                  }}
+                >
+                  <ImageBox label="Multimedia" name="multimedia" />
+                  <ThumbnailsView
+                    data={
+                      [
+                        // {
+                        //   id: '1',
+                        //   title: '1',
+                        //   coverUrl: 'https://picsum.photos/200/300',
+                        //   description: '1',
+                        // },
+                        // {
+                        //   id: '2',
+                        //   title: '2',
+                        //   coverUrl: 'https://picsum.photos/200/300',
+                        //   description: '2',
+                        // },
+                        // {
+                        //   id: '3',
+                        //   title: '3',
+                        //   coverUrl: 'https://picsum.photos/200/300',
+                        //   description: '3',
+                        // },
+                        // {
+                        //   id: '4',
+                        //   title: '4',
+                        //   coverUrl: 'https://picsum.photos/200/300',
+                        //   description: '4',
+                        // },
+                        // {
+                        //   id: '5',
+                        //   title: '5',
+                        //   coverUrl: 'https://picsum.photos/200/300',
+                        //   description: '5',
+                        // },
+                        // {
+                        //   id: '6',
+                        //   title: '6',
+                        //   coverUrl: 'https://picsum.photos/200/300',
+                        //   description: '6',
+                        // },
+                      ]
+                    }
+                  />
+                </Box>
 
                 {tabSelected === SOCIALNETWORKSNAMES.instagram && (
                   <InstagramOptions name="instagramComments" />

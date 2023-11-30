@@ -7,7 +7,6 @@ import { IPost, ISocialNetworksNames } from 'src/types/post';
 export interface PostState {
   openModal: boolean;
   openModalPreviewMobile: boolean;
-  previewData: IPost;
   postList: IPost[];
   formData: {
     errors: any;
@@ -16,30 +15,14 @@ export interface PostState {
   tabSelected: ISocialNetworksNames;
   socialNetworksConnected: ISocialNetworksNames[];
   socialNetworksToPublish: ISocialNetworksNames[];
+  showCropSection: boolean;
+  dataImageCrop: string;
+  dataImageCroped: string;
 }
 
 const initialState: PostState = {
   openModal: false,
   openModalPreviewMobile: false,
-  previewData: {
-    id: '6471648e-d6c5-4fdc-a156-56ba19583019',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    title: '',
-    content: '',
-    platforms: [],
-    mediaUrls: [''],
-    taggedProfiles: [''],
-    scheduleDate: new Date(),
-    hashtags: [''],
-    status: '',
-    publish: true,
-    likes: null,
-    shares: null,
-    comments: null,
-    userId: '',
-    ayrshareId: '',
-  },
   postList: [],
   formData: {
     errors: {},
@@ -48,6 +31,9 @@ const initialState: PostState = {
   socialNetworksConnected: ['facebook'],
   tabSelected: 'facebook',
   socialNetworksToPublish: [],
+  showCropSection: true,
+  dataImageCrop: '',
+  dataImageCroped: '',
 };
 
 export const PostSlice = createSlice({
@@ -57,9 +43,7 @@ export const PostSlice = createSlice({
     setOpenModal: (state, action: PayloadAction<boolean>) => {
       state.openModal = action.payload;
     },
-    setPreviewData: (state, action: PayloadAction<IPost>) => {
-      state.previewData = action.payload;
-    },
+
     setPostList: (state, action: PayloadAction<IPost[]>) => {
       state.postList = action.payload;
     },
@@ -78,19 +62,30 @@ export const PostSlice = createSlice({
     setSocialNetworksToPublish: (state, action: PayloadAction<ISocialNetworksNames[]>) => {
       state.socialNetworksToPublish = action.payload;
     },
+    setShowCropSection: (state, action: PayloadAction<boolean>) => {
+      state.showCropSection = action.payload;
+    },
+    setDataImageCrop: (state, action: PayloadAction<string>) => {
+      state.dataImageCrop = action.payload;
+    },
+    setDataImageCroped: (state, action: PayloadAction<string>) => {
+      state.dataImageCroped = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
   setOpenModal,
-  setPreviewData,
   setPostList,
   setOpenModalPreviewMobile,
   setFormData,
   setTabSelected,
   setSocialNetworksConnected,
   setSocialNetworksToPublish,
+  setShowCropSection,
+  setDataImageCrop,
+  setDataImageCroped,
 } = PostSlice.actions;
 
 export default PostSlice.reducer;

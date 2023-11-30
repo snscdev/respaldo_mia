@@ -25,6 +25,7 @@ interface CardPostProps {
 
 export default function PreviewInstagram({ image, sx }: CardPostProps) {
   const text = useSelector((state: RootState) => state.post.formData.values.content);
+  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   const theme = useTheme();
   const { user } = useAuthContext();
@@ -156,10 +157,9 @@ export default function PreviewInstagram({ image, sx }: CardPostProps) {
   return (
     <Card
       sx={{
-        maxWidth: '340px',
+        width: '340px',
         borderRadius: '8px',
         backgroundColor: theme.palette.background.paper,
-        width: '100%',
         height: 'auto',
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
         mb: 2,
@@ -168,7 +168,7 @@ export default function PreviewInstagram({ image, sx }: CardPostProps) {
     >
       {renderCardHead}
 
-      <Image src={image} alt="post" width="100%" height={328} />
+      <Image src={dataImageCroped || image} alt="post" width="100%" height={328} />
 
       {renderFooterCard}
     </Card>

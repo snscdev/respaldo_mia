@@ -8,7 +8,7 @@ export const initialValues = {
   scheduleDate: '',
   taggedProfiles: [],
   hashtags: [],
-  publish: false,
+  publish: true,
 
   /// Instagram
   instagramOptions: {

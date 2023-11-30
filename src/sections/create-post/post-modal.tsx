@@ -11,9 +11,12 @@ import PostModalWrepper from './post-modal-wrapper';
 import PreviewaLayout from './previews/previews-layout';
 import RenderPreview from './previews/render-preview';
 import PostModalForm from './form/post-modal-form';
+import CropSection from './crop-section';
 
 export default function PostModal() {
   const mdUp = useResponsive('up', 'md');
+
+  const showCropSection = useSelector((state: RootState) => state.post.showCropSection);
 
   const openModalPreviewMobile = useSelector(
     (state: RootState) => state.post.openModalPreviewMobile
@@ -56,10 +59,16 @@ export default function PostModal() {
     </Grid>
   );
 
+  const renderCropSection = (
+    <Grid item xs={12} md={7}>
+      <CropSection />
+    </Grid>
+  );
+
   return (
     <PostModalWrepper>
       <Grid container spacing={0}>
-        {renderGridForm}
+        {showCropSection ? renderCropSection : renderGridForm}
 
         {renderGridPreview}
       </Grid>

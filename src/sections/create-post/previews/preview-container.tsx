@@ -1,16 +1,10 @@
-import { Box, Tabs, Tab, alpha } from '@mui/material';
-import { RootState } from 'src/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { Box, alpha } from '@mui/material';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export default function PreviewContainer({ children }: Props) {
-  const { platforms } = useSelector((state: RootState) => state.post.previewData);
-
-  const dispatch = useDispatch();
-
   return (
     <Box
       sx={(theme) => ({

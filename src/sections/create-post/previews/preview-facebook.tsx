@@ -25,6 +25,7 @@ interface CardPostProps {
 
 export default function PreviewFacebook({ image, sx }: CardPostProps) {
   const text = useSelector((state: RootState) => state.post.formData.values.content);
+  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   const theme = useTheme();
   const { user } = useAuthContext();
@@ -82,15 +83,6 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
       </Stack>
       <Box sx={{ p: '4px 10px' }}>
         <Typography sx={{ fontSize: '70%', textAlign: 'initial' }}>{text}</Typography>
-        {/* <Typography
-          sx={{
-            fontSize: '70%',
-            textAlign: 'initial',
-            color: theme.palette.background.purpel.main,
-          }}
-        >
-          {t('Dashboard.Create_Post.Create.card.link')}
-        </Typography> */}
       </Box>
     </>
   );
@@ -204,10 +196,9 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
   return (
     <Card
       sx={{
-        maxWidth: '304px',
+        width: '304px',
         borderRadius: '8px',
         backgroundColor: theme.palette.background.paper,
-        width: '100%',
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
         mb: 2,
         ...sx,
@@ -215,7 +206,7 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
     >
       {renderCardHead}
 
-      <Image src={image} alt="post" width="100%" height={298} />
+      <Image src={dataImageCroped} alt="post" width="100%" height={298} />
 
       {renderFooterCard}
     </Card>
