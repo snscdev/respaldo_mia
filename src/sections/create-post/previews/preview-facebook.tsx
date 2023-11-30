@@ -29,7 +29,6 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
 
   const theme = useTheme();
   const { user } = useAuthContext();
-  const { t } = useLocales();
 
   const renderCardHead = (
     <>
@@ -206,7 +205,7 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
     >
       {renderCardHead}
 
-      <Image src={dataImageCroped} alt="post" width="100%" height={298} />
+      <Image src={dataImageCroped || image} alt="post" width="100%" height={298} />
 
       {renderFooterCard}
     </Card>

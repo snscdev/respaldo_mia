@@ -23,11 +23,16 @@ const StyledTabs = styled(Tab)(({ theme }) => ({
 }));
 export default function PostModalSocialButtons() {
   const tabSelected = useSelector((state: RootState) => state.post.tabSelected);
+  const socialNetworksConnected = useSelector(
+    (state: RootState) => state.post.socialNetworksConnected
+  );
   const socialNetworksToPublish = useSelector(
     (state: RootState) => state.post.socialNetworksToPublish
   );
   const theme = useTheme();
   const dispatch = useDispatch();
+
+  const disableCheck = !socialNetworksConnected.some((social) => social === tabSelected);
 
   return (
     <Box>
@@ -60,6 +65,7 @@ export default function PostModalSocialButtons() {
               <>
                 <Checkbox
                   value={socialNetworksToPublish.some((social) => social === item.name)}
+                  disabled={disableCheck}
                   onChange={(e, value) =>
                     dispatch(
                       setSocialNetworksToPublish(

@@ -92,6 +92,10 @@ export default function CropSection({ image }: ICropSection) {
           crop={crop}
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
+          style={{
+            width: '80%',
+            height: '100%',
+          }}
         >
           <img
             ref={imgRef}

@@ -12,6 +12,8 @@ import {
 import { useAuthContext } from 'src/auth/hooks';
 import { useLocales } from 'src/locales';
 import ImageMUI from 'src/components/image/image';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 
 interface CardPostProps {
   image: string;
@@ -22,6 +24,7 @@ export default function PreviewDefault({ image, sx }: CardPostProps) {
   const theme = useTheme();
   const { user } = useAuthContext();
   const { t } = useLocales();
+  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   return (
     <Card
@@ -91,7 +94,7 @@ export default function PreviewDefault({ image, sx }: CardPostProps) {
           {t('Dashboard.Create_Post.Create.card.link')}
         </Typography>
       </Box>
-      <ImageMUI src={image} alt="icon" width="100%" />
+      <ImageMUI src={dataImageCroped || image} alt="icon" width="100%" />
       <Stack spacing={1} width="100%" sx={{ p: '11px' }} direction="row">
         {[0, 1, 2].map((item, index) => (
           <Box

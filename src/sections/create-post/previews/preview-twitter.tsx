@@ -24,6 +24,7 @@ interface CardPostProps {
 
 export default function PreviewTwitter({ image, sx }: CardPostProps) {
   const text = useSelector((state: RootState) => state.post.formData.values.content);
+  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   const theme = useTheme();
   const { user } = useAuthContext();
@@ -100,7 +101,7 @@ export default function PreviewTwitter({ image, sx }: CardPostProps) {
         }}
       >
         <Image
-          src={image}
+          src={dataImageCroped || image}
           alt="post"
           width="100%"
           height={221}
@@ -145,10 +146,9 @@ export default function PreviewTwitter({ image, sx }: CardPostProps) {
   return (
     <Card
       sx={{
-        maxWidth: '418px',
+        width: '418px',
         borderRadius: '8px',
         backgroundColor: theme.palette.background.paper,
-        width: '100%',
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
         mb: 2,
         ...sx,
