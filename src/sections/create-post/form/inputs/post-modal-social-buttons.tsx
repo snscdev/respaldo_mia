@@ -47,6 +47,9 @@ export default function PostModalSocialButtons() {
           '& .MuiTab-root': {
             color: 'text.secondary',
           },
+          '& .MuiTabScrollButton-horizontal': {
+            display: 'none',
+          },
         }}
       >
         {SOCIALNETWORKS.map((item, index) => (

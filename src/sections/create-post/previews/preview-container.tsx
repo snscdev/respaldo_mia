@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
+import { Box, Tabs, Tab, alpha } from '@mui/material';
 import { RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPreviewSelected } from 'src/store/slices/post';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +8,6 @@ interface Props {
 
 export default function PreviewContainer({ children }: Props) {
   const { platforms } = useSelector((state: RootState) => state.post.previewData);
-  const previewSelected = useSelector((state: RootState) => state.post.previewSelected);
 
   const dispatch = useDispatch();
 
@@ -23,40 +20,27 @@ export default function PreviewContainer({ children }: Props) {
         bgcolor: theme.palette.background.neutral,
         height: '80%',
         borderRadius: '8px',
+        overflowY: 'scroll',
+        /// estilos del scroll
+        '&::-webkit-scrollbar': {
+          width: '5px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: theme.palette.background.neutral,
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: alpha(theme.palette.info.main, 0.3),
+          borderRadius: '8px',
+        },
       })}
     >
       <Box
         sx={{
           maxWidth: '100%',
           width: '100%',
+          height: '10%',
         }}
-      >
-        <Tabs
-          value={previewSelected}
-          variant="scrollable"
-          scrollButtons="auto"
-          onChange={(e, newNalue) => dispatch(setPreviewSelected(newNalue))}
-          sx={{
-            mb: '10%',
-            padding: '0 5%',
-            alignSelf: 'start',
-            '& .MuiTabs-indicator': {
-              backgroundColor: '#7778EC',
-            },
-            '& .MuiTab-root': {
-              color: 'text.secondary',
-            },
-            '& .Mui-selected': {
-              color: '#7778EC',
-            },
-          }}
-        >
-          {platforms.map((item, index) => (
-            <Tab key={index} label={item} value={item} />
-          ))}
-        </Tabs>
-      </Box>
-
+      />
       <Box>{children}</Box>
     </Box>
   );

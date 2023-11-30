@@ -8,7 +8,6 @@ export interface PostState {
   openModal: boolean;
   openModalPreviewMobile: boolean;
   previewData: IPost;
-  previewSelected: ISocialNetworksNames | string;
   postList: IPost[];
   formData: {
     errors: any;
@@ -41,7 +40,6 @@ const initialState: PostState = {
     userId: '',
     ayrshareId: '',
   },
-  previewSelected: '',
   postList: [],
   formData: {
     errors: {},
@@ -64,9 +62,6 @@ export const PostSlice = createSlice({
     },
     setPostList: (state, action: PayloadAction<IPost[]>) => {
       state.postList = action.payload;
-    },
-    setPreviewSelected: (state, action: PayloadAction<ISocialNetworksNames>) => {
-      state.previewSelected = action.payload;
     },
     setOpenModalPreviewMobile: (state, action: PayloadAction<boolean>) => {
       state.openModalPreviewMobile = action.payload;
@@ -91,7 +86,6 @@ export const {
   setOpenModal,
   setPreviewData,
   setPostList,
-  setPreviewSelected,
   setOpenModalPreviewMobile,
   setFormData,
   setTabSelected,

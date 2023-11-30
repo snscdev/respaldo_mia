@@ -9,7 +9,6 @@ import { setOpenModalPreviewMobile } from 'src/store/slices/post';
 
 import PostModalWrepper from './post-modal-wrapper';
 import PreviewaLayout from './previews/previews-layout';
-import PreviewContainer from './previews/preview-container';
 import RenderPreview from './previews/render-preview';
 import PostModalForm from './form/post-modal-form';
 
@@ -32,9 +31,7 @@ export default function PostModal() {
           background: theme.palette.background.neutral,
         })}
       >
-        <PreviewContainer>
-          <RenderPreview />
-        </PreviewContainer>
+        <RenderPreview />
       </DialogContent>
     </Dialog>
   );

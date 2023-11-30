@@ -18,6 +18,7 @@ import PublishRadioButtons from './inputs/post-modal-publish-radio-buttons';
 import PublishDatePicker from './inputs/post-modal-publish-date-picker';
 import PostTypeInstagram from './inputs/post-modal-post-type-instagram';
 import InstagramOptions from './inputs/post-modal-instagram-options';
+import TiktokOptions from './inputs/post-modal-tiktok-options';
 
 interface IDataForm {
   errors: any;
@@ -84,6 +85,10 @@ export default function PostModalForm() {
 
                 {tabSelected === SOCIALNETWORKSNAMES.instagram && (
                   <InstagramOptions name="instagramComments" />
+                )}
+
+                {tabSelected === SOCIALNETWORKSNAMES.tiktok && (
+                  <TiktokOptions name="tikTokOptions" />
                 )}
 
                 <PublishRadioButtons name="publish" />
