@@ -31,7 +31,7 @@ const initialState: PostState = {
   socialNetworksConnected: ['facebook'],
   tabSelected: 'facebook',
   socialNetworksToPublish: [],
-  showCropSection: true,
+  showCropSection: false,
   dataImageCrop: '',
   dataImageCroped: '',
 };

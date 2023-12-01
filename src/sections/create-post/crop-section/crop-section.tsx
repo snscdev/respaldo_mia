@@ -5,6 +5,7 @@ import { DependencyList, useEffect, useRef, useState } from 'react';
 import ReactCrop, { Crop, PixelCrop, centerCrop, makeAspectCrop } from 'react-image-crop';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
+import { Box, Slider, Typography } from '@mui/material';
 import { setDataImageCroped } from 'src/store/slices/post';
 import CropSectionLayout from './crop-section-layout';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -67,6 +68,26 @@ export default function CropSection({ image }: ICropSection) {
     }, deps);
   }
 
+  const rotateImage = (srcBase64: string, angle: number) =>
+    new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = srcBase64;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const cw = img.width;
+        const ch = img.height;
+        const cx = cw / 2;
+        const cy = ch / 2;
+        canvas.width = cw;
+        canvas.height = ch;
+        ctx?.rotate((angle * Math.PI) / 180);
+        ctx?.drawImage(img, -cx, -cy);
+        resolve(canvas.toDataURL('image/png'));
+      };
+      img.onerror = (err) => reject(err);
+    });
+
   useDebounceEffect(
     async () => {
       if (completedCrop?.width && completedCrop?.height && imgRef?.current) {
@@ -80,6 +101,12 @@ export default function CropSection({ image }: ICropSection) {
         //   manteinAspect: aspectImage
         // })
       }
+      /// rotar la imagen asi no este cortada
+      if (rotate !== 0) {
+        const b64 = await rotateImage(image.data, rotate);
+        distpach(setDataImageCroped(b64));
+      }
+      //   setSelectedImage({
     },
     100,
     [completedCrop, scale, rotate]
@@ -87,6 +114,44 @@ export default function CropSection({ image }: ICropSection) {
 
   return (
     <CropSectionLayout>
+      <Box>
+        <Box>
+          <Typography>Escala</Typography>
+          <Slider
+            size="small"
+            defaultValue={1}
+            step={0.1}
+            min={0.1}
+            max={5}
+            sx={{ width: '80%' }}
+            value={scale}
+            marks
+            valueLabelDisplay="auto"
+            disabled={!dataImageCrop}
+            color={'info' as 'primary'}
+            onChange={(event: Event, newValue: number | number[]) => setScale(Number(newValue))}
+          />
+        </Box>
+
+        <div>
+          <Typography>Rotar</Typography>
+          <Slider
+            size="small"
+            color={'info' as 'primary'}
+            step={1}
+            min={-180}
+            max={180}
+            value={rotate}
+            sx={{ width: '80%' }}
+            marks
+            valueLabelDisplay="auto"
+            disabled={!dataImageCrop}
+            onChange={(event: Event, newValue: number | number[]) =>
+              setRotate(Math.min(180, Math.max(-180, Number(newValue))))
+            }
+          />
+        </div>
+      </Box>
       {dataImageCrop.length > 0 && (
         <ReactCrop
           crop={crop}

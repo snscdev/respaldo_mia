@@ -64,6 +64,7 @@ export default function PreviewContainer({ children }: Props) {
               '& .Mui-selected': {
                 color: '#7778EC',
               },
+              /// quitar los botones de scroll
             }}
           >
             {socialNetworksToPublish.map((item, index) => (
