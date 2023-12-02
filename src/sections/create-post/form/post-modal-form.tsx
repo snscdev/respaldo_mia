@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from 'src/store/slices/post';
 import { RootState } from 'src/store';
 
-import { Alert, Box, Button, Stack, alpha, useTheme } from '@mui/material';
+import { Box, Button, Stack, alpha, useTheme } from '@mui/material';
 import ThumbnailsView from 'src/components/Thumbnails';
 import { SOCIALNETWORKSNAMES } from 'src/const/post/redes';
 import { useLocales } from 'src/locales';
 import PostTextArea from './inputs/post-modal-text-area';
 import PosModalFormLayout from './form-layout';
-import { initialValues, validationSchema } from './dataForms';
+import { validationSchema } from './dataForms';
 
 import PublishRadioButtons from './inputs/post-modal-publish-radio-buttons';
 import PublishDatePicker from './inputs/post-modal-publish-date-picker';
@@ -45,6 +45,7 @@ const DataForm = ({ errors, values }: IDataForm) => {
 
 export default function PostModalForm() {
   const tabSelected = useSelector((state: RootState) => state.post.tabSelected);
+  const valuesForm = useSelector((state: RootState) => state.post.formData.values);
   const socialNetworksConnected = useSelector(
     (state: RootState) => state.post.socialNetworksConnected
   );
@@ -56,7 +57,7 @@ export default function PostModalForm() {
   return (
     <PosModalFormLayout>
       <Formik
-        initialValues={initialValues}
+        initialValues={valuesForm}
         onSubmit={(values) => {
           console.log(values);
         }}
@@ -105,48 +106,7 @@ export default function PostModalForm() {
                       }}
                     >
                       <ImageBox label="Multimedia" name="multimedia" />
-                      <ThumbnailsView
-                        data={
-                          [
-                            // {
-                            //   id: '1',
-                            //   title: '1',
-                            //   coverUrl: 'https://picsum.photos/200/300',
-                            //   description: '1',
-                            // },
-                            // {
-                            //   id: '2',
-                            //   title: '2',
-                            //   coverUrl: 'https://picsum.photos/200/300',
-                            //   description: '2',
-                            // },
-                            // {
-                            //   id: '3',
-                            //   title: '3',
-                            //   coverUrl: 'https://picsum.photos/200/300',
-                            //   description: '3',
-                            // },
-                            // {
-                            //   id: '4',
-                            //   title: '4',
-                            //   coverUrl: 'https://picsum.photos/200/300',
-                            //   description: '4',
-                            // },
-                            // {
-                            //   id: '5',
-                            //   title: '5',
-                            //   coverUrl: 'https://picsum.photos/200/300',
-                            //   description: '5',
-                            // },
-                            // {
-                            //   id: '6',
-                            //   title: '6',
-                            //   coverUrl: 'https://picsum.photos/200/300',
-                            //   description: '6',
-                            // },
-                          ]
-                        }
-                      />
+                      <ThumbnailsView />
                     </Box>
 
                     {tabSelected === SOCIALNETWORKSNAMES.instagram && (

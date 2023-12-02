@@ -1,8 +1,10 @@
 'use client';
 
+/* eslint-disable prefer-template */
+
 import { Box, IconButton, Menu, Theme, styled, useTheme } from '@mui/material';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
-import { ErrorMessage, useField } from 'formik';
+import { useField } from 'formik';
 import { useEffect, useState } from 'react';
 import Iconify from 'src/components/iconify/iconify';
 import { useLocales } from 'src/locales';
@@ -50,7 +52,7 @@ interface IPostTextArea {
 export default function PostTextArea({ name }: IPostTextArea) {
   const { currentLang } = useLocales();
 
-  const [field, meta, helpers] = useField(name);
+  const [, meta, helpers] = useField(name);
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -75,10 +77,25 @@ export default function PostTextArea({ name }: IPostTextArea) {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
+
+  const handleClickHashtag = () => {
+    setText((prevValue: string) => prevValue + ' #');
+    // focus on text area
+    const el = document.getElementById(`post-modal-text-area-${name}`);
+    el?.focus();
+  };
+
+  const handleClickMensiion = () => {
+    setText((prevValue: string) => prevValue + ' @');
+    const el = document.getElementById(`post-modal-text-area-${name}`);
+    el?.focus();
+  };
+
   return (
     <Box>
       <TexAreaContainer error={meta.error && meta.touched} theme={theme}>
         <TextArea
+          id={`post-modal-text-area-${name}`}
           lang={currentLang.label}
           value={text}
           onChange={handleChange}
@@ -119,12 +136,28 @@ export default function PostTextArea({ name }: IPostTextArea) {
           >
             <EmojiPicker onEmojiClick={onEmojiClick} />
           </Menu>
-          <IconButton onClick={openEmojiPicker}>
+          <IconButton onClick={handleClickHashtag}>
             <Iconify icon="fontisto:hashtag" />
           </IconButton>
-          <IconButton onClick={openEmojiPicker}>
+          <IconButton onClick={handleClickMensiion}>
             <Iconify icon="streamline:sign-at-solid" />
           </IconButton>
+
+          <Box
+            sx={{
+              position: 'absolute',
+              right: '16px',
+              fontSize: '14px',
+              fontWeight: 400,
+              color: theme.palette.text.secondary,
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '8px',
+            }}
+          >
+            <Box>#{text.split('#').length - 1}</Box>
+            <Box>{text.length}</Box>
+          </Box>
         </Box>
       </TexAreaContainer>
       <ErrorForm name={name} />

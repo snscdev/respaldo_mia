@@ -3,22 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { IPost, ISocialNetworksNames } from 'src/types/post';
-
-export interface PostState {
-  openModal: boolean;
-  openModalPreviewMobile: boolean;
-  postList: IPost[];
-  formData: {
-    errors: any;
-    values: any;
-  };
-  tabSelected: ISocialNetworksNames;
-  socialNetworksConnected: ISocialNetworksNames[];
-  socialNetworksToPublish: ISocialNetworksNames[];
-  showCropSection: boolean;
-  dataImageCrop: string;
-  dataImageCroped: string;
-}
+import { PostState } from './types';
 
 const initialState: PostState = {
   openModal: false,
@@ -26,7 +11,51 @@ const initialState: PostState = {
   postList: [],
   formData: {
     errors: {},
-    values: {},
+    values: {
+      /// constantes
+      title: '',
+      content: '',
+      mediaUrls: [],
+      scheduleDate: '',
+      taggedProfiles: [],
+      hashtags: [],
+      publish: true,
+
+      /// Instagram
+      instagramOptions: {
+        reels: false,
+        shareReelsFeed: false,
+        stories: false,
+      },
+      instagramComments: '',
+
+      /// Facebook
+      facebookOptions: {
+        thumbNail: 'string',
+        reels: false,
+      },
+
+      /// TikTok
+      tikTokOptions: {
+        disableComments: true,
+        disableDuet: true,
+        disableStitch: true,
+      },
+
+      /// LinkedIn
+      linkedInOptions: {
+        thumbNail: 'string',
+      },
+
+      /// Twitter
+      twitterOptions: {
+        longVideo: false,
+        poll: {
+          duration: 0,
+          options: ['string'],
+        },
+      },
+    },
   },
   socialNetworksConnected: ['facebook'],
   tabSelected: 'facebook',
@@ -43,9 +72,11 @@ export const PostSlice = createSlice({
     setOpenModal: (state, action: PayloadAction<boolean>) => {
       state.openModal = action.payload;
     },
-
-    setPostList: (state, action: PayloadAction<IPost[]>) => {
+    setPostList: (state, action: PayloadAction<IPost[] | any>) => {
       state.postList = action.payload;
+    },
+    setUpdateFormDataMediaUrls: (state, action: PayloadAction<string>) => {
+      state.formData.values.mediaUrls.push(action.payload);
     },
     setOpenModalPreviewMobile: (state, action: PayloadAction<boolean>) => {
       state.openModalPreviewMobile = action.payload;
@@ -86,6 +117,7 @@ export const {
   setShowCropSection,
   setDataImageCrop,
   setDataImageCroped,
+  setUpdateFormDataMediaUrls,
 } = PostSlice.actions;
 
 export default PostSlice.reducer;

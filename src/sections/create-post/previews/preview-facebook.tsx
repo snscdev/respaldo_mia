@@ -1,3 +1,5 @@
+/* eslint-disable no-unneeded-ternary */
+/* eslint-disable no-nested-ternary */
 import {
   Avatar,
   Box,
@@ -25,10 +27,11 @@ interface CardPostProps {
 
 export default function PreviewFacebook({ image, sx }: CardPostProps) {
   const text = useSelector((state: RootState) => state.post.formData.values.content);
-  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   const theme = useTheme();
   const { user } = useAuthContext();
+
+  /// si showCropSection es true, entonces imagePreview = dataImageCroped sino imagePreview = dataImageCrop sino imagePreview = image
 
   const renderCardHead = (
     <>
@@ -205,7 +208,7 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
     >
       {renderCardHead}
 
-      <Image src={dataImageCroped || image} alt="post" width="100%" height={298} />
+      <Image src={image} alt="post" width="100%" height={298} />
 
       {renderFooterCard}
     </Card>

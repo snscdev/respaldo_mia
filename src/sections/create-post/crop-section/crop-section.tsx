@@ -2,59 +2,36 @@
 /* eslint-disable prefer-spread */
 /* eslint-disable @next/next/no-img-element */
 import { DependencyList, useEffect, useRef, useState } from 'react';
-import ReactCrop, { Crop, PixelCrop, centerCrop, makeAspectCrop } from 'react-image-crop';
+import ReactCrop, { Crop, PixelCrop } from 'react-image-crop';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { Box, Slider, Typography } from '@mui/material';
-import { setDataImageCroped } from 'src/store/slices/post';
+import { Box, Button, Slider, Typography } from '@mui/material';
+import {
+  setDataImageCroped,
+  setShowCropSection,
+  setUpdateFormDataMediaUrls,
+} from 'src/store/slices/post';
 import CropSectionLayout from './crop-section-layout';
 import 'react-image-crop/dist/ReactCrop.css';
 import { imgPreview } from './imgPreview';
 
-function centerAspectCrop(mediaWidth: number, mediaHeight: number, aspect: number) {
-  return centerCrop(
-    makeAspectCrop(
-      {
-        unit: '%',
-        width: 90,
-      },
-      aspect,
-      mediaWidth,
-      mediaHeight
-    ),
-    mediaWidth,
-    mediaHeight
-  );
-}
-
-interface ICropSection {
-  image: {
-    file: any;
-    data: string;
-    success: boolean;
-    dataPreview: string;
-  };
-}
-
-export default function CropSection({ image }: ICropSection) {
-  const [crop, setCrop] = useState<Crop>();
+export default function CropSection() {
+  const [crop, setCrop] = useState<Crop>({ unit: 'px', width: 300, height: 300, x: 100, y: 25 });
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
   const [aspect, setAspect] = useState<number | undefined>();
 
   const dataImageCrop = useSelector((state: RootState) => state.post.dataImageCrop);
+  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   const imgRef = useRef<HTMLImageElement>(null);
 
   const distpach = useDispatch();
 
-  // const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-  //   if (aspect) {
-  //     const { width, height } = e.currentTarget;
-  //     setCrop(centerAspectCrop(width, height, aspect));
-  //   }
-  // };
+  useEffect(() => {
+    setCompletedCrop(crop as PixelCrop);
+  }, []);
 
   function useDebounceEffect(fn: any, waitTime: number, deps?: DependencyList) {
     useEffect(() => {
@@ -68,49 +45,23 @@ export default function CropSection({ image }: ICropSection) {
     }, deps);
   }
 
-  const rotateImage = (srcBase64: string, angle: number) =>
-    new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = srcBase64;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const cw = img.width;
-        const ch = img.height;
-        const cx = cw / 2;
-        const cy = ch / 2;
-        canvas.width = cw;
-        canvas.height = ch;
-        ctx?.rotate((angle * Math.PI) / 180);
-        ctx?.drawImage(img, -cx, -cy);
-        resolve(canvas.toDataURL('image/png'));
-      };
-      img.onerror = (err) => reject(err);
-    });
-
   useDebounceEffect(
     async () => {
+      let b64 = '';
       if (completedCrop?.width && completedCrop?.height && imgRef?.current) {
-        const b64 = imgPreview(imgRef.current, completedCrop, scale, rotate);
-        distpach(setDataImageCroped(b64));
-        // setSelectedImage({
-        //   data: image.data,
-        //   file: image.file,
-        //   success: false,
-        //   dataPreview: b64,
-        //   manteinAspect: aspectImage
-        // })
-      }
-      /// rotar la imagen asi no este cortada
-      if (rotate !== 0) {
-        const b64 = await rotateImage(image.data, rotate);
+        b64 = imgPreview(imgRef.current, completedCrop, scale, rotate);
         distpach(setDataImageCroped(b64));
       }
-      //   setSelectedImage({
     },
     100,
     [completedCrop, scale, rotate]
   );
+
+  const handleSave = () => {
+    distpach(setShowCropSection(false));
+    distpach(setUpdateFormDataMediaUrls(dataImageCroped));
+    distpach(setDataImageCroped(''));
+  };
 
   return (
     <CropSectionLayout>
@@ -121,7 +72,7 @@ export default function CropSection({ image }: ICropSection) {
             size="small"
             defaultValue={1}
             step={0.1}
-            min={0.1}
+            min={1}
             max={5}
             sx={{ width: '80%' }}
             value={scale}
@@ -155,6 +106,7 @@ export default function CropSection({ image }: ICropSection) {
       {dataImageCrop.length > 0 && (
         <ReactCrop
           crop={crop}
+          maxHeight={imgRef?.current?.height}
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
           style={{
@@ -166,11 +118,13 @@ export default function CropSection({ image }: ICropSection) {
             ref={imgRef}
             alt="Crop me"
             src={dataImageCrop}
-            style={{ transform: `scale(${scale}) rotate(${rotate}deg)` }}
-            // onLoad={onImageLoad}
+            style={{ transform: `scale(${scale}) rotate(${rotate}deg)`, background: 'white' }}
           />
         </ReactCrop>
       )}
+      <Button variant="contained" color="primary" sx={{ width: '20%' }} onClick={handleSave}>
+        Guardar
+      </Button>
     </CropSectionLayout>
   );
 }

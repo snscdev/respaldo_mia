@@ -12,7 +12,6 @@ import {
   useTheme,
 } from '@mui/material';
 import { useAuthContext } from 'src/auth/hooks';
-import { useLocales } from 'src/locales';
 import Iconify from 'src/components/iconify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
@@ -25,12 +24,9 @@ interface CardPostProps {
 
 export default function PreviewInstagram({ image, sx }: CardPostProps) {
   const text = useSelector((state: RootState) => state.post.formData.values.content);
-  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   const theme = useTheme();
   const { user } = useAuthContext();
-  const { t } = useLocales();
-
   const renderCardHead = (
     <Stack
       spacing={2}
@@ -168,7 +164,7 @@ export default function PreviewInstagram({ image, sx }: CardPostProps) {
     >
       {renderCardHead}
 
-      <Image src={dataImageCroped || image} alt="post" width="100%" height={328} />
+      <Image src={image} alt="post" width="100%" height={328} />
 
       {renderFooterCard}
     </Card>

@@ -10,7 +10,6 @@ import {
   useTheme,
 } from '@mui/material';
 import { useAuthContext } from 'src/auth/hooks';
-import { useLocales } from 'src/locales';
 import ImageMUI from 'src/components/image/image';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
@@ -20,18 +19,17 @@ interface CardPostProps {
   sx?: SxProps<Theme> | undefined;
 }
 
-export default function PreviewDefault({ image, sx }: CardPostProps) {
+export default function PreviewLinkedin({ image, sx }: CardPostProps) {
   const theme = useTheme();
   const { user } = useAuthContext();
-  const { t } = useLocales();
-  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
+  const text = useSelector((state: RootState) => state.post.formData.values.content);
 
   return (
     <Card
       sx={{
         borderRadius: '8px',
+        width: '350px',
         backgroundColor: theme.palette.background.paper,
-        width: '100%',
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
         mb: 2,
         ...sx,
@@ -81,20 +79,9 @@ export default function PreviewDefault({ image, sx }: CardPostProps) {
         </Grid>
       </Stack>
       <Box sx={{ p: '4px 10px' }}>
-        <Typography sx={{ fontSize: '70%', textAlign: 'initial' }}>
-          {t('Dashboard.Create_Post.Create.card.text')}
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: '70%',
-            textAlign: 'initial',
-            color: theme.palette.background.purpel.main,
-          }}
-        >
-          {t('Dashboard.Create_Post.Create.card.link')}
-        </Typography>
+        <Typography sx={{ fontSize: '70%', textAlign: 'initial' }}>{text}</Typography>
       </Box>
-      <ImageMUI src={dataImageCroped || image} alt="icon" width="100%" />
+      <ImageMUI src={image} alt="icon" width="100%" height={200} />
       <Stack spacing={1} width="100%" sx={{ p: '11px' }} direction="row">
         {[0, 1, 2].map((item, index) => (
           <Box

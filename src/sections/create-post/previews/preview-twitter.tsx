@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   Card,
-  Divider,
   Grid,
   Stack,
   SxProps,
@@ -15,7 +14,6 @@ import Iconify from 'src/components/iconify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import Image from 'src/components/image';
-import SvgColor from 'src/components/svg-color';
 
 interface CardPostProps {
   image: string;
@@ -24,7 +22,6 @@ interface CardPostProps {
 
 export default function PreviewTwitter({ image, sx }: CardPostProps) {
   const text = useSelector((state: RootState) => state.post.formData.values.content);
-  const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
 
   const theme = useTheme();
   const { user } = useAuthContext();
@@ -101,7 +98,7 @@ export default function PreviewTwitter({ image, sx }: CardPostProps) {
         }}
       >
         <Image
-          src={dataImageCroped || image}
+          src={image}
           alt="post"
           width="100%"
           height={221}

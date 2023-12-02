@@ -43,6 +43,7 @@ export default function PostModalSocialButtons() {
         onChange={(e, newNalue) => dispatch(setTabSelected(newNalue))}
         sx={{
           alignSelf: 'start',
+
           '& .MuiTabs-indicator': {
             backgroundColor: 'transparent',
             borderRadius: '14.3px',
@@ -61,6 +62,9 @@ export default function PostModalSocialButtons() {
           <StyledTabs
             key={index}
             value={item.name}
+            sx={{
+              width: { xs: 120, md: 'auto' },
+            }}
             icon={
               <>
                 <Checkbox
