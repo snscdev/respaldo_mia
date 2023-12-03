@@ -40,6 +40,6 @@ export default function RenderPreview() {
   }
 
   if (tabSelected === SOCIALNETWORKSNAMES.tiktok) {
-    return <PreviewTiktok image={imagePreview} />;
+    return <PreviewTiktok image={imageDefault} />;
   }
 }

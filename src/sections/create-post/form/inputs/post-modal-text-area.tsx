@@ -8,6 +8,8 @@ import { useField } from 'formik';
 import { useEffect, useState } from 'react';
 import Iconify from 'src/components/iconify/iconify';
 import { useLocales } from 'src/locales';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 import ErrorForm from '../error-form';
 
 const TextArea = styled('textarea')(({ theme }) => ({
@@ -56,9 +58,10 @@ export default function PostTextArea({ name }: IPostTextArea) {
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const valuesForm = useSelector((state: RootState) => state.post.formData.values);
 
   const [showPicker, setShowPicker] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState(valuesForm.content);
 
   useEffect(() => {
     helpers.setValue(text);

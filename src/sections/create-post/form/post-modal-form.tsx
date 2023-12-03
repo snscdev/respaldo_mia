@@ -32,6 +32,7 @@ const DataForm = ({ errors, values }: IDataForm) => {
   const distpach = useDispatch();
 
   useEffect(() => {
+    console.log(values);
     distpach(
       setFormData({
         errors,
@@ -53,7 +54,7 @@ export default function PostModalForm() {
   const { t } = useLocales();
 
   const isConected = socialNetworksConnected.includes(tabSelected);
-
+  console.log(valuesForm);
   return (
     <PosModalFormLayout>
       <Formik
