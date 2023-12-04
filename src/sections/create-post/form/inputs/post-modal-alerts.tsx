@@ -16,6 +16,9 @@ export default function AlertMessages() {
   return (
     <Alert
       severity="info"
+      sx={{
+        zIndex: 3,
+      }}
       action={
         <Button
           size="small"

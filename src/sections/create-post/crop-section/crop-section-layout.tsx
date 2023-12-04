@@ -1,4 +1,4 @@
-import { Button, Icon, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import Iconify from 'src/components/iconify';
 import { setDataImageCrop, setDataImageCroped, setShowCropSection } from 'src/store/slices/post';

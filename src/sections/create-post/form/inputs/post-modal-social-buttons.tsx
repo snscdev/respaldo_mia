@@ -1,7 +1,8 @@
 import { Tabs, styled, Tab, Checkbox, Box, useTheme, alpha, Tooltip } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'src/components/image/image';
-import { SOCIALNETWORKS } from 'src/const/post/redes';
+import SvgColor from 'src/components/svg-color';
+import { SOCIALNETWORKS, SOCIALNETWORKSNAMES } from 'src/const/post/redes';
 import { RootState } from 'src/store';
 import { setSocialNetworksToPublish, setTabSelected } from 'src/store/slices/post';
 
@@ -90,11 +91,19 @@ export default function PostModalSocialButtons() {
                     }}
                   />
                 </Tooltip>
-                <Image
-                  src={`/assets/icons/dashboard/post/${item.name}.svg`}
-                  alt={item.name}
-                  width={24}
-                />
+                {item.name === SOCIALNETWORKSNAMES.twitter ? (
+                  <SvgColor
+                    src={`/assets/icons/dashboard/post/${item.name}.svg`}
+                    width={24}
+                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                  />
+                ) : (
+                  <Image
+                    src={`/assets/icons/dashboard/post/${item.name}.svg`}
+                    alt={item.name}
+                    width={24}
+                  />
+                )}
               </>
             }
           />

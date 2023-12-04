@@ -2,15 +2,31 @@
 
 import { Form, Formik } from 'formik';
 
+import { m } from 'framer-motion';
+
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData, setOpenModalPreviewMobile } from 'src/store/slices/post';
 import { RootState } from 'src/store';
 
-import { Box, Button, Stack, alpha, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Stack,
+  Tooltip,
+  TooltipProps,
+  Typography,
+  alpha,
+  styled,
+  tooltipClasses,
+  useTheme,
+} from '@mui/material';
 import ThumbnailsView from 'src/components/Thumbnails';
 import { SOCIALNETWORKSNAMES } from 'src/const/post/redes';
+import SvgColor from 'src/components/svg-color';
 import { useResponsive } from 'src/hooks/use-responsive';
+import Image from 'src/components/image';
 import { useLocales } from 'src/locales';
 import PostTextArea from './inputs/post-modal-text-area';
 import PosModalFormLayout from './form-layout';
@@ -45,11 +61,26 @@ const DataForm = ({ errors, values }: IDataForm) => {
   return <></>;
 };
 
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}));
+
 export default function PostModalForm() {
   const tabSelected = useSelector((state: RootState) => state.post.tabSelected);
   const valuesForm = useSelector((state: RootState) => state.post.formData.values);
   const socialNetworksConnected = useSelector(
     (state: RootState) => state.post.socialNetworksConnected
+  );
+  const socialNetworksToPublish = useSelector(
+    (state: RootState) => state.post.socialNetworksToPublish
   );
   const theme = useTheme();
   const { t } = useLocales();
@@ -59,6 +90,9 @@ export default function PostModalForm() {
   const dispatch = useDispatch();
 
   const isConected = socialNetworksConnected.includes(tabSelected);
+
+  const showOverlay = socialNetworksToPublish.includes(tabSelected);
+
   return (
     <PosModalFormLayout>
       <Formik
@@ -70,7 +104,86 @@ export default function PostModalForm() {
       >
         {({ values, errors }) => (
           <>
-            <Form>
+            <Form
+              style={{
+                position: 'relative',
+              }}
+            >
+              {!showOverlay && (
+                <HtmlTooltip
+                  followCursor
+                  title={
+                    <>
+                      <Typography
+                        variant="button"
+                        color="inherit"
+                      >{`Para postear en ${tabSelected}`}</Typography>{' '}
+                      <br />
+                      <Typography variant="caption" color="inherit">
+                        Activa el formulario haciendo clic en el checkbox
+                      </Typography>
+                      <Box
+                        sx={{
+                          height: 48,
+                          marginTop: '10px',
+                          width: 89,
+                          border: `1px solid ${theme.palette.background.neutral} !important`,
+                          borderRadius: '14.3px',
+                          borderColor: `${theme.palette.info.main} !important`,
+                          backgroundColor: `${theme.palette.background.default} !important`,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          gap: '10px',
+                        }}
+                      >
+                        <m.div
+                          animate={{
+                            scale: [1, 1.5, 1.5, 1, 1],
+                            borderRadius: ['0%', '0%', '50%', '50%', '0%'],
+                          }}
+                          transition={{
+                            duration: 2,
+                            ease: 'easeInOut',
+                            times: [0, 0.2, 0.5, 0.8, 1],
+                            repeat: Infinity,
+                            repeatDelay: 1,
+                          }}
+                        >
+                          <Checkbox checked color="info" />
+                        </m.div>
+                        {tabSelected === SOCIALNETWORKSNAMES.twitter ? (
+                          <SvgColor
+                            src={`/assets/icons/dashboard/post/${tabSelected}.svg`}
+                            width={24}
+                            color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                          />
+                        ) : (
+                          <Image
+                            src={`/assets/icons/dashboard/post/${tabSelected}.svg`}
+                            alt={tabSelected}
+                            width={24}
+                          />
+                        )}
+                      </Box>
+                    </>
+                  }
+                >
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: 'calc(100% - 24px)',
+                      height: 'calc(100vh - 44vh)',
+                      zIndex: 1,
+                      backgroundColor: alpha(theme.palette.background.neutral, 0.6),
+                      borderRadius: '10px',
+                    }}
+                  />
+                </HtmlTooltip>
+              )}
+
               <Stack
                 sx={{
                   gap: '24px',

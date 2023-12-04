@@ -33,7 +33,7 @@ interface PostModalProps {
 export default function PostModalWrepper({ children }: PostModalProps) {
   const dispatch = useDispatch();
   const mdUp = useResponsive('up', 'md');
-  const { openModal } = useSelector((state: RootState) => state.post);
+  const { openModal, showCropSection } = useSelector((state: RootState) => state.post);
 
   const theme = useTheme();
 
@@ -55,15 +55,17 @@ export default function PostModalWrepper({ children }: PostModalProps) {
       {!mdUp ? (
         <>
           <AppBar position="relative" color="default">
-            <Toolbar>
-              <IconButton color="inherit" edge="start" onClick={handleBack}>
-                <Iconify icon="eva:close-outline" />
-              </IconButton>
+            {!showCropSection && (
+              <Toolbar>
+                <IconButton color="inherit" edge="start" onClick={handleBack}>
+                  <Iconify icon="eva:close-outline" />
+                </IconButton>
 
-              <Typography variant="h6" sx={{ flex: 1 }}>
-                Cerrar
-              </Typography>
-            </Toolbar>
+                <Typography variant="h6" sx={{ flex: 1 }}>
+                  Cerrar
+                </Typography>
+              </Toolbar>
+            )}
           </AppBar>
           <DialogContent>{children}</DialogContent>
         </>

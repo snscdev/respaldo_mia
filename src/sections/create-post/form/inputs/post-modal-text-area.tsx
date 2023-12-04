@@ -102,6 +102,7 @@ export default function PostTextArea({ name }: IPostTextArea) {
           lang={currentLang.label}
           value={text}
           onChange={handleChange}
+          placeholder="Añade el pie de pagina de esta publicación"
           style={{
             height: '150px',
           }}

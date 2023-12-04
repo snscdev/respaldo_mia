@@ -16,6 +16,7 @@ import Iconify from 'src/components/iconify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import Image from 'src/components/image';
+import SvgColor from 'src/components/svg-color/svg-color';
 
 interface CardPostProps {
   image: string;
@@ -58,7 +59,7 @@ export default function PreviewInstagram({ image, sx }: CardPostProps) {
             >
               <Box
                 sx={{
-                  backgroundColor: theme.palette.grey[300],
+                  backgroundColor: theme.palette.background.neutral,
                   height: '10px',
                   width: '100%',
                   borderRadius: '12px',
@@ -118,10 +119,14 @@ export default function PreviewInstagram({ image, sx }: CardPostProps) {
       }}
     >
       <Box>
-        <Image src="/assets/icons/dashboard/post/instagram/likes.svg" alt="likes" />
+        <SvgColor src="/assets/icons/dashboard/post/instagram/likes.svg" width={100} height={24} />
       </Box>
       <Box>
-        <Image src="/assets/icons/dashboard/post/instagram/bookmark.svg" alt="likes" />
+        <SvgColor
+          src="/assets/icons/dashboard/post/instagram/bookmark.svg"
+          width={24}
+          height={24}
+        />
       </Box>
     </Box>
   );

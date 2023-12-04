@@ -19,6 +19,7 @@ import Iconify from 'src/components/iconify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import Image from 'src/components/image';
+import SvgColor from 'src/components/svg-color';
 
 interface CardPostProps {
   image: string;
@@ -65,7 +66,7 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
               >
                 <Box
                   sx={{
-                    backgroundColor: theme.palette.grey[300],
+                    backgroundColor: theme.palette.background.neutral,
                     height: '10px',
                     width: '100%',
                     borderRadius: '12px',
@@ -107,7 +108,7 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
         sx={{
           height: '28px',
           borderRadius: '3px',
-          backgroundColor: theme.palette.grey[300],
+          backgroundColor: theme.palette.background.neutral,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -175,7 +176,13 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
             cursor: 'pointer',
           }}
         >
-          <Image src={`/assets/icons/dashboard/post/facebook/${item}.svg`} alt={item} />
+          <SvgColor
+            src={`/assets/icons/dashboard/post/facebook/${item}.svg`}
+            width={14}
+            height={14}
+            top={2}
+            position="relative"
+          />
           <Typography
             sx={{ fontSize: '11px', fontWeight: 400, p: '0px', position: 'relative', top: 3 }}
           >

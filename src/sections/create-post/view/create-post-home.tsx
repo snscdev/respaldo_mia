@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 // @mui
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { IconButton, Paper, Tab, Tabs, Typography, useTheme } from '@mui/material';
+import { Box, IconButton, Paper, Tab, Tabs, Typography, useTheme } from '@mui/material';
 import Container from '@mui/material/Container';
 import Image from 'src/components/image';
 
@@ -44,7 +44,6 @@ const Icons = SOCIALNETWORKS.map((item) => ({
 
 const mockState = ['published', 'programmed', 'published', 'programmed', 'published'];
 
-const redes = [1];
 const posts: IPostItem[] = SOCIALNETWORKS.map((item, index) => ({
   id: index.toString(),
   socialName: item.name,
@@ -63,6 +62,11 @@ const defaultFilters: IPostFilters = {
 };
 
 export default function CreatePostHome() {
+  const socialNetworksConnected = useSelector(
+    (state: RootState) => state.post.socialNetworksConnected
+  );
+  const postListData = useSelector((state: RootState) => state.post.postList);
+
   const settings = useSettingsContext();
 
   const Theme = useTheme();
@@ -239,45 +243,56 @@ export default function CreatePostHome() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
-      <CustomBreadcrumbs
-        heading={t('Dashboard.Create_Post.Title')}
-        links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
-          { name: t('Dashboard.Create_Post.Title') },
-        ]}
-        action={mdUp ? <CreatePostBtns /> : null}
+      <Box
         sx={{
-          mb: { xs: 3, md: 5 },
-        }}
-      />
-
-      <Stack
-        spacing={2.5}
-        sx={{
-          mb: { xs: 3, md: 5 },
+          width: '100%',
+          height: 'auto',
         }}
       >
-        {renderFilters}
-        {renderTabs}
-        {canReset && renderResults}
+        <CustomBreadcrumbs
+          heading={t('Dashboard.Create_Post.Title')}
+          links={[
+            { name: 'Dashboard', href: paths.dashboard.root },
+            { name: t('Dashboard.Create_Post.Title') },
+          ]}
+          action={mdUp ? <CreatePostBtns /> : null}
+          sx={{
+            mb: { xs: 3, md: 5 },
+          }}
+        />
 
-        {!mdUp ? <CreatePostBtns /> : null}
-      </Stack>
+        <Stack
+          spacing={2.5}
+          sx={{
+            mb: { xs: 3, md: 5 },
+          }}
+        >
+          {socialNetworksConnected?.length && postListData?.length ? (
+            <>
+              {renderFilters}
+              {renderTabs}
+              {canReset && renderResults}
+            </>
+          ) : null}
+          {!mdUp ? <CreatePostBtns /> : null}
+        </Stack>
 
-      {redes.length ? (
-        posts.length ? (
-          dataFiltered.length ? (
-            <PostList posts={dataFiltered} />
+        {socialNetworksConnected?.length ? (
+          postListData?.length ? (
+            dataFiltered.length ? (
+              <PostList posts={dataFiltered} />
+            ) : (
+              <EmptyContent title="No Data" filled sx={{ py: 10 }} />
+            )
           ) : (
-            <EmptyContent title="No Data" filled sx={{ py: 10 }} />
+            <CreatePostMessage />
           )
         ) : (
-          <CreatePostMessage />
-        )
-      ) : (
-        ConnectSocialNetworks
-      )}
-      <PostModal />
+          ConnectSocialNetworks
+        )}
+
+        <PostModal />
+      </Box>
     </Container>
   );
 }

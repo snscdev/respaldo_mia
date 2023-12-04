@@ -34,15 +34,6 @@ export default function ImageBox({
         dispath(setDataImageCrop(e.target?.result as string));
 
         dispath(setShowCropSection(true));
-
-        // setSelectedImage({
-        //   file,
-        //   data: e.target?.result,
-        //   dataPreview: e.target?.result,
-        //   manteinAspect: aspectImage
-        // })
-        // setShowCrop(true)
-        // dispatch(setLoadImages(true))
       }
     };
     reader.readAsDataURL(file);
