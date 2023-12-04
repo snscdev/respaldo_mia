@@ -6,8 +6,10 @@ import ReactCrop, { Crop, PixelCrop } from 'react-image-crop';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { Box, Button, Slider, Typography } from '@mui/material';
+import { useResponsive } from 'src/hooks/use-responsive';
 import {
   setDataImageCroped,
+  setOpenModalPreviewMobile,
   setShowCropSection,
   setUpdateFormDataMediaUrls,
 } from 'src/store/slices/post';
@@ -16,11 +18,15 @@ import 'react-image-crop/dist/ReactCrop.css';
 import { imgPreview } from './imgPreview';
 
 export default function CropSection() {
-  const [crop, setCrop] = useState<Crop>({ unit: 'px', width: 300, height: 300, x: 100, y: 25 });
+  const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
   const [aspect, setAspect] = useState<number | undefined>();
+
+  const mdDown = useResponsive('down', 'md');
+
+  const dispatch = useDispatch();
 
   const dataImageCrop = useSelector((state: RootState) => state.post.dataImageCrop);
   const dataImageCroped = useSelector((state: RootState) => state.post.dataImageCroped);
@@ -30,8 +36,20 @@ export default function CropSection() {
   const distpach = useDispatch();
 
   useEffect(() => {
+    const imgTag = document.createElement('img');
+    imgTag.src = dataImageCrop;
+    const w = 150;
+    const h = 150;
+    setCrop({
+      unit: 'px',
+      width: w,
+      height: h,
+      x: 5,
+      y: 5,
+    });
+
     setCompletedCrop(crop as PixelCrop);
-  }, []);
+  }, [dataImageCrop]);
 
   function useDebounceEffect(fn: any, waitTime: number, deps?: DependencyList) {
     useEffect(() => {
@@ -65,7 +83,7 @@ export default function CropSection() {
 
   return (
     <CropSectionLayout>
-      <Box>
+      <Box width="100%" padding="0 24px 0 0">
         <Box>
           <Typography>Escala</Typography>
           <Slider
@@ -74,7 +92,6 @@ export default function CropSection() {
             step={0.1}
             min={1}
             max={5}
-            sx={{ width: '80%' }}
             value={scale}
             marks
             valueLabelDisplay="auto"
@@ -93,7 +110,6 @@ export default function CropSection() {
             min={-180}
             max={180}
             value={rotate}
-            sx={{ width: '80%' }}
             marks
             valueLabelDisplay="auto"
             disabled={!dataImageCrop}
@@ -110,8 +126,8 @@ export default function CropSection() {
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
           style={{
-            width: '80%',
             height: '100%',
+            width: '80%',
           }}
         >
           <img
@@ -122,7 +138,36 @@ export default function CropSection() {
           />
         </ReactCrop>
       )}
-      <Button variant="contained" color="primary" sx={{ width: '20%' }} onClick={handleSave}>
+
+      {mdDown && (
+        <Button
+          variant="outlined"
+          color="info"
+          sx={{
+            width: {
+              xs: '100%',
+              md: '20%',
+            },
+          }}
+          onClick={() => dispatch(setOpenModalPreviewMobile(true))}
+        >
+          Ver Preview
+        </Button>
+      )}
+
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          width: {
+            xs: '100%',
+            md: '20%',
+          },
+          margin: '0 0 24px 0',
+          alignSelf: 'flex-start',
+        }}
+        onClick={handleSave}
+      >
         Guardar
       </Button>
     </CropSectionLayout>

@@ -1,13 +1,13 @@
 /* eslint-disable prefer-arrow-callback */
 import {
   AppBar,
-  Button,
   Dialog,
   DialogContent,
   IconButton,
   Slide,
   Toolbar,
   Typography,
+  useTheme,
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { forwardRef } from 'react';
@@ -35,6 +35,8 @@ export default function PostModalWrepper({ children }: PostModalProps) {
   const mdUp = useResponsive('up', 'md');
   const { openModal } = useSelector((state: RootState) => state.post);
 
+  const theme = useTheme();
+
   const handleBack = () => {
     dispatch(setOpenModal(false));
   };
@@ -55,11 +57,11 @@ export default function PostModalWrepper({ children }: PostModalProps) {
           <AppBar position="relative" color="default">
             <Toolbar>
               <IconButton color="inherit" edge="start" onClick={handleBack}>
-                <Iconify icon="solar:alt-arrow-left-outline" />
+                <Iconify icon="eva:close-outline" />
               </IconButton>
 
               <Typography variant="h6" sx={{ flex: 1 }}>
-                volver
+                Cerrar
               </Typography>
             </Toolbar>
           </AppBar>

@@ -22,7 +22,7 @@ export function alert(theme: Theme) {
         // STANDARD
         ...(standardVariant && {
           color: theme.palette[color][lightMode ? 'darker' : 'lighter'],
-          backgroundColor: theme.palette[color][lightMode ? 'lighter' : 'darker'],
+          backgroundColor: alpha(theme.palette[color][lightMode ? 'lighter' : 'darker'], 0.3),
           [`& .${alertClasses.icon}`]: {
             color: theme.palette[color][lightMode ? 'main' : 'light'],
           },

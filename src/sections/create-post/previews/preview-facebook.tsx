@@ -198,17 +198,17 @@ export default function PreviewFacebook({ image, sx }: CardPostProps) {
   return (
     <Card
       sx={{
-        width: '304px',
+        maxWidth: '304px',
+        margin: '0 auto',
         borderRadius: '8px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
-        mb: 2,
         ...sx,
       }}
     >
       {renderCardHead}
 
-      <Image src={image} alt="post" width="100%" height={298} />
+      <Image src={image} alt="post" width="100%" height={298} minWidth={304} />
 
       {renderFooterCard}
     </Card>

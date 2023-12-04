@@ -12,9 +12,6 @@ interface IPosModalFormLayout {
 }
 
 export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
-  const mdDown = useResponsive('down', 'md');
-
-  const dispatch = useDispatch();
   const { t } = useLocales();
 
   return (
@@ -60,8 +57,6 @@ export default function PosModalFormLayout({ children }: IPosModalFormLayout) {
       <PostModalSocialButtons />
 
       {children}
-
-      {mdDown && <Button onClick={() => dispatch(setOpenModalPreviewMobile(true))}>Open</Button>}
     </Stack>
   );
 }

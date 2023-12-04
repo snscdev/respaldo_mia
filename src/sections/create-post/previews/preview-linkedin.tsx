@@ -28,10 +28,10 @@ export default function PreviewLinkedin({ image, sx }: CardPostProps) {
     <Card
       sx={{
         borderRadius: '8px',
-        width: '350px',
+        maxWidth: '350px',
+        margin: '0 auto',
         backgroundColor: theme.palette.background.paper,
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
-        mb: 2,
         ...sx,
       }}
     >

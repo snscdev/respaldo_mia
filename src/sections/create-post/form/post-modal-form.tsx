@@ -4,12 +4,13 @@ import { Form, Formik } from 'formik';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFormData } from 'src/store/slices/post';
+import { setFormData, setOpenModalPreviewMobile } from 'src/store/slices/post';
 import { RootState } from 'src/store';
 
 import { Box, Button, Stack, alpha, useTheme } from '@mui/material';
 import ThumbnailsView from 'src/components/Thumbnails';
 import { SOCIALNETWORKSNAMES } from 'src/const/post/redes';
+import { useResponsive } from 'src/hooks/use-responsive';
 import { useLocales } from 'src/locales';
 import PostTextArea from './inputs/post-modal-text-area';
 import PosModalFormLayout from './form-layout';
@@ -53,8 +54,11 @@ export default function PostModalForm() {
   const theme = useTheme();
   const { t } = useLocales();
 
+  const mdDown = useResponsive('down', 'md');
+
+  const dispatch = useDispatch();
+
   const isConected = socialNetworksConnected.includes(tabSelected);
-  console.log(valuesForm);
   return (
     <PosModalFormLayout>
       <Formik
@@ -71,7 +75,7 @@ export default function PostModalForm() {
                 sx={{
                   gap: '24px',
                   p: '0 20px 0 0',
-                  maxHeight: 'calc(100vh - 300px)',
+                  height: 'calc(100vh - 44vh)',
                   overflowY: 'scroll',
                   overflowX: 'hidden',
                   '&::-webkit-scrollbar': {
@@ -121,19 +125,38 @@ export default function PostModalForm() {
                     <PublishRadioButtons name="publish" />
 
                     {!values.publish && <PublishDatePicker name="scheduleDate" />}
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      color="primary"
-                      sx={{
-                        width: '20%',
-                      }}
-                    >
-                      {t('Dashboard.Create_Post.Create.Modal.btn_Post')}
-                    </Button>
                   </>
                 )}
               </Stack>
+              {mdDown && (
+                <Button
+                  variant="outlined"
+                  color="info"
+                  sx={{
+                    width: {
+                      xs: '100%',
+                      md: '20%',
+                    },
+                  }}
+                  onClick={() => dispatch(setOpenModalPreviewMobile(true))}
+                >
+                  Ver Preview
+                </Button>
+              )}
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{
+                  width: {
+                    xs: '100%',
+                    md: '20%',
+                  },
+                  margin: '24px 0',
+                }}
+              >
+                {t('Dashboard.Create_Post.Create.Modal.btn_Post')}
+              </Button>
             </Form>
             <DataForm errors={errors} values={values} />
           </>

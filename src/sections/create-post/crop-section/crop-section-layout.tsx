@@ -18,6 +18,8 @@ export default function CropSectionLayout({ children }: { children: React.ReactN
         padding: '24px 4px 0 0',
         gap: '24px',
       }}
+      justifyContent="center"
+      alignItems="center"
     >
       <Button
         variant="text"
@@ -25,6 +27,7 @@ export default function CropSectionLayout({ children }: { children: React.ReactN
         startIcon={<Iconify icon="solar:alt-arrow-left-outline" width={24} height={24} />}
         sx={{
           width: '100px',
+          alignSelf: 'flex-start',
         }}
       >
         Volver
@@ -34,6 +37,7 @@ export default function CropSectionLayout({ children }: { children: React.ReactN
         sx={{
           fontWeight: 700,
           p: '24px 24px 0 0',
+          alignSelf: 'flex-start',
         }}
       >
         Multimedia

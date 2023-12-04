@@ -3,23 +3,57 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { setTabSelected } from 'src/store/slices/post';
 
-interface Props {
-  children: React.ReactNode;
+interface ITab {
+  hidenBtns?: boolean;
 }
 
-export default function PreviewContainer({ children }: Props) {
+export const TabsPreview = ({ hidenBtns = false }: ITab) => {
   const tabSelected = useSelector((state: RootState) => state.post.tabSelected);
-  const showCropSection = useSelector((state: RootState) => state.post.showCropSection);
   const socialNetworksToPublish = useSelector(
     (state: RootState) => state.post.socialNetworksToPublish
   );
   const dispatch = useDispatch();
   return (
+    <Tabs
+      value={tabSelected}
+      variant="scrollable"
+      scrollButtons="auto"
+      onChange={(e, newNalue) => dispatch(setTabSelected(newNalue))}
+      sx={{
+        mb: '10%',
+        padding: '0 5%',
+        alignSelf: 'start',
+        '& .MuiTabs-indicator': {
+          top: 35,
+          backgroundColor: '#7778EC',
+        },
+        '& .MuiTab-root': {
+          color: 'text.secondary',
+        },
+        '& .Mui-selected': {
+          color: '#7778EC',
+        },
+        '& .MuiTabs-scrollButtons': {
+          display: hidenBtns ? 'none' : 'flex',
+        },
+      }}
+    >
+      {socialNetworksToPublish.map((item, index) => (
+        <Tab key={index} label={item} value={item} />
+      ))}
+    </Tabs>
+  );
+};
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function PreviewContainer({ children }: Props) {
+  const showCropSection = useSelector((state: RootState) => state.post.showCropSection);
+
+  return (
     <Box
       sx={(theme) => ({
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
         bgcolor: theme.palette.background.neutral,
         height: '80%',
         borderRadius: '8px',
@@ -44,34 +78,7 @@ export default function PreviewContainer({ children }: Props) {
           height: !showCropSection ? '10%' : '10%',
         }}
       >
-        {showCropSection && (
-          <Tabs
-            value={tabSelected}
-            variant="scrollable"
-            scrollButtons="auto"
-            onChange={(e, newNalue) => dispatch(setTabSelected(newNalue))}
-            sx={{
-              mb: '10%',
-              padding: '0 5%',
-              alignSelf: 'start',
-              '& .MuiTabs-indicator': {
-                top: 35,
-                backgroundColor: '#7778EC',
-              },
-              '& .MuiTab-root': {
-                color: 'text.secondary',
-              },
-              '& .Mui-selected': {
-                color: '#7778EC',
-              },
-              /// quitar los botones de scroll
-            }}
-          >
-            {socialNetworksToPublish.map((item, index) => (
-              <Tab key={index} label={item} value={item} />
-            ))}
-          </Tabs>
-        )}
+        {showCropSection && <TabsPreview />}
       </Box>
       <Box>{children}</Box>
     </Box>

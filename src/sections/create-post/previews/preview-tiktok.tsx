@@ -1,16 +1,5 @@
-import {
-  Avatar,
-  Box,
-  Grid,
-  Stack,
-  SxProps,
-  Theme,
-  Typography,
-  useTheme,
-  alpha,
-} from '@mui/material';
+import { Avatar, Box, SxProps, Theme, Typography, useTheme, alpha } from '@mui/material';
 import { useAuthContext } from 'src/auth/hooks';
-import Iconify from 'src/components/iconify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import Image from 'src/components/image';
@@ -32,6 +21,7 @@ export default function PreviewTiktok({ image, sx }: CardPostProps) {
         position: 'relative',
         height: '500px',
         width: '231px',
+        margin: '0 auto',
       }}
     >
       <Image
@@ -57,7 +47,6 @@ export default function PreviewTiktok({ image, sx }: CardPostProps) {
         sx={{
           borderRadius: '8px',
           position: 'absolute',
-          width: '291px',
         }}
       >
         <Image src="/assets/background/tiktok.svg" alt="post" height={500} />

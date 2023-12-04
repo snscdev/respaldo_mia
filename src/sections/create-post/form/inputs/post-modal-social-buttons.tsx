@@ -1,4 +1,4 @@
-import { Tabs, styled, Tab, Checkbox, Box, useTheme, alpha } from '@mui/material';
+import { Tabs, styled, Tab, Checkbox, Box, useTheme, alpha, Tooltip } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'src/components/image/image';
 import { SOCIALNETWORKS } from 'src/const/post/redes';
@@ -31,8 +31,6 @@ export default function PostModalSocialButtons() {
   );
   const theme = useTheme();
   const dispatch = useDispatch();
-
-  const disableCheck = !socialNetworksConnected.some((social) => social === tabSelected);
 
   return (
     <Box>
@@ -67,29 +65,31 @@ export default function PostModalSocialButtons() {
             }}
             icon={
               <>
-                <Checkbox
-                  value={socialNetworksToPublish.some((social) => social === item.name)}
-                  disabled={disableCheck}
-                  onChange={(e, value) =>
-                    dispatch(
-                      setSocialNetworksToPublish(
-                        value
-                          ? [...socialNetworksToPublish, item.name]
-                          : socialNetworksToPublish.filter((social) => social !== item.name)
+                <Tooltip title={`Publicar en ${item.name}`} arrow placement="top-start">
+                  <Checkbox
+                    value={socialNetworksToPublish.some((social) => social === item.name)}
+                    disabled={!socialNetworksConnected.some((social) => social === item.name)}
+                    onChange={(e, value) =>
+                      dispatch(
+                        setSocialNetworksToPublish(
+                          value
+                            ? [...socialNetworksToPublish, item.name]
+                            : socialNetworksToPublish.filter((social) => social !== item.name)
+                        )
                       )
-                    )
-                  }
-                  checked={socialNetworksToPublish.some((social) => social === item.name)}
-                  sx={{
-                    right: 5,
-                    '&.Mui-checked': {
-                      color: theme.palette.info.main,
-                    },
-                    '&:hover': {
-                      backgroundColor: alpha(theme.palette.info.main, 0.1),
-                    },
-                  }}
-                />
+                    }
+                    checked={socialNetworksToPublish.some((social) => social === item.name)}
+                    sx={{
+                      right: { xs: 15, md: 5 },
+                      '&.Mui-checked': {
+                        color: theme.palette.info.main,
+                      },
+                      '&:hover': {
+                        backgroundColor: alpha(theme.palette.info.main, 0.1),
+                      },
+                    }}
+                  />
+                </Tooltip>
                 <Image
                   src={`/assets/icons/dashboard/post/${item.name}.svg`}
                   alt={item.name}

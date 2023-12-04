@@ -14,6 +14,7 @@ import Iconify from 'src/components/iconify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import Image from 'src/components/image';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 interface CardPostProps {
   image: string;
@@ -22,6 +23,8 @@ interface CardPostProps {
 
 export default function PreviewTwitter({ image, sx }: CardPostProps) {
   const text = useSelector((state: RootState) => state.post.formData.values.content);
+
+  const mdUp = useResponsive('up', 'md');
 
   const theme = useTheme();
   const { user } = useAuthContext();
@@ -87,7 +90,12 @@ export default function PreviewTwitter({ image, sx }: CardPostProps) {
   );
 
   const renderContent = (
-    <Box padding="0 24px">
+    <Box
+      padding="0 24px"
+      sx={{
+        width: '100%',
+      }}
+    >
       <Stack
         direction="column"
         gap={2}
@@ -143,11 +151,12 @@ export default function PreviewTwitter({ image, sx }: CardPostProps) {
   return (
     <Card
       sx={{
-        width: '418px',
+        maxWidth: '418px',
+        width: '100%',
+        margin: '0 auto',
         borderRadius: '8px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
-        mb: 2,
         ...sx,
       }}
     >

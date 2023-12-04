@@ -153,12 +153,12 @@ export default function PreviewInstagram({ image, sx }: CardPostProps) {
   return (
     <Card
       sx={{
-        width: '340px',
+        maxWidth: '340px',
         borderRadius: '8px',
+        margin: '0 auto',
         backgroundColor: theme.palette.background.paper,
         height: 'auto',
         boxShadow: '0px 0.5px 0.5px rgba(0, 0, 0, 0.25)',
-        mb: 2,
         ...sx,
       }}
     >

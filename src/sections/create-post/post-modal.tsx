@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable prefer-arrow-callback */
-import { Dialog, DialogContent, Grid } from '@mui/material';
+import { Box, Dialog, DialogContent, Grid } from '@mui/material';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import PreviewaLayout from './previews/previews-layout';
 import RenderPreview from './previews/render-preview';
 import PostModalForm from './form/post-modal-form';
 import CropSection from './crop-section';
+import { TabsPreview } from './previews/preview-container';
 
 export default function PostModal() {
   const mdUp = useResponsive('up', 'md');
@@ -34,7 +35,17 @@ export default function PostModal() {
           background: theme.palette.background.neutral,
         })}
       >
-        <RenderPreview />
+        <TabsPreview hidenBtns />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '10%',
+          }}
+        >
+          <RenderPreview />
+        </Box>
       </DialogContent>
     </Dialog>
   );
