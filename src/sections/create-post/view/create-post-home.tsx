@@ -278,6 +278,7 @@ export default function CreatePostHome() {
         </Stack>
 
         {socialNetworksConnected?.length ? (
+          // posts?.length ? (
           postListData?.length ? (
             dataFiltered.length ? (
               <PostList posts={dataFiltered} />
