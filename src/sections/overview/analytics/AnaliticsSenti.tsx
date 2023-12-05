@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { ApexOptions } from 'apexcharts';
 import { useState, useCallback } from 'react';
 // @mui
@@ -7,6 +6,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ButtonBase from '@mui/material/ButtonBase';
 import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
+// utils
+import { fData } from 'src/utils/format-number';
 // components
 import Iconify from 'src/components/iconify';
 import Chart, { useChart } from 'src/components/chart';
@@ -18,7 +19,9 @@ interface Props extends CardProps {
   title?: string;
   subheader?: string;
   chart: {
-    categories?: string[];
+    labels: {
+      [key: string]: string[];
+    };
     colors?: string[];
     series: {
       type: string;
@@ -31,34 +34,33 @@ interface Props extends CardProps {
   };
 }
 
-export default function BankingBalanceStatistics({ title, subheader, chart, ...other }: Props) {
-  const { colors, series, options } = chart;
+export default function AnaliticsSenti({ title, subheader, chart, ...other }: Props) {
+  const { labels, colors, series, options } = chart;
 
   const popover = usePopover();
 
-  const [seriesData, setSeriesData] = useState('Mañana');
-
-  const morning = ['05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00'];
-
-  const afternoon = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
-
-  const night = ['19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00'];
-
-  const categories = seriesData === 'Mañana' ? morning : seriesData === 'Tarde' ? afternoon : night;
+  const [seriesData, setSeriesData] = useState('Week');
 
   const chartOptions = useChart({
+    chart: {
+      stacked: true,
+    },
     colors,
     stroke: {
-      show: true,
-      width: 1,
-      colors: ['transparent'],
+      width: 2,
     },
     xaxis: {
-      categories,
+      categories: (seriesData === 'Dia' && labels.Dia) || (seriesData === 'Hora' && labels.Hora),
     },
     tooltip: {
       y: {
-        formatter: (value: number) => `$${value}`,
+        formatter: (value: number) => fData(value),
+      },
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: (seriesData === 'Week' && 8) || (seriesData === 'Month' && 6) || 10,
+        columnWidth: '20%',
       },
     },
     ...options,

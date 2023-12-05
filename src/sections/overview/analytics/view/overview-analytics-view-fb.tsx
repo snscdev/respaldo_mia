@@ -7,7 +7,6 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Image from 'next/image';
 
-
 // components
 import { useSettingsContext } from 'src/components/settings';
 //
@@ -117,8 +116,7 @@ export default function OverviewAnalyticsViewFB() {
         sx={{ mb: { xs: 3, md: 5 } }}
       />
       <Grid container spacing={4}>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
-
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
       </Grid>
 
       <Grid container spacing={3}>
@@ -158,12 +156,12 @@ export default function OverviewAnalyticsViewFB() {
         </Grid> */}
 
         <Grid xs={12} sm={12} md={6}>
-  <BannerOneKpi title="Nuevos Seguidores" total="+245" color="success" />
-</Grid>
+          <BannerOneKpi title="Nuevos Seguidores" total="+245" color="success" />
+        </Grid>
 
-<Grid xs={12} sm={12} md={6}>
-  <BannerOneKpi title="Menciones" total="45" />
-</Grid>
+        <Grid xs={12} sm={12} md={6}>
+          <BannerOneKpi title="Menciones" total="45" />
+        </Grid>
 
         <Grid xs={12} md={6} lg={8}>
           <AnalyticsWebsiteVisits

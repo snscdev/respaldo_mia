@@ -23,7 +23,7 @@ import Box from '@mui/material/Box';
 
 // ----------------------------------------------------------------------
 
-// type ItemProps = {
+// type ListItem = {
 //   id: string;
 //   title: string;
 //   time: Date;
@@ -57,7 +57,6 @@ export default function AnalyticsOrderTimeline({ title, subheader, list, ...othe
       <CardHeader
         title={title}
         subheader={subheader}
-        titleTypographyProps={{ align: 'right' }}
         subheaderTypographyProps={{ align: 'right' }}
       />
 
@@ -85,31 +84,6 @@ export default function AnalyticsOrderTimeline({ title, subheader, list, ...othe
           />
         ))}
       </Timeline>
-      <Box sx={{ position: 'absolute', bottom: 8, right: 8 }}>
-        <Tooltip title="Información adicional">
-          <IconButton
-            size="small"
-            onClick={handleOpenDialog}
-            sx={{ width: 20, height: 20, opacity: 0.48 }}
-          >
-            <HelpOutlineIcon fontSize="inherit" />
-          </IconButton>
-        </Tooltip>
-
-        <Dialog open={openDialog} onClose={handleCloseDialog}>
-          <DialogTitle>Título del Diálogo</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Aquí puedes agregar el texto o contenido que desees mostrar en la ventana emergente.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog} color="primary">
-              Cerrar
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Box>
     </Card>
   );
 }
@@ -124,7 +98,6 @@ type OrderItemProps = {
 };
 
 function OrderItem({ title, subtitle, type, lastTimeline }: OrderItemProps) {
-    
   const getColor = (inputtype: string) => {
     switch (inputtype) {
       case 'order1':
