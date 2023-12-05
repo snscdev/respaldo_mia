@@ -1,6 +1,7 @@
 // @mui
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
+import { IPost } from 'src/types/post';
 // routes
 import PostItem from './post-item';
 //
@@ -8,7 +9,7 @@ import PostItem from './post-item';
 // ----------------------------------------------------------------------
 
 type Props = {
-  posts: any[];
+  posts: IPost[];
 };
 
 export default function PostList({ posts = [] }: Props) {

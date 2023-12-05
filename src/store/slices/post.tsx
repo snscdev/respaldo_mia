@@ -57,7 +57,7 @@ const initialState: PostState = {
       },
     },
   },
-  socialNetworksConnected: ['facebook'],
+  socialNetworksConnected: [],
   tabSelected: 'facebook',
   socialNetworksToPublish: [],
   showCropSection: false,
@@ -72,8 +72,8 @@ export const PostSlice = createSlice({
     setOpenModal: (state, action: PayloadAction<boolean>) => {
       state.openModal = action.payload;
     },
-    setPostList: (state, action: PayloadAction<IPost[] | any>) => {
-      state.postList = action.payload;
+    setPostList: (state, action: PayloadAction<IPost>) => {
+      state.postList.push(action.payload);
     },
     setUpdateFormDataMediaUrls: (state, action: PayloadAction<string>) => {
       state.formData.values.mediaUrls.push(action.payload);

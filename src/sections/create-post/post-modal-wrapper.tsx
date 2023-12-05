@@ -1,13 +1,13 @@
 /* eslint-disable prefer-arrow-callback */
 import {
   AppBar,
+  Box,
   Dialog,
   DialogContent,
   IconButton,
   Slide,
   Toolbar,
   Typography,
-  useTheme,
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { forwardRef } from 'react';
@@ -35,43 +35,42 @@ export default function PostModalWrepper({ children }: PostModalProps) {
   const mdUp = useResponsive('up', 'md');
   const { openModal, showCropSection } = useSelector((state: RootState) => state.post);
 
-  const theme = useTheme();
-
   const handleBack = () => {
     dispatch(setOpenModal(false));
   };
 
   return (
-    <Dialog
-      maxWidth="lg"
-      fullWidth
-      fullScreen={!mdUp}
-      open={openModal}
-      TransitionComponent={Transition}
-      keepMounted
-      onClose={() => dispatch(setOpenModal(false))}
-      aria-describedby="alert-dialog-slide-description"
-    >
-      {!mdUp ? (
-        <>
-          <AppBar position="relative" color="default">
-            {!showCropSection && (
-              <Toolbar>
-                <IconButton color="inherit" edge="start" onClick={handleBack}>
-                  <Iconify icon="eva:close-outline" />
-                </IconButton>
+    <Box>
+      <Dialog
+        maxWidth="lg"
+        fullWidth
+        fullScreen={!mdUp}
+        open={openModal}
+        TransitionComponent={Transition}
+        onClose={() => dispatch(setOpenModal(false))}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        {!mdUp ? (
+          <>
+            <AppBar position="relative" color="default">
+              {!showCropSection && (
+                <Toolbar>
+                  <IconButton color="inherit" edge="start" onClick={handleBack}>
+                    <Iconify icon="eva:close-outline" />
+                  </IconButton>
 
-                <Typography variant="h6" sx={{ flex: 1 }}>
-                  Cerrar
-                </Typography>
-              </Toolbar>
-            )}
-          </AppBar>
+                  <Typography variant="h6" sx={{ flex: 1 }}>
+                    Cerrar
+                  </Typography>
+                </Toolbar>
+              )}
+            </AppBar>
+            <DialogContent>{children}</DialogContent>
+          </>
+        ) : (
           <DialogContent>{children}</DialogContent>
-        </>
-      ) : (
-        <DialogContent>{children}</DialogContent>
-      )}
-    </Dialog>
+        )}
+      </Dialog>
+    </Box>
   );
 }

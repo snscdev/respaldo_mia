@@ -20,6 +20,7 @@ export interface IPost {
   mediaUrls: string[];
   taggedProfiles: string[];
   scheduleDate: Date;
+  creationDate: Date;
   hashtags: string[];
   status: string;
   publish: boolean;

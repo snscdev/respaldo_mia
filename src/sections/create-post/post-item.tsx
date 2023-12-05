@@ -1,8 +1,8 @@
 // @mui
 import { CardActionArea, CardContent, CardMedia, Typography, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
-import { Box } from '@mui/system';
-import { IPostItem } from 'src/types/post';
+import { Box, Stack } from '@mui/system';
+import { IPost } from 'src/types/post';
 import Image from 'next/image';
 import { useLocales } from 'src/locales';
 import { fDate } from 'src/utils/format-time';
@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 // ----------------------------------------------------------------------
 
 type Props = {
-  post: IPostItem;
+  post: IPost;
 };
 
 export default function PostItem({ post }: Props) {
@@ -34,17 +34,43 @@ export default function PostItem({ post }: Props) {
       }}
     >
       <CardActionArea>
-        {post.image && (
-          <Image
-            src={`/assets/icons/dashboard/post/${post.socialName}.svg`}
-            alt="post image"
-            width={25}
-            height={25}
-            style={{ position: 'absolute', top: '10px', right: '10px' }}
-          />
+        {post.mediaUrls?.length && (
+          <Stack
+            direction="row"
+            sx={{
+              position: 'absolute',
+              top: '0',
+              right: '0',
+              padding: '5px',
+              zIndex: '2',
+            }}
+          >
+            {post.platforms.map((url, index) => (
+              <Box
+                key={index}
+                sx={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.background.purpel.main,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginRight: '5px',
+                }}
+              >
+                <Image
+                  src={`/assets/icons/dashboard/post/${post.platforms}.svg`}
+                  alt="post image"
+                  width={10}
+                  height={10}
+                />
+              </Box>
+            ))}
+          </Stack>
         )}
-        {post.image ? (
-          <CardMedia component="img" height="200px" image={post.image} alt="post image" />
+        {post.mediaUrls?.length ? (
+          <CardMedia component="img" height="200px" image={post.mediaUrls[0]} alt="post image" />
         ) : (
           <Box
             sx={{
@@ -53,18 +79,39 @@ export default function PostItem({ post }: Props) {
               position: 'relative',
             }}
           >
-            <Image
-              src={`/assets/icons/dashboard/post/${post.socialName}.svg`}
-              alt="post image"
-              width={80}
-              height={80}
-              style={{
+            <Stack
+              direction="row"
+              sx={{
                 position: 'absolute',
                 top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
+                right: '50%',
+                padding: '5px',
+                zIndex: '2',
               }}
-            />
+            >
+              {post.platforms.map((url, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '50%',
+                    backgroundColor: theme.palette.background.purpel.main,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginRight: '5px',
+                  }}
+                >
+                  <Image
+                    src={`/assets/icons/dashboard/post/${post.platforms}.svg`}
+                    alt="post image"
+                    width={10}
+                    height={10}
+                  />
+                </Box>
+              ))}
+            </Stack>
           </Box>
         )}
         <CardContent sx={{ padding: '13px 20px', height: '119px' }}>
@@ -85,7 +132,7 @@ export default function PostItem({ post }: Props) {
               whiteSpace: 'nowrap',
             }}
           >
-            {post.text}
+            {post.content}
           </Typography>
           <Typography
             sx={{
@@ -97,13 +144,17 @@ export default function PostItem({ post }: Props) {
           >
             {t('Dashboard.Create_Post.Create.card.link')}
           </Typography>
-          {post.state === 'programmed' ? (
-            <Typography sx={{ fontSize: '12px', fontWeight: '400' }} color="text.secondary">
-              {t('Dashboard.Create_Post.Create.card.programmed', { fecha: fDate(post.date) })}
+          {post.publish ? (
+            <Typography sx={{ fontSize: '12px', fontWeight: '400' }} color="success.main">
+              {t('Dashboard.Create_Post.Create.card.published', {
+                fecha: fDate(post.creationDate),
+              })}
             </Typography>
           ) : (
-            <Typography sx={{ fontSize: '12px', fontWeight: '400' }} color="success.main">
-              {t('Dashboard.Create_Post.Create.card.published', { fecha: fDate(post.date) })}
+            <Typography sx={{ fontSize: '12px', fontWeight: '400' }} color="text.secondary">
+              {t('Dashboard.Create_Post.Create.card.programmed', {
+                fecha: fDate(post.scheduleDate),
+              })}
             </Typography>
           )}
         </CardContent>

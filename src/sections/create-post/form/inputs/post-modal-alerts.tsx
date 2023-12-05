@@ -1,4 +1,4 @@
-import { Alert, Button } from '@mui/material';
+import { Alert, Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { setSocialNetworksConnected } from 'src/store/slices/post';
@@ -14,24 +14,30 @@ export default function AlertMessages() {
   if (socialNetworksConnected.includes(tabSelected)) return <></>;
 
   return (
-    <Alert
-      severity="info"
+    <Box
       sx={{
-        zIndex: 3,
+        padding: '0 24px 0 0',
       }}
-      action={
-        <Button
-          size="small"
-          variant="outlined"
-          onClick={() =>
-            distpach(setSocialNetworksConnected([...socialNetworksConnected, tabSelected]))
-          }
-        >
-          Conectar
-        </Button>
-      }
     >
-      Conecta para publicar en {tabSelected}
-    </Alert>
+      <Alert
+        severity="info"
+        sx={{
+          zIndex: 3,
+        }}
+        action={
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={() =>
+              distpach(setSocialNetworksConnected([...socialNetworksConnected, tabSelected]))
+            }
+          >
+            Conectar
+          </Button>
+        }
+      >
+        Conecta para publicar en {tabSelected}
+      </Alert>
+    </Box>
   );
 }

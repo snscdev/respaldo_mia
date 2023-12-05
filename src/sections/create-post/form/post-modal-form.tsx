@@ -6,7 +6,12 @@ import { m } from 'framer-motion';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFormData, setOpenModalPreviewMobile } from 'src/store/slices/post';
+import {
+  setFormData,
+  setOpenModal,
+  setOpenModalPreviewMobile,
+  setPostList,
+} from 'src/store/slices/post';
 import { RootState } from 'src/store';
 
 import {
@@ -26,6 +31,7 @@ import ThumbnailsView from 'src/components/Thumbnails';
 import { SOCIALNETWORKSNAMES } from 'src/const/post/redes';
 import SvgColor from 'src/components/svg-color';
 import { useResponsive } from 'src/hooks/use-responsive';
+import { IPost } from 'src/types/post';
 import Image from 'src/components/image';
 import { useLocales } from 'src/locales';
 import PostTextArea from './inputs/post-modal-text-area';
@@ -93,17 +99,30 @@ export default function PostModalForm() {
 
   const showOverlay = socialNetworksToPublish.includes(tabSelected);
 
+  const handleSubmit = (values: any) => {
+    const DataPost: IPost = {
+      ...values,
+      platforms: [...socialNetworksToPublish],
+      creationDate: new Date(),
+    };
+
+    dispatch(setPostList(DataPost));
+    // cerrar modal
+    dispatch(setOpenModalPreviewMobile(false));
+    dispatch(setOpenModal(false));
+  };
+
   return (
     <PosModalFormLayout>
       <Formik
         initialValues={valuesForm}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {({ values, errors }) => (
           <>
+            <AlertMessages />
+
             <Form
               style={{
                 position: 'relative',
@@ -206,8 +225,6 @@ export default function PostModalForm() {
                   },
                 }}
               >
-                <AlertMessages />
-
                 {isConected && (
                   <>
                     {tabSelected === SOCIALNETWORKSNAMES.instagram && (

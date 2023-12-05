@@ -13,14 +13,14 @@ import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 // components
 import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
-import { IPostItem } from 'src/types/post';
+import { IPost } from 'src/types/post';
 import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   query: string;
-  results: IPostItem[];
+  results: IPost[];
   onSearch: (inputValue: string) => void;
   hrefItem: (id: string) => string;
 };
@@ -91,8 +91,8 @@ export default function PostSearch({ query, results, onSearch, hrefItem }: Props
           <Box component="li" {...props} onClick={() => handleClick(post.id)} key={post.id}>
             <Avatar
               key={post.id}
-              alt={post.title}
-              src={post.image}
+              alt={post.content}
+              src={post.mediaUrls[0]}
               variant="rounded"
               sx={{
                 width: 48,

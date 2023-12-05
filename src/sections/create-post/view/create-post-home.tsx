@@ -22,12 +22,13 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { SOCIALNETWORKS } from 'src/const/post/redes';
 // types
-import { IPostFilters, IPostItem, PostFilterValue } from 'src/types/post';
+import { IPost, IPostFilters, IPostItem, PostFilterValue } from 'src/types/post';
 import EmptyContent from 'src/components/empty-content/empty-content';
 import { fTimestamp } from 'src/utils/format-time';
 //
 import { useLocales } from 'src/locales';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSocialNetworksConnected } from 'src/store/slices/post';
 import { RootState } from 'src/store';
 import CreatePostMessage from './create-post-message';
 import CreatePostBtns from './create-post-btn';
@@ -69,6 +70,8 @@ export default function CreatePostHome() {
 
   const settings = useSettingsContext();
 
+  const distpach = useDispatch();
+
   const Theme = useTheme();
 
   const { t } = useLocales();
@@ -86,7 +89,7 @@ export default function CreatePostHome() {
       : false;
 
   const dataFiltered = applyFilter({
-    inputData: posts,
+    inputData: postListData,
     filters,
     dateError,
   });
@@ -117,8 +120,8 @@ export default function CreatePostHome() {
       }));
 
       if (inputValue) {
-        const results = posts.filter(
-          (post) => post.title?.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
+        const results = postListData.filter(
+          (post) => post.content?.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
         );
 
         setSearch((prevState) => ({
@@ -196,8 +199,7 @@ export default function CreatePostHome() {
         </Typography>
 
         <Button
-          component={RouterLink}
-          href={paths.dashboard.tour.new}
+          onClick={() => distpach(setSocialNetworksConnected(['facebook']))}
           variant="contained"
           color="info"
           sx={{ mt: 2, minHeight: '50px' }}
@@ -246,7 +248,6 @@ export default function CreatePostHome() {
       <Box
         sx={{
           width: '100%',
-          height: 'auto',
         }}
       >
         <CustomBreadcrumbs
@@ -278,7 +279,6 @@ export default function CreatePostHome() {
         </Stack>
 
         {socialNetworksConnected?.length ? (
-          // posts?.length ? (
           postListData?.length ? (
             dataFiltered.length ? (
               <PostList posts={dataFiltered} />
@@ -291,9 +291,8 @@ export default function CreatePostHome() {
         ) : (
           ConnectSocialNetworks
         )}
-
-        <PostModal />
       </Box>
+      <PostModal />
     </Container>
   );
 }
@@ -303,7 +302,7 @@ const applyFilter = ({
   filters,
   dateError,
 }: {
-  inputData: IPostItem[];
+  inputData: IPost[];
   filters: IPostFilters;
   dateError: boolean;
 }) => {
@@ -313,18 +312,31 @@ const applyFilter = ({
     if (startDate && endDate) {
       inputData = inputData.filter(
         (post) =>
-          fTimestamp(post?.date) >= fTimestamp(startDate) &&
-          fTimestamp(post?.date) <= fTimestamp(endDate)
+          fTimestamp(post?.creationDate) >= fTimestamp(startDate) &&
+          fTimestamp(post?.creationDate) <= fTimestamp(endDate)
       );
     }
   }
 
   if (socialNetworks.length) {
-    inputData = inputData.filter((post) => socialNetworks?.includes(post?.socialName as string));
+    // debe filtrar por redes sociales seleccionadas en socialNetworks en el atributo platforms de cada post
+    inputData = inputData.filter((post) =>
+      socialNetworks.some((social) => post?.platforms?.includes(social))
+    );
   }
 
   if (state) {
-    inputData = inputData.filter((post) => post?.state === state);
+    inputData = inputData.filter((post) => {
+      if (state === 'published') {
+        return post?.publish;
+      }
+
+      if (state === 'programmed') {
+        return !post?.publish;
+      }
+
+      return false;
+    });
   }
 
   return inputData;

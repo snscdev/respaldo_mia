@@ -1,10 +1,9 @@
-import { IPost } from 'src/types';
-import { ISocialNetworksNames } from 'src/types/post';
+import { IPost, ISocialNetworksNames } from 'src/types/post';
 
 export interface PostState {
   openModal: boolean;
   openModalPreviewMobile: boolean;
-  postList: IPost[] | null | undefined;
+  postList: IPost[];
   formData: {
     errors: any;
     values: {
