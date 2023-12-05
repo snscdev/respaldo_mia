@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Image from 'src/components/image/image';
 import SvgColor from 'src/components/svg-color';
 import { SOCIALNETWORKS, SOCIALNETWORKSNAMES } from 'src/const/post/redes';
+import { useLocales } from 'src/locales';
 import { RootState } from 'src/store';
 import { setSocialNetworksToPublish, setTabSelected } from 'src/store/slices/post';
 
@@ -32,6 +33,7 @@ export default function PostModalSocialButtons() {
   );
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { t } = useLocales();
 
   return (
     <Box>
@@ -66,7 +68,13 @@ export default function PostModalSocialButtons() {
             }}
             icon={
               <>
-                <Tooltip title={`Publicar en ${item.name}`} arrow placement="top-start">
+                <Tooltip
+                  title={t('Dashboard.Create_Post.Create.Modal.Tooltip_ToPostIn', {
+                    tabSelected: item.name,
+                  })}
+                  arrow
+                  placement="top-start"
+                >
                   <Checkbox
                     value={socialNetworksToPublish.some((social) => social === item.name)}
                     disabled={!socialNetworksConnected.some((social) => social === item.name)}

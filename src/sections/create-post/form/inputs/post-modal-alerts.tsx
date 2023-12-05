@@ -1,5 +1,6 @@
 import { Alert, Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocales } from 'src/locales';
 import { RootState } from 'src/store';
 import { setSocialNetworksConnected } from 'src/store/slices/post';
 
@@ -8,6 +9,7 @@ export default function AlertMessages() {
   const socialNetworksConnected = useSelector(
     (state: RootState) => state.post.socialNetworksConnected
   );
+  const { t } = useLocales();
 
   const distpach = useDispatch();
 
@@ -32,11 +34,13 @@ export default function AlertMessages() {
               distpach(setSocialNetworksConnected([...socialNetworksConnected, tabSelected]))
             }
           >
-            Conectar
+            {t('Dashboard.Create_Post.Create.Modal.btn_Connect')}
           </Button>
         }
       >
-        Conecta para publicar en {tabSelected}
+        {t('Dashboard.Create_Post.Create.Modal.Message_ConnectToPublish', {
+          tabSelected,
+        })}
       </Alert>
     </Box>
   );

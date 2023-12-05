@@ -13,6 +13,7 @@ import {
   setShowCropSection,
   setUpdateFormDataMediaUrls,
 } from 'src/store/slices/post';
+import { useLocales } from 'src/locales';
 import CropSectionLayout from './crop-section-layout';
 import 'react-image-crop/dist/ReactCrop.css';
 import { imgPreview } from './imgPreview';
@@ -23,7 +24,7 @@ export default function CropSection() {
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
   const [aspect, setAspect] = useState<number | undefined>();
-
+  const { t } = useLocales();
   const mdDown = useResponsive('down', 'md');
 
   const dispatch = useDispatch();
@@ -53,12 +54,12 @@ export default function CropSection() {
 
   function useDebounceEffect(fn: any, waitTime: number, deps?: DependencyList) {
     useEffect(() => {
-      const t = setTimeout(() => {
+      const time = setTimeout(() => {
         fn.apply(undefined, deps);
       }, waitTime);
 
       return () => {
-        clearTimeout(t);
+        clearTimeout(time);
       };
     }, deps);
   }
@@ -85,7 +86,7 @@ export default function CropSection() {
     <CropSectionLayout>
       <Box width="100%" padding="0 24px 0 0">
         <Box>
-          <Typography>Escala</Typography>
+          <Typography>{t('Dashboard.Create_Post.Create.Modal.Crop_Scale')}</Typography>
           <Slider
             size="small"
             defaultValue={1}
@@ -102,7 +103,7 @@ export default function CropSection() {
         </Box>
 
         <div>
-          <Typography>Rotar</Typography>
+          <Typography>{t('Dashboard.Create_Post.Create.Modal.Crop_Rotate')}</Typography>
           <Slider
             size="small"
             color={'info' as 'primary'}
@@ -151,7 +152,7 @@ export default function CropSection() {
           }}
           onClick={() => dispatch(setOpenModalPreviewMobile(true))}
         >
-          Ver Preview
+          {t('Dashboard.Create_Post.Create.Modal.btn_See_Preview')}
         </Button>
       )}
 
@@ -168,7 +169,7 @@ export default function CropSection() {
         }}
         onClick={handleSave}
       >
-        Guardar
+        {t('Dashboard.Create_Post.Create.Modal.btn_Save')}
       </Button>
     </CropSectionLayout>
   );

@@ -56,6 +56,7 @@ export default function PostTextArea({ name }: IPostTextArea) {
 
   const [, meta, helpers] = useField(name);
   const theme = useTheme();
+  const { t } = useLocales();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const valuesForm = useSelector((state: RootState) => state.post.formData.values);
@@ -102,7 +103,7 @@ export default function PostTextArea({ name }: IPostTextArea) {
           lang={currentLang.label}
           value={text}
           onChange={handleChange}
-          placeholder="Añade el pie de pagina de esta publicación"
+          placeholder={t('Dashboard.Create_Post.Create.Modal.Footer_Of_Post')}
           style={{
             height: '150px',
           }}

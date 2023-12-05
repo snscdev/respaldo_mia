@@ -107,7 +107,19 @@
                     "Stories": "Historias",
                     "Instagram_Options": "Opciones de instagram",
                     "Tiktok_Options": "Opciones de tiktok",
-                    "Options_Placeholder_Insta": "Añade hashtags para que tu publicación sea más visible"
+                    "Options_Placeholder_Insta": "Añade hashtags para que tu publicación sea más visible",
+                    "Tooltip_ToPostIn": "Para postear en {{tabSelected}}",
+                    "Tooltip_Activate": "Activa el formulario haciendo clic en el checkbox",
+                    "Footer_Of_Post": "Añade el pie de pagina de esta publicación",
+                    "Crop_Scale": "Escala",
+                    "Crop_Rotate": "Rotar",
+                    "btn_See_Preview": "Ver Preview",
+                    "btn_Save": "Guardar",
+                    "Message_ConnectToPublish": "Conecta para publicar en {{tabSelected}}",
+                    "btn_Connect": "Conectar",
+                    "Switch_Disable_Comments": "Deshabilitar comentarios",
+                    "Switch_Disable_Duo": "Deshabilitar Duo",
+                    "Switch_Disable_Paste": "Deshabilitar Pegar"
                 }
             }
         }

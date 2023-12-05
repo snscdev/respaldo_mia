@@ -107,7 +107,19 @@
           "Stories": "Stories",
           "Instagram_Options": "Instagram Options",
           "Tiktok_Options": "Tiktok Options",
-          "Options_Placeholder_Insta": "Add hashtags to make your post more visible"
+          "Options_Placeholder_Insta": "Add hashtags to make your post more visible",
+          "Tooltip_ToPostIn": "To post in {{tabSelected}}",
+          "Tooltip_Activate": "Activate the form by clicking on the checkbox",
+          "Footer_Of_Post": "Add the footer of this post",
+          "Crop_Scale": "Scale",
+          "Crop_Rotate": "Rotate",
+          "btn_See_Preview": "See Preview",
+          "btn_Save": "Save",
+          "Message_ConnectToPublish": "Connect to publish on {{tabSelected}}",
+          "btn_Connect": "Connect",
+          "Switch_Disable_Comments": "Disable comments",
+          "Switch_Disable_Duo": "Disable Duo",
+          "Switch_Disable_Paste": "Disable Paste"
         }
       }
     }

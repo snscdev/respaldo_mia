@@ -133,13 +133,14 @@ export default function PostModalForm() {
                   followCursor
                   title={
                     <>
-                      <Typography
-                        variant="button"
-                        color="inherit"
-                      >{`Para postear en ${tabSelected}`}</Typography>{' '}
+                      <Typography variant="button" color="inherit">
+                        {t('Dashboard.Create_Post.Create.Modal.Tooltip_ToPostIn', {
+                          tabSelected,
+                        })}
+                      </Typography>{' '}
                       <br />
                       <Typography variant="caption" color="inherit">
-                        Activa el formulario haciendo clic en el checkbox
+                        {t('Dashboard.Create_Post.Create.Modal.Tooltip_Activate')}
                       </Typography>
                       <Box
                         sx={{

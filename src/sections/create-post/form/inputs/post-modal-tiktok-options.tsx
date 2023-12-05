@@ -94,7 +94,7 @@ export default function TiktokOptions({ name }: IPostTextArea) {
               name="disableComments"
             />
           }
-          label="Deshabilitar comentarios"
+          label={t('Dashboard.Create_Post.Create.Modal.Switch_Disable_Comments')}
         />
         <FormControlLabel
           control={
@@ -105,7 +105,7 @@ export default function TiktokOptions({ name }: IPostTextArea) {
               name="disableDuet"
             />
           }
-          label="Deshabilitar Duo"
+          label={t('Dashboard.Create_Post.Create.Modal.Switch_Disable_Duo')}
         />
         <FormControlLabel
           control={
@@ -116,7 +116,7 @@ export default function TiktokOptions({ name }: IPostTextArea) {
               name="disableStitch"
             />
           }
-          label="Deshabilitar Pegar"
+          label={t('Dashboard.Create_Post.Create.Modal.Switch_Disable_Paste')}
         />
       </FormGroup>
     </Box>
