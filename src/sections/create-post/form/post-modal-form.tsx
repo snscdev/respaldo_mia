@@ -128,7 +128,7 @@ export default function PostModalForm() {
                 position: 'relative',
               }}
             >
-              {!showOverlay && (
+              {!showOverlay && isConected && (
                 <HtmlTooltip
                   followCursor
                   title={
@@ -273,20 +273,22 @@ export default function PostModalForm() {
                   Ver Preview
                 </Button>
               )}
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{
-                  width: {
-                    xs: '100%',
-                    md: '20%',
-                  },
-                  margin: '24px 0',
-                }}
-              >
-                {t('Dashboard.Create_Post.Create.Modal.btn_Post')}
-              </Button>
+              {showOverlay && isConected && (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    width: {
+                      xs: '100%',
+                      md: '20%',
+                    },
+                    margin: '24px 0',
+                  }}
+                >
+                  {t('Dashboard.Create_Post.Create.Modal.btn_Post')}
+                </Button>
+              )}
             </Form>
             <DataForm errors={errors} values={values} />
           </>
