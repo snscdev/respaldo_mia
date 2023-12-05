@@ -8,6 +8,7 @@ import { useLocales } from 'src/locales';
 import { fDate } from 'src/utils/format-time';
 import { setOpenModal } from 'src/store/slices/post';
 import { useDispatch } from 'react-redux';
+import { alpha } from '@mui/material/styles';
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -41,18 +42,17 @@ export default function PostItem({ post }: Props) {
               position: 'absolute',
               top: '0',
               right: '0',
-              padding: '5px',
               zIndex: '2',
             }}
           >
-            {post.platforms.map((url, index) => (
+            {post.platforms.map((name, index) => (
               <Box
                 key={index}
                 sx={{
-                  width: '24px',
-                  height: '24px',
+                  width: '28px',
+                  height: '28px',
                   borderRadius: '50%',
-                  backgroundColor: theme.palette.background.purpel.main,
+                  backgroundColor: name === 'twitter' ? theme.palette.background.default : '',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -60,10 +60,10 @@ export default function PostItem({ post }: Props) {
                 }}
               >
                 <Image
-                  src={`/assets/icons/dashboard/post/${post.platforms}.svg`}
+                  src={`/assets/icons/dashboard/post/${name}.svg`}
                   alt="post image"
-                  width={10}
-                  height={10}
+                  width={28}
+                  height={28}
                 />
               </Box>
             ))}
@@ -96,7 +96,6 @@ export default function PostItem({ post }: Props) {
                     width: '24px',
                     height: '24px',
                     borderRadius: '50%',
-                    backgroundColor: theme.palette.background.purpel.main,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -126,6 +125,7 @@ export default function PostItem({ post }: Props) {
               fontSize: '12px',
               fontWeight: '400',
               height: '20px',
+              marginBottom: '8px',
               width: '100%',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
@@ -134,16 +134,7 @@ export default function PostItem({ post }: Props) {
           >
             {post.content}
           </Typography>
-          <Typography
-            sx={{
-              color: theme.palette.background.purpel.main,
-              fontSize: '12px',
-              fontWeight: '400',
-              paddingBottom: '8px',
-            }}
-          >
-            {t('Dashboard.Create_Post.Create.card.link')}
-          </Typography>
+
           {post.publish ? (
             <Typography sx={{ fontSize: '12px', fontWeight: '400' }} color="success.main">
               {t('Dashboard.Create_Post.Create.card.published', {
