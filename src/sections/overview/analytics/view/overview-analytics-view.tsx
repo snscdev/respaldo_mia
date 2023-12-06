@@ -5,14 +5,13 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
 
 // components
 import Stack from '@mui/material/Stack';
 import { useSettingsContext } from 'src/components/settings';
 //
 import { _analyticOrderTimeline, _analyticTraffic, _ecommerceNewProducts } from 'src/_mock';
-import { Card, Divider } from '@mui/material';
+import { Card, CardContent, Divider, Typography } from '@mui/material';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { paths } from 'src/routes/paths';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -33,7 +32,6 @@ import penIcon from '../../../../../public/assets/icons/analyticsPage/pen.png';
 import phoneIcon from '../../../../../public/assets/icons/analyticsPage/phone.png';
 import videoIcon from '../../../../../public/assets/icons/analyticsPage/video.png';
 import WordCloud from '../word-cloud';
-import BestPostingHours from '../best-posting-hours';
 import EcommerceWidgetSummary from '../averages-carrousel';
 import YearlySales from '../yearly-sale';
 import BookingTotalIncomes from '../../booking/booking-total-incomes';
@@ -42,6 +40,10 @@ import AnalyticsCurrent from '../AnaliticsCurrents';
 import AnaliticsSenti from '../AnaliticsSenti';
 import BookingCheckInWidgets from '../../booking/booking-check-in-widgets';
 import AnalyticsTrafficBySite from '../AnaliticsTrafficBySite';
+import useChartsData from './AnaliticsData';
+import { primaryFont } from '../../../../theme/typography';
+import BestPostingHours from '../BestPostingHours';
+import TopWords from '../TopWords';
 
 // ----------------------------------------------------------------------
 
@@ -53,9 +55,8 @@ export default function OverviewAnalyticsViewFB() {
 
   const smUp = useResponsive('up', 'sm');
 
-  function generateRandomData(length: number) {
-    return Array.from({ length }, () => Math.floor(Math.random() * 100));
-  }
+  const { yearlySalesData, EmotionPerHora, EmotionAnalysis, Feeling, TopHashtags } =
+    useChartsData();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -112,64 +113,14 @@ export default function OverviewAnalyticsViewFB() {
           <YearlySales
             title="Yearly Sales"
             subheader="(+43%) than last year"
-            chart={{
-              colors: [theme.palette.primary.light, theme.palette.primary.main],
-              categories: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct',
-                'Nov',
-                'Dec',
-              ],
-              series: [
-                {
-                  year: 'Mes',
-                  data: [
-                    { name: 'Me Gusta', data: generateRandomData(5) },
-                    { name: 'Comentarios', data: generateRandomData(5) },
-                    { name: 'Compartidas', data: generateRandomData(5) },
-                  ],
-                },
-                {
-                  year: 'Semana',
-                  data: [
-                    { name: 'Me Gusta', data: generateRandomData(5) },
-                    { name: 'Comentarios', data: generateRandomData(5) },
-                    { name: 'Compartidas', data: generateRandomData(5) },
-                  ],
-                },
-                {
-                  year: 'Dia',
-                  data: [
-                    { name: 'Me Gusta', data: generateRandomData(5) },
-                    { name: 'Comentarios', data: generateRandomData(5) },
-                    { name: 'Compartidas', data: generateRandomData(5) },
-                  ],
-                },
-                {
-                  year: 'Año',
-                  data: [
-                    { name: 'Me Gusta', data: generateRandomData(5) },
-                    { name: 'Comentarios', data: generateRandomData(5) },
-                    { name: 'Compartidas', data: generateRandomData(5) },
-                  ],
-                },
-              ],
-            }}
+            chart={yearlySalesData}
           />
         </Grid>
 
         <Grid xs={12} md={4}>
           <Stack spacing={3}>
             <BookingTotalIncomes
-              title="Total Incomes"
+              title="Seguidores Totales"
               total={18765}
               percent={2.6}
               chart={{
@@ -187,7 +138,7 @@ export default function OverviewAnalyticsViewFB() {
             />
             <BookingTotalIncomes
               color="info"
-              title="Total Incomes"
+              title="Engagement"
               total={18765}
               percent={2.6}
               chart={{
@@ -207,227 +158,27 @@ export default function OverviewAnalyticsViewFB() {
         </Grid>
 
         <Grid xs={12}>
-          <BankingBalanceStatistics
-            title="Emoción Por Hora"
-            chart={{
-              colors: [
-                theme.palette.primary.main,
-                theme.palette.info.main,
-                theme.palette.error.main,
-                theme.palette.success.main,
-                theme.palette.background.purpel.main,
-                theme.palette.primary.light,
-              ],
-              series: [
-                {
-                  type: 'Mañana',
-                  data: [
-                    {
-                      name: 'Felicidad',
-                      data: [10, 41, 35, 151, 49, 62, 69],
-                    },
-                    {
-                      name: 'Tristeza',
-                      data: [10, 20, 13, 55, 45, 15, 12],
-                    },
-                    {
-                      name: 'Enojo',
-                      data: [8, 52, 32, 25, 47, 58, 19],
-                    },
-                    {
-                      name: 'Disgusto',
-                      data: [10, 34, 13, 56, 77, 88, 99],
-                    },
-                    {
-                      name: 'Miedo',
-                      data: [10, 54, 13, 16, 77, 28, 99],
-                    },
-                    {
-                      name: 'sorpresa',
-                      data: [10, 34, 13, 56, 77, 88, 99],
-                    },
-                  ],
-                },
-                {
-                  type: 'Tarde',
-                  data: [
-                    {
-                      name: 'Felicidad',
-                      data: [10, 41, 35, 151, 49, 62, 69],
-                    },
-                    {
-                      name: 'Tristeza',
-                      data: [10, 20, 13, 55, 45, 15, 12],
-                    },
-                    {
-                      name: 'Enojo',
-                      data: [8, 52, 32, 25, 47, 58, 19],
-                    },
-                    {
-                      name: 'Disgusto',
-                      data: [10, 34, 13, 56, 77, 88, 99],
-                    },
-                    {
-                      name: 'Miedo',
-                      data: [10, 54, 13, 16, 77, 28, 99],
-                    },
-                    {
-                      name: 'sorpresa',
-                      data: [10, 34, 13, 56, 77, 88, 99],
-                    },
-                  ],
-                },
-                {
-                  type: 'Noche',
-                  data: [
-                    {
-                      name: 'Felicidad',
-                      data: [10, 41, 35, 151, 49, 62, 69],
-                    },
-                    {
-                      name: 'Tristeza',
-                      data: [10, 20, 13, 55, 45, 15, 12],
-                    },
-                    {
-                      name: 'Enojo',
-                      data: [8, 52, 32, 25, 47, 58, 19],
-                    },
-                    {
-                      name: 'Disgusto',
-                      data: [10, 34, 13, 56, 77, 88, 99],
-                    },
-                    {
-                      name: 'Miedo',
-                      data: [10, 54, 13, 16, 77, 28, 99],
-                    },
-                    {
-                      name: 'sorpresa',
-                      data: [10, 34, 13, 56, 77, 88, 99],
-                    },
-                  ],
-                },
-              ],
-            }}
-          />
+          <BankingBalanceStatistics title="Emoción Por Hora" chart={EmotionPerHora} />
         </Grid>
         <Grid xs={12} md={6} lg={4}>
-          <AnalyticsCurrent
-            title="Análisis de Emoción"
-            chart={{
-              colors: [
-                theme.palette.primary.main,
-                theme.palette.info.main,
-                theme.palette.error.main,
-                theme.palette.success.main,
-                theme.palette.background.purpel.main,
-                theme.palette.primary.light,
-              ],
-              series: [
-                { label: 'Felicidad', value: 4344 },
-                { label: 'Tristeza', value: 5435 },
-                { label: 'Enojo', value: 1443 },
-                { label: 'Disgusto', value: 4443 },
-                { label: 'Miedo', value: 5435 },
-                { label: 'Sorpresa', value: 1443 },
-              ],
-            }}
-          />
+          <AnalyticsCurrent title="Análisis de Emoción" chart={EmotionAnalysis} />
         </Grid>
 
         <Grid xs={12} md={8}>
-          <AnaliticsSenti
-            title="Sentimiento"
-            chart={{
-              labels: {
-                Dia: ['Mon', 'Tue', 'Web', 'Thu', 'Fri', 'Sat', 'Sun'],
-                Hora: [
-                  '05:00',
-                  '06:00',
-                  '07:00',
-                  '08:00',
-                  '09:00',
-                  '10:00',
-                  '11:00',
-                  '12:00',
-                  '13:00',
-                  '14:00',
-                  '15:00',
-                  '16:00',
-                ],
-              },
-              colors: [theme.palette.info.main, theme.palette.error.main],
-              series: [
-                {
-                  type: 'Dia',
-                  data: [
-                    { name: 'Positivo', data: [20, 34, 48, 65, 37, 48, 28] },
-                    { name: 'Negativo', data: [10, 34, 13, 26, 27, 28, 15] },
-                  ],
-                },
-                {
-                  type: 'Hora',
-                  data: [
-                    {
-                      name: 'Positivo',
-                      data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 12, 43, 34],
-                    },
-                    {
-                      name: 'Negativo',
-                      data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 12, 43, 34],
-                    },
-                  ],
-                },
-              ],
-            }}
-          />
+          <AnaliticsSenti title="Sentimiento" chart={Feeling} />
         </Grid>
         <Grid xs={12}>
-          <Card>
-            <Stack
-              direction={{ xs: 'column', sm: 'row' }}
-              divider={
-                <Divider
-                  orientation={smUp ? 'vertical' : 'horizontal'}
-                  flexItem
-                  sx={{ borderStyle: 'dashed' }}
-                />
-              }
-            >
-              asd
-            </Stack>
-          </Card>
+          <BestPostingHours />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <AnalyticsOrderTimeline
-            title="Top Hashtags"
-            list={[
-              {
-                title: '#YOLO',
-                subtitle: 'Sentimiento: [Sentimiento]',
-              },
-              {
-                title: '12 Invoices have been paid',
-                subtitle: 'Sentimiento: [Sentimiento]',
-              },
-              {
-                title: 'Order #37745 from September',
-                subtitle: 'Sentimiento: [Sentimiento]',
-              },
-              {
-                title: 'New order placed #XF-2356',
-                subtitle: 'Sentimiento: [Sentimiento]',
-              },
-              {
-                title: 'New order placed #XF-2356',
-                subtitle: 'Sentimiento: [Sentimiento]',
-              },
-            ]}
-          />
+          <AnalyticsOrderTimeline title="Top Hashtags" list={TopHashtags} />
         </Grid>
-
+        <Grid xs={12} md={8}>
+          <TopWords />
+        </Grid>
         <Grid xs={12} md={6} lg={4}>
-          <AnalyticsTrafficBySite title="Traffic by Site" list={_analyticTraffic} />
+          <AnalyticsTrafficBySite title="Engagement Por Tipo De Post" list={_analyticTraffic} />
         </Grid>
       </Grid>
     </Container>

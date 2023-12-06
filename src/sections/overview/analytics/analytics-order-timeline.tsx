@@ -53,7 +53,12 @@ export default function AnalyticsOrderTimeline({ title, subheader, list, ...othe
   };
 
   return (
-    <Card {...other}>
+    <Card
+      {...other}
+      sx={{
+        height: '100%',
+      }}
+    >
       <CardHeader
         title={title}
         subheader={subheader}
@@ -117,8 +122,7 @@ function OrderItem({ title, subtitle, type, lastTimeline }: OrderItemProps) {
     <TimelineItem>
       <TimelineSeparator>
         <TimelineDot color={getColor(type)} />
-        {lastTimeline ? null : <TimelineConnector sx={{ height: 0 }} />}{' '}
-        {/* Aquí mantenemos la altura de los conectores en 20 */}
+        <TimelineConnector sx={{ height: 50 }} />
       </TimelineSeparator>
 
       <TimelineContent>

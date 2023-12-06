@@ -39,7 +39,7 @@ export default function AnaliticsSenti({ title, subheader, chart, ...other }: Pr
 
   const popover = usePopover();
 
-  const [seriesData, setSeriesData] = useState('Week');
+  const [seriesData, setSeriesData] = useState('Dia');
 
   const chartOptions = useChart({
     chart: {

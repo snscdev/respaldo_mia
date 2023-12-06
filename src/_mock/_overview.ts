@@ -102,26 +102,26 @@ export const _analyticOrderTimeline = [...Array(5)].map((_, index) => {
 
 export const _analyticTraffic = [
   {
-    value: 'facebook',
-    label: 'FaceBook',
+    value: 'hand',
+    label: 'Text Post',
     total: _mock.number.nativeL(1),
     icon: 'eva:facebook-fill',
   },
   {
-    value: 'google',
-    label: 'Google',
+    value: 'camera',
+    label: 'Photo Post',
     total: _mock.number.nativeL(2),
     icon: 'eva:google-fill',
   },
   {
-    value: 'linkedin',
-    label: 'Linkedin',
+    value: 'video',
+    label: 'Video Post',
     total: _mock.number.nativeL(3),
     icon: 'eva:linkedin-fill',
   },
   {
-    value: 'twitter',
-    label: 'Twitter',
+    value: 'mobile',
+    label: 'Story',
     total: _mock.number.nativeL(4),
     icon: 'eva:twitter-fill',
   },

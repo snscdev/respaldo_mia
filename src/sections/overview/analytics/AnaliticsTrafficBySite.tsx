@@ -8,6 +8,7 @@ import Card, { CardProps } from '@mui/material/Card';
 import { fShortenNumber } from 'src/utils/format-number';
 // components
 import Iconify from 'src/components/iconify';
+import Image from 'src/components/image/image';
 
 // ----------------------------------------------------------------------
 
@@ -30,16 +31,10 @@ export default function AnalyticsTrafficBySite({ title, subheader, list, ...othe
       <Box display="grid" gap={2} gridTemplateColumns="repeat(2, 1fr)" sx={{ p: 3 }}>
         {list.map((site) => (
           <Paper key={site.label} variant="outlined" sx={{ py: 2.5, textAlign: 'center' }}>
-            <Iconify
-              icon={site.icon}
-              color={
-                (site.value === 'facebook' && '#1877F2') ||
-                (site.value === 'google' && '#DF3E30') ||
-                (site.value === 'linkedin' && '#006097') ||
-                (site.value === 'twitter' && '#1C9CEA') ||
-                ''
-              }
+            <Image
+              src={`/assets/icons/dashboard/analytics/${site.value}.svg`}
               width={32}
+              alt="image"
             />
 
             <Typography variant="h6" sx={{ mt: 0.5 }}>
