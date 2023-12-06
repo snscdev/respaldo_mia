@@ -3,12 +3,11 @@ import { CardActionArea, CardContent, CardMedia, Typography, useTheme } from '@m
 import Card from '@mui/material/Card';
 import { Box, Stack } from '@mui/system';
 import { IPost } from 'src/types/post';
-import Image from 'next/image';
 import { useLocales } from 'src/locales';
 import { fDate } from 'src/utils/format-time';
 import { setOpenModal } from 'src/store/slices/post';
 import { useDispatch } from 'react-redux';
-import { alpha } from '@mui/material/styles';
+import Image from 'src/components/image/image';
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -25,6 +24,41 @@ export default function PostItem({ post }: Props) {
     dispatch(setOpenModal(true));
   };
 
+  const renderSocialMini = (
+    <Stack
+      direction="row"
+      sx={{
+        position: 'absolute',
+        top: '10px',
+        right: '5px',
+        zIndex: '2',
+      }}
+    >
+      {post.platforms.map((name, index) => (
+        <Box
+          key={index}
+          sx={{
+            width: '28px',
+            height: '28px',
+            borderRadius: '50%',
+            backgroundColor: name === 'twitter' ? theme.palette.background.default : '',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginRight: '5px',
+          }}
+        >
+          <Image
+            src={`/assets/icons/dashboard/post/${name}.svg`}
+            alt="post image"
+            width={28}
+            height={28}
+          />
+        </Box>
+      ))}
+    </Stack>
+  );
+
   return (
     <Card
       onClick={handleClick}
@@ -32,43 +66,12 @@ export default function PostItem({ post }: Props) {
         borderRadius: '8px',
         maxWidth: '352px',
         position: 'relative',
+        width: '100%',
       }}
     >
       <CardActionArea>
-        {post.mediaUrls?.length && (
-          <Stack
-            direction="row"
-            sx={{
-              position: 'absolute',
-              top: '0',
-              right: '0',
-              zIndex: '2',
-            }}
-          >
-            {post.platforms.map((name, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: '28px',
-                  height: '28px',
-                  borderRadius: '50%',
-                  backgroundColor: name === 'twitter' ? theme.palette.background.default : '',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginRight: '5px',
-                }}
-              >
-                <Image
-                  src={`/assets/icons/dashboard/post/${name}.svg`}
-                  alt="post image"
-                  width={28}
-                  height={28}
-                />
-              </Box>
-            ))}
-          </Stack>
-        )}
+        {post.mediaUrls?.length ? renderSocialMini : null}
+
         {post.mediaUrls?.length ? (
           <CardMedia component="img" height="200px" image={post.mediaUrls[0]} alt="post image" />
         ) : (
@@ -81,39 +84,22 @@ export default function PostItem({ post }: Props) {
           >
             <Stack
               direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={2}
               sx={{
-                position: 'absolute',
-                top: '50%',
-                right: '50%',
-                padding: '5px',
-                zIndex: '2',
+                height: '100%',
               }}
             >
               {post.platforms.map((url, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginRight: '5px',
-                  }}
-                >
-                  <Image
-                    src={`/assets/icons/dashboard/post/${post.platforms}.svg`}
-                    alt="post image"
-                    width={10}
-                    height={10}
-                  />
+                <Box key={index}>
+                  <Image src={`/assets/icons/dashboard/post/${url}.svg`} alt="post image" />
                 </Box>
               ))}
             </Stack>
           </Box>
         )}
-        <CardContent sx={{ padding: '13px 20px', height: '119px' }}>
+        <CardContent sx={{ padding: '13px 20px', height: 'auto' }}>
           <Typography
             component="div"
             sx={{ fontSize: '18px', fontWeight: '600', paddingBottom: '8px' }}

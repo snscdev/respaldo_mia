@@ -15,6 +15,8 @@ import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
 import { IPost } from 'src/types/post';
 import { useLocales } from 'src/locales';
+import { useDispatch } from 'react-redux';
+import { setOpenModal } from 'src/store/slices/post';
 
 // ----------------------------------------------------------------------
 
@@ -28,15 +30,17 @@ type Props = {
 export default function PostSearch({ query, results, onSearch, hrefItem }: Props) {
   // const router = useRouter();
 
+  const distpach = useDispatch();
+
   const handleClick = (id: string) => {
-    // router.push(hrefItem(id));
+    distpach(setOpenModal(true));
   };
   const { t } = useLocales();
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (query) {
       if (event.key === 'Enter') {
-        const selectProduct = results.filter((post) => post.title === query)[0];
+        const selectProduct = results.filter((post) => post.content === query)[0];
 
         handleClick(selectProduct.id);
       }
@@ -50,7 +54,7 @@ export default function PostSearch({ query, results, onSearch, hrefItem }: Props
       popupIcon={null}
       options={results}
       onInputChange={(event, newValue) => onSearch(newValue)}
-      getOptionLabel={(option) => option.title}
+      getOptionLabel={(option) => option.content}
       noOptionsText={<SearchNotFound query={query} sx={{ bgcolor: 'unset' }} />}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       slotProps={{
@@ -84,8 +88,8 @@ export default function PostSearch({ query, results, onSearch, hrefItem }: Props
         />
       )}
       renderOption={(props, post, { inputValue }) => {
-        const matches = match(post.title, inputValue);
-        const parts = parse(post.title, matches);
+        const matches = match(post.content, inputValue);
+        const parts = parse(post.content, matches);
 
         return (
           <Box component="li" {...props} onClick={() => handleClick(post.id)} key={post.id}>

@@ -95,7 +95,7 @@ export default function EcommerceWidgetSummary({
         }}
       />
 
-      <Typography variant="subtitle2" component="div" noWrap>
+      <Typography variant="subtitle2" component="div">
         {percent > 0 && '+'}
 
         {fPercent(percent)}
@@ -108,7 +108,7 @@ export default function EcommerceWidgetSummary({
   );
 
   return (
-    <Card sx={{ display: 'flex', alignItems: 'center', p: 3, ...sx }} {...other}>
+    <Card sx={{ display: 'flex', alignItems: 'center', p: 3, ...sx, width: '100%' }} {...other}>
       <Box sx={{ flexGrow: 1 }}>
         <Typography variant="subtitle2" sx={{ mb: 2 }}>
           {title}

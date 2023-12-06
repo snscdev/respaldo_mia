@@ -319,7 +319,6 @@ const applyFilter = ({
   }
 
   if (socialNetworks.length) {
-    // debe filtrar por redes sociales seleccionadas en socialNetworks en el atributo platforms de cada post
     inputData = inputData.filter((post) =>
       socialNetworks.some((social) => post?.platforms?.includes(social))
     );

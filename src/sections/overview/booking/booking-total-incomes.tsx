@@ -134,7 +134,6 @@ export default function BookingTotalIncomes({
           <Box sx={{ mt: 0.5, opacity: 0.8, typography: 'body2' }}>que el mes anterior </Box>
         </div>
       </Stack>
-
       <Chart type="line" series={[{ data: series }]} options={chartOptions} height={118} />
     </Stack>
   );
