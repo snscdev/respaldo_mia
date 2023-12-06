@@ -163,7 +163,7 @@ export default function HomeHero() {
           variant="h2"
           sx={{
             textAlign: { xs: 'initial', md: 'center' },
-            fontWeight: 400,
+            fontWeight: 600,
           }}
         >
           {t('landing_home_title1')} <br />
