@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { CardProps } from '@mui/material/Card';
 // utils
-import { fCurrency, fPercent } from 'src/utils/format-number';
+import { fCurrency, fNumber, fPercent } from 'src/utils/format-number';
 // theme
 import { bgGradient } from 'src/theme/css';
 // components
@@ -29,12 +29,14 @@ interface Props extends CardProps {
     }[];
     options?: ApexOptions;
   };
+  unit?: string;
 }
 
 export default function BookingTotalIncomes({
   title,
   total,
   percent,
+  unit = 'k',
   color = 'primary',
   chart,
   sx,
@@ -88,7 +90,7 @@ export default function BookingTotalIncomes({
         show: false,
       },
       y: {
-        formatter: (value: number) => fCurrency(value),
+        formatter: (value: number) => `${value} ${unit}`,
         title: {
           formatter: () => '',
         },
@@ -116,7 +118,7 @@ export default function BookingTotalIncomes({
       <Stack direction="row" justifyContent="space-between" sx={{ mb: 3 }}>
         <div>
           <Box sx={{ mb: 1, typography: 'subtitle2' }}>{title}</Box>
-          <Box sx={{ typography: 'h3' }}>{fCurrency(total)}</Box>
+          <Box sx={{ typography: 'h3' }}>{fNumber(total) + unit}</Box>
         </div>
 
         <div>
@@ -129,7 +131,7 @@ export default function BookingTotalIncomes({
             </Box>
           </Stack>
 
-          <Box sx={{ mt: 0.5, opacity: 0.8, typography: 'body2' }}>than last month </Box>
+          <Box sx={{ mt: 0.5, opacity: 0.8, typography: 'body2' }}>que el mes anterior </Box>
         </div>
       </Stack>
 

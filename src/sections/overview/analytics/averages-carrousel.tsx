@@ -101,7 +101,7 @@ export default function EcommerceWidgetSummary({
         {fPercent(percent)}
 
         <Box component="span" sx={{ color: 'text.secondary', typography: 'body2' }}>
-          {' than last week'}
+          {`${percent < 0 ? ' menos' : ' más'} que la semana pasada`}
         </Box>
       </Typography>
     </Stack>

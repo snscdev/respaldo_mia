@@ -55,7 +55,7 @@ export default function OverviewAnalyticsViewFB({ social }: IProps) {
       <Grid container spacing={3}>
         <Grid xs={12} md={4}>
           <EcommerceWidgetSummary
-            title="Product Sold"
+            title="Me Gusta"
             percent={2.6}
             total={765}
             chart={{
@@ -66,7 +66,7 @@ export default function OverviewAnalyticsViewFB({ social }: IProps) {
 
         <Grid xs={12} md={4}>
           <EcommerceWidgetSummary
-            title="Total Balance"
+            title="Comentarios"
             percent={-0.1}
             total={18765}
             chart={{
@@ -78,7 +78,7 @@ export default function OverviewAnalyticsViewFB({ social }: IProps) {
 
         <Grid xs={12} md={4}>
           <EcommerceWidgetSummary
-            title="Sales Profit"
+            title="Compartidas"
             percent={0.6}
             total={4876}
             chart={{
@@ -98,8 +98,8 @@ export default function OverviewAnalyticsViewFB({ social }: IProps) {
 
         <Grid xs={12} md={8}>
           <YearlySales
-            title="Yearly Sales"
-            subheader="(+43%) than last year"
+            title="Interacciones"
+            subheader="(+43%) más que la semana pasada"
             chart={yearlySalesData}
           />
         </Grid>
@@ -126,6 +126,7 @@ export default function OverviewAnalyticsViewFB({ social }: IProps) {
             <BookingTotalIncomes
               color="info"
               title="Engagement"
+              unit="%"
               total={18765}
               percent={2.6}
               chart={{
