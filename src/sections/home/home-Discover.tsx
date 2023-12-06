@@ -121,7 +121,7 @@ export default function HomeDiscover() {
   const renderImgs = (
     <m.div variants={varFade().inRight}>
       <Stack
-        gap={3}
+        gap={0}
         style={{
           position: 'relative',
           zIndex: 999,
@@ -129,44 +129,44 @@ export default function HomeDiscover() {
           height: '100%',
         }}
       >
-        <Stack direction="row" gap={2.5} justifyContent="center" alignItems="end">
+        <Stack direction="row" gap={1} justifyContent="center" alignItems="end">
           <Image
-            src="/assets/images/home/cards/default-placeholder.jpg"
+            src="/assets/images/home/fq.png"
             style={{
               borderRadius: 10,
-              width: '30%',
-              boxShadow: '0px 30px 60px 0px rgba(59, 130, 246, 0.25)',
+              width: '35%',
+              // boxShadow: '0px 30px 60px 0px rgba(59, 130, 246, 0.25)',
             }}
             alt="prueba"
           />
           <Image
-            src="/assets/images/home/cards/default-placeholder.jpg"
+            src="/assets/images/home/f4.png"
             alt="prueba"
             style={{
               borderRadius: 10,
-              width: '48%',
-              boxShadow: '0px 30px 60px 0px rgba(59, 130, 246, 0.25)',
+              width: '50%',
+              // boxShadow: '0px 30px 60px 0px rgba(59, 130, 246, 0.25)',
             }}
           />
           <Image
-            src="/assets/images/home/cards/default-placeholder.jpg"
+            src="/assets/images/home/f8.png"
             alt="prueba"
             style={{
               borderRadius: 10,
               width: '40%',
-              boxShadow: `0px 30px 60px 0px rgba(59, 130, 246, 0.25)`,
+              // boxShadow: `0px 30px 60px 0px rgba(59, 130, 246, 0.25)`,
             }}
           />
         </Stack>
 
-        <Stack direction="row" gap={3} justifyContent="center" alignItems="initial">
+        <Stack direction="row" gap={2} justifyContent="center" alignItems="initial">
           <Image
-            src="/assets/images/home/cards/default-placeholder.jpg"
+            src="/assets/images/home/f7.png"
             alt="prueba"
             style={{
               borderRadius: 10,
-              width: '60%',
-              boxShadow: '0px 30px 60px 0px rgba(59, 130, 246, 0.25)',
+              width: '100%',
+              // boxShadow: '0px 30px 60px 0px rgba(59, 130, 246, 0.25)',
             }}
           />
         </Stack>

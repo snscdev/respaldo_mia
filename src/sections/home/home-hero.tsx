@@ -143,18 +143,18 @@ export default function HomeHero() {
   const hide = percent > 120;
 
   const renderDescription = (
-    <Stack
-      alignItems={{ xs: 'flex-start', md: 'center' }}
-      justifyContent="center"
+    <Box
       gap="20px"
       sx={{
-        height: 1,
         mx: 'auto',
         maxWidth: 480,
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'center',
         opacity: opacity > 0 ? opacity : 0,
         mt: {
-          xs: `${HEADER.H_MOBILE}px`,
-          md: `-${HEADER.H_DESKTOP + percent * 2.5}px`,
+          xs: `${HEADER.H_MOBILE + 50}px`,
+          md: `${HEADER.H_DESKTOP}px`,
         },
       }}
     >
@@ -214,15 +214,27 @@ export default function HomeHero() {
         </Typography>
       </m.div>
       <m.div variants={varFade().in}>
-        <Stack spacing={1.5} direction="row" sx={{ mb: 5 }}>
-          <Button component={RouterLink} href="#" color="primary" size="large" variant="contained"
+        <Stack
+          spacing={1.5}
+          direction="row"
+          sx={{ mb: 5 }}
+          justifyContent={{
+            xs: 'start',
+            md: 'center',
+          }}
+        >
+          <Button
+            component={RouterLink}
+            href="#"
+            color="primary"
+            size="large"
+            variant="contained"
             sx={{
               fontSize: {
-                xs: currentLang.value === "es" ? "12px" : "15px", md: "15px"
-
-              }
-            }
-            }
+                xs: currentLang.value === 'es' ? '12px' : '15px',
+                md: '15px',
+              },
+            }}
           >
             {t('Try_Free')}
           </Button>
@@ -248,17 +260,18 @@ export default function HomeHero() {
             rel="noopener"
             href="#"
             sx={{
-              borderColor: 'text.primary', fontSize: {
-                xs: currentLang.value === "es" ? "12px" : "15px", md: "15px"
-
-              }
+              borderColor: 'text.primary',
+              fontSize: {
+                xs: currentLang.value === 'es' ? '12px' : '15px',
+                md: '15px',
+              },
             }}
           >
             {t('See_in_Action')}
           </Button>
         </Stack>
       </m.div>
-    </Stack>
+    </Box>
   );
 
   const renderImgs = (
@@ -281,44 +294,55 @@ export default function HomeHero() {
       >
         <Stack direction="row" gap={3} justifyContent="center" alignItems="end">
           <Image
-            src="/assets/images/home/cards/default-placeholder.jpg"
-            style={{
-              borderRadius: 10,
-              width: '25%',
+            src="/assets/images/home/f8.png"
+            sx={{
+              borderRadius: '10px',
+              width: '45%',
+              '&:hover': {
+                transform: 'scale(1.1)',
+                transition: 'transform 0.5s',
+              },
             }}
             alt="prueba"
           />
           <Image
-            src="/assets/images/home/cards/default-placeholder.jpg"
+            src="/assets/images/home/f10.png"
             alt="prueba"
-            style={{
-              borderRadius: 10,
+            sx={{
+              borderRadius: '10px',
               width: '48%',
+              '&:hover': {
+                transform: 'scale(1.1)',
+                transition: 'transform 0.5s',
+              },
             }}
           />
           <Stack
             gap={3}
-            style={{
+            sx={{
               width: '25%',
               height: '100%',
             }}
           >
-            <Image
+            {/* <Image
               src="/assets/images/home/cards/default-placeholder.jpg"
               alt="prueba"
-              style={{
+              sx={{
                 borderRadius: 10,
                 width: '70%',
                 boxShadow: '0px 30px 60px 0px #89b2f780',
               }}
-            />
+            /> */}
             <Image
-              src="/assets/images/home/cards/default-placeholder.jpg"
+              src="/assets/images/home/f3.png"
               alt="prueba"
-              style={{
-                borderRadius: 10,
+              sx={{
+                borderRadius: '10px',
                 width: '100%',
-                boxShadow: '0px 30px 60px 0px rgba(25, 55, 102, 0.25)',
+                '&:hover': {
+                  transform: 'scale(1.1)',
+                  transition: 'transform 0.5s',
+                },
               }}
             />
           </Stack>
@@ -326,31 +350,37 @@ export default function HomeHero() {
 
         <Stack direction="row" gap={3} justifyContent="center" alignItems="initial">
           <Image
-            src="/assets/images/home/cards/default-placeholder.jpg"
+            src="/assets/images/home/fq.png"
             alt="prueba"
-            style={{
-              borderRadius: 10,
+            sx={{
+              borderRadius: '10px',
               width: '50%',
               boxShadow: '0px 30px 60px 0px rgba(25, 55, 102, 0.25)',
+              '&:hover': {
+                transform: 'scale(1.1)',
+                transition: 'transform 0.5s',
+              },
             }}
           />
 
           <Stack
             justifyContent="space-between"
-            style={{
+            sx={{
               width: '50%',
             }}
           >
             <Image
-              src="/assets/images/home/cards/default-placeholder.jpg"
+              src="/assets/images/home/f11.png"
               alt="prueba"
-              style={{
-                borderRadius: 10,
+              sx={{
                 width: '64%',
-                boxShadow: '0px 30px 60px 0px rgba(25, 55, 102, 0.25)',
+                '&:hover': {
+                  transform: 'scale(1.1)',
+                  transition: 'transform 0.5s',
+                },
               }}
             />
-            <Image
+            {/* <Image
               src="/assets/images/home/cards/default-placeholder.jpg"
               alt="prueba"
               style={{
@@ -358,7 +388,7 @@ export default function HomeHero() {
                 width: '30%',
                 boxShadow: '0px 30px 60px 0px #89b2f780',
               }}
-            />
+            /> */}
           </Stack>
         </Stack>
       </Stack>

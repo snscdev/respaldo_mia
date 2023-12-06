@@ -126,15 +126,15 @@ export default function HomePowerhouse() {
   ];
 
   const images = [
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
-    'assets/images/home/cards/default-placeholder.jpg',
+    '/assets/icons/home/facebook-circle.svg',
+    '/assets/icons/home/Instagram.png',
+    '/assets/icons/home/pinterest.svg',
+    '/assets/icons/home/twitter.svg',
+    '/assets/icons/home/youtube.svg',
+    '/assets/icons/home/LinkedIn.png',
+    '/assets/icons/home/canva.svg',
+    '/assets/icons/home/Tiktok.png',
+    '/assets/icons/home/gmb.png',
   ];
 
   const renderToggle = (
@@ -330,13 +330,12 @@ export default function HomePowerhouse() {
               key={index}
               src={item}
               alt={item}
+              objectFit="contain"
               sx={{
                 width: '100%',
                 height: '100%',
                 maxWidth: '98px',
                 maxHeight: '98px',
-                objectFit: 'cover',
-                boxShadow: '3.37557px 3.37557px 33.75569px 0px rgba(178, 170, 156, 0.25)',
               }}
             />
           ))}

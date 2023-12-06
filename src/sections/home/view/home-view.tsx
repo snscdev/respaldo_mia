@@ -11,7 +11,7 @@ import ScrollProgress from 'src/components/scroll-progress';
 import HomeHero from '../home-hero';
 import HomeUnlock from '../home-unlock';
 import HomePowerhouse from '../home-powerhouse';
-import HomeDiscover from '../home-looking-for';
+import HomeDiscover from '../home-Discover';
 import HomeContacUs from '../home-contact-us';
 import HomeUnleash from '../home-unleash';
 

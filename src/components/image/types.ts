@@ -11,4 +11,5 @@ export type ImageProps = BoxProps &
     overlay?: string;
     ratio?: ImageRatio;
     disabledEffect?: boolean;
+    objectFit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
   };
