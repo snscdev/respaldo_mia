@@ -74,6 +74,16 @@ export function useNavData() {
             // ],
           },
           {
+            title: t('Analytics'),
+            path: paths.dashboard.analytics.root,
+            icon: ICONS.analytics,
+            children: [
+              { title: t('facebook'), path: paths.dashboard.analytics.facebook },
+              { title: t('instagram'), path: paths.dashboard.analytics.instagram },
+              { title: t('twitter (X)'), path: paths.dashboard.analytics.twitter },
+            ],
+          },
+          {
             title: t('trends'),
             path: paths.dashboard.general.booking,
             icon: ICONS.external,
@@ -82,18 +92,6 @@ export function useNavData() {
             title: t('Online Presence'),
             path: paths.dashboard.general.banking,
             icon: ICONS.banking,
-          },
-          {
-            title: t('Analytics'),
-            path: paths.dashboard.analytics.root,
-            icon: ICONS.analytics,
-            children: [
-              { title: t('facebook'), path: paths.dashboard.analytics.facebook },
-              { title: t('instagram'), path: paths.dashboard.analytics.instagram },
-              { title: t('twitter (X)'), path: paths.dashboard.analytics.twitter },
-              { title: t('LinkedIn'), path: paths.dashboard.analytics.linkedin },
-              { title: t('Threads'), path: paths.dashboard.analytics.threads },
-            ],
           },
           // Ocoya
         ],

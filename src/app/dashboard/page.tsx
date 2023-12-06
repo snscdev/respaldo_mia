@@ -1,6 +1,6 @@
 // sections
 // import { OverviewAppView } from 'src/sections/overview/app/view';
-import ComingSoonView from '../coming-soon/view';
+import { CalendarView } from 'src/sections/calendar/view';
 
 // ----------------------------------------------------------------------
 
@@ -10,6 +10,5 @@ export const metadata = {
 
 export default function OverviewAppPage() {
   // return <OverviewAppView />;
-  return <ComingSoonView />;
+  return <CalendarView />;
 }
-

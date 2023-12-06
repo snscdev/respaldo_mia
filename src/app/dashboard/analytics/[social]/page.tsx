@@ -7,7 +7,11 @@ import { OverviewAnalyticsView } from 'src/sections/overview/analytics/view';
 export const metadata = {
   title: 'Dashboard: Analytics',
 };
-
-export default function OverviewAnalyticsPageFB() {
-  return <OverviewAnalyticsView />;
+type Props = {
+  params: {
+    social: string;
+  };
+};
+export default function OverviewAnalyticsPageFB({ params }: Props) {
+  return <OverviewAnalyticsView social={params.social} />;
 }

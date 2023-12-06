@@ -4,56 +4,39 @@
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 
 // components
 import Stack from '@mui/material/Stack';
 import { useSettingsContext } from 'src/components/settings';
 //
-import { _analyticOrderTimeline, _analyticTraffic, _ecommerceNewProducts } from 'src/_mock';
-import { Card, CardContent, Divider, Typography } from '@mui/material';
-import { useResponsive } from 'src/hooks/use-responsive';
+import { _analyticTraffic } from 'src/_mock';
+import { SOCIALNETWORKSNAMES } from 'src/const/post/redes';
 import { paths } from 'src/routes/paths';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 import { useAuthContext } from 'src/auth/hooks';
-import { useMockedUser } from 'src/hooks/use-mocked-user';
-// import EcommerceWidgetSummary from '../../e-commerce/ecommerce-widget-summary';
-import AnalyticsSentimentAnalysis from '../analytics-sentiment-analysis';
 import AnalyticsOrderTimeline from '../analytics-order-timeline';
-import AnalyticsWebsiteVisits from '../analytics-website-visits';
-import EngagementPerPost from '../engagement-perpost';
-import HottestTrends from '../hottest-trends';
-import ActivityPerHour from '../activity-per-hour';
 import BannerOneKpi from '../banner-one-kpi';
-import GaugeEng from '../gauge-engagement';
-import GainedFollowers from '../gained-followers';
-import cameraIcon from '../../../../../public/assets/icons/analyticsPage/camera.png';
-import penIcon from '../../../../../public/assets/icons/analyticsPage/pen.png';
-import phoneIcon from '../../../../../public/assets/icons/analyticsPage/phone.png';
-import videoIcon from '../../../../../public/assets/icons/analyticsPage/video.png';
-import WordCloud from '../word-cloud';
 import EcommerceWidgetSummary from '../averages-carrousel';
 import YearlySales from '../yearly-sale';
 import BookingTotalIncomes from '../../booking/booking-total-incomes';
 import BankingBalanceStatistics from '../../banking/banking-balance-statistics';
 import AnalyticsCurrent from '../AnaliticsCurrents';
 import AnaliticsSenti from '../AnaliticsSenti';
-import BookingCheckInWidgets from '../../booking/booking-check-in-widgets';
 import AnalyticsTrafficBySite from '../AnaliticsTrafficBySite';
 import useChartsData from './AnaliticsData';
-import { primaryFont } from '../../../../theme/typography';
 import BestPostingHours from '../BestPostingHours';
 import TopWords from '../TopWords';
+import SentimentbyTopic from '../sentiment-by-topic';
 
 // ----------------------------------------------------------------------
-
-export default function OverviewAnalyticsViewFB() {
+interface IProps {
+  social: string;
+}
+export default function OverviewAnalyticsViewFB({ social }: IProps) {
   const settings = useSettingsContext();
   const { user } = useAuthContext();
 
   const theme = useTheme();
-
-  const smUp = useResponsive('up', 'sm');
 
   const { yearlySalesData, EmotionPerHora, EmotionAnalysis, Feeling, TopHashtags } =
     useChartsData();
@@ -61,7 +44,11 @@ export default function OverviewAnalyticsViewFB() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <CustomBreadcrumbs
-        heading={user?.name ? `Facebook: ${user.name}` : 'Facebook'}
+        heading={
+          user?.name
+            ? `${social.charAt(0).toUpperCase() + social.slice(1)}: ${user.name}`
+            : 'Facebook'
+        }
         links={[{ name: 'Dashboard', href: paths.dashboard.root }, { name: 'Facebook' }]}
         sx={{ mb: { xs: 3, md: 5 } }}
       />
@@ -174,12 +161,41 @@ export default function OverviewAnalyticsViewFB() {
         <Grid xs={12} md={6} lg={4}>
           <AnalyticsOrderTimeline title="Top Hashtags" list={TopHashtags} />
         </Grid>
-        <Grid xs={12} md={8}>
-          <TopWords />
-        </Grid>
-        <Grid xs={12} md={6} lg={4}>
-          <AnalyticsTrafficBySite title="Engagement Por Tipo De Post" list={_analyticTraffic} />
-        </Grid>
+
+        {social === SOCIALNETWORKSNAMES.twitter && (
+          <>
+            <Grid xs={12} md={6} lg={4}>
+              <AnalyticsOrderTimeline
+                title="Usuarios Etiquetados que Generan Engagement"
+                list={TopHashtags}
+              />
+            </Grid>
+            <Grid xs={12} md={6} lg={4}>
+              <AnalyticsTrafficBySite title="Engagement Por Tipo De Post" list={_analyticTraffic} />
+            </Grid>
+            <Grid xs={12} md={6}>
+              <TopWords />
+            </Grid>
+            <Grid xs={12} md={6}>
+              <SentimentbyTopic />
+            </Grid>
+          </>
+        )}
+
+        {social === SOCIALNETWORKSNAMES.facebook ||
+          (social === SOCIALNETWORKSNAMES.instagram && (
+            <>
+              <Grid xs={12} md={8}>
+                <TopWords />
+              </Grid>
+              <Grid xs={12} md={6} lg={4}>
+                <AnalyticsTrafficBySite
+                  title="Engagement Por Tipo De Post"
+                  list={_analyticTraffic}
+                />
+              </Grid>
+            </>
+          ))}
       </Grid>
     </Container>
   );
