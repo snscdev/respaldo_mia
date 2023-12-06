@@ -182,20 +182,16 @@ export default function OverviewAnalyticsViewFB({ social }: IProps) {
           </>
         )}
 
-        {social === SOCIALNETWORKSNAMES.facebook ||
-          (social === SOCIALNETWORKSNAMES.instagram && (
-            <>
-              <Grid xs={12} md={8}>
-                <TopWords />
-              </Grid>
-              <Grid xs={12} md={6} lg={4}>
-                <AnalyticsTrafficBySite
-                  title="Engagement Por Tipo De Post"
-                  list={_analyticTraffic}
-                />
-              </Grid>
-            </>
-          ))}
+        {(social === SOCIALNETWORKSNAMES.facebook || social === SOCIALNETWORKSNAMES.instagram) && (
+          <>
+            <Grid xs={12} md={8}>
+              <TopWords />
+            </Grid>
+            <Grid xs={12} md={6} lg={4}>
+              <AnalyticsTrafficBySite title="Engagement Por Tipo De Post" list={_analyticTraffic} />
+            </Grid>
+          </>
+        )}
       </Grid>
     </Container>
   );
